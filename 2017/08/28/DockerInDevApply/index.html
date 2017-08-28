@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Java | coder | pfff&#39;s blog">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="pengfei">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Docker在日常开发中的应用"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Java | coder | pfff&#39;s blog" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="私塾"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Docker在日常开发中的应用 - 私塾</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    主页
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    归档
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    关于
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    标签
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    分类
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    联系
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2017/08/28/DockerInDevApply/">
+                Docker在日常开发中的应用
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-08-28</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h2 id="Docker在日常开发中的应用"><a href="#Docker在日常开发中的应用" class="headerlink" title="Docker在日常开发中的应用"></a>Docker在日常开发中的应用</h2><p>开发时可能会在开发机器上装各种各样的容器，对开发机器造成的压力较大，我们可以采用docker的方式，用来处理各种开发环境的管理。docker对win10之前的系统版本并不友好，推荐使用win10机器安装docker</p>
+<h3 id="docker命令"><a href="#docker命令" class="headerlink" title="docker命令"></a><code>docker</code>命令</h3><p><code>docker search 镜像名</code>: 搜索容器镜像</p>
+<p><code>docker pull 镜像名</code>: 下载镜像</p>
+<p><code>docker images</code>: 查看本地所有镜像</p>
+<a id="more"></a>
+<p><code>docker ps</code>: 查看启动的容器列表</p>
+<p><code>docker ps -a</code>: 查看所有的容器列表</p>
+<p><code>docker run 参数</code>: 启动容器</p>
+<p><code>docker start 容器名/容器编号</code>: 启动容器</p>
+<p><code>docker stop 容器名/容器编号</code>: 关闭容器</p>
+<p><code>docker exec 容器名/容器编号</code>: 进入容器shell </p>
+<p><code>docker cp 拷贝文件 容器名称:容器物理文件路径</code>: 从本地系统拷贝文件到容器</p>
+<h3 id="样例：在docker中导入数据库备份"><a href="#样例：在docker中导入数据库备份" class="headerlink" title="样例：在docker中导入数据库备份"></a>样例：在docker中导入数据库备份</h3><h4 id="1-进入启动数据库"><a href="#1-进入启动数据库" class="headerlink" title="1. 进入启动数据库"></a>1. 进入启动数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker run --name xe -d -p 9090:9090 -p 1521:1521 wnameless/oracle-xe-11g </div><div class="line">或</div><div class="line">docker start xe</div></pre></td></tr></table></figure>
+<h4 id="2-查询数据文件存放位置"><a href="#2-查询数据文件存放位置" class="headerlink" title="2. 查询数据文件存放位置"></a>2. 查询数据文件存放位置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">select b.file_name 物理文件名,</div><div class="line">       b.tablespace_name 表空间,</div><div class="line">       b.bytes / 1024 / 1024 大小M,</div><div class="line">       (b.bytes - sum(nvl(a.bytes, 0))) / 1024 / 1024 已使用M,</div><div class="line">       substr((b.bytes - sum(nvl(a.bytes, 0))) / (b.bytes) * 100, 1, 5) 利用率</div><div class="line">  from dba_free_space a, dba_data_files b</div><div class="line"> where a.file_id = b.file_id</div><div class="line"> group by b.tablespace_name, b.file_name, b.bytes</div><div class="line"> order by b.tablespace_name;</div></pre></td></tr></table></figure>
+<h4 id="3-创建表空间以及用户"><a href="#3-创建表空间以及用户" class="headerlink" title="3. 创建表空间以及用户"></a>3. 创建表空间以及用户</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">CREATE TABLESPACE SPK_DATA DATAFILE &apos;/u01/app/oracle/oradata/XE/SPK_DATA.dbf&apos;</div><div class="line">SIZE 1073740</div><div class="line">AUTOEXTEND ON NEXT 104857600 MAXSIZE 512M</div><div class="line">LOGGING ONLINE PERMANENT BLOCKSIZE 8192</div><div class="line">EXTENT MANAGEMENT LOCAL AUTOALLOCATE DEFAULT</div><div class="line">NOCOMPRESS SEGMENT SPACE MANAGEMENT AUTO;</div><div class="line">create user spk identified by spk default tablespace SPK_DATA;</div><div class="line">grant execute on sys.DBMS_CRYPTO to spk;</div><div class="line">grant connect to spk;</div><div class="line">grant resource to spk;</div><div class="line">grant create view to spk;</div><div class="line">grant debug any procedure to spk;</div><div class="line">grant debug connect session to spk;</div><div class="line">grant unlimited tablespace to spk;</div><div class="line">grant dba to spk;</div></pre></td></tr></table></figure>
+<h4 id="4-SSH登录docker容器"><a href="#4-SSH登录docker容器" class="headerlink" title="4. SSH登录docker容器"></a>4. SSH登录docker容器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker exec -ti b5bb9f8850d1 /bin/bash</div></pre></td></tr></table></figure>
+<h4 id="5-将数据库备份文件导入容器中"><a href="#5-将数据库备份文件导入容器中" class="headerlink" title="5. 将数据库备份文件导入容器中"></a>5. 将数据库备份文件导入容器中</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker cp spk0309.DMP xe:/u01/app/oracle/oradata/XE/bak</div></pre></td></tr></table></figure>
+<h4 id="6-创建目录以及授权"><a href="#6-创建目录以及授权" class="headerlink" title="6. 创建目录以及授权"></a>6. 创建目录以及授权</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir bak</div><div class="line">create directory bak as &apos;/u01/app/oracle/oradata/XE/bak&apos;;</div><div class="line">grant read, write on directory bak  to public;</div></pre></td></tr></table></figure>
+<h4 id="7-修改数据库文件所属用户"><a href="#7-修改数据库文件所属用户" class="headerlink" title="7. 修改数据库文件所属用户"></a>7. 修改数据库文件所属用户</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown oracle:dba spk0309.DMP</div></pre></td></tr></table></figure>
+<h4 id="8-导入数据"><a href="#8-导入数据" class="headerlink" title="8. 导入数据"></a>8. 导入数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">impdp spk/spk DIRECTORY=bak DUMPFILE=spk0309.DMP logfile=spk0309.log</div></pre></td></tr></table></figure>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    blog.shenshenshou.top
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2017/08/28/DockerInDevApply/">Docker在日常开发中的应用</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2017/08/25/Install-Docker-Toolbox-on-Windows/">在windows7上安装Docker Toolbo</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2017/08/25/SpringJDBCTemplateCallProduce/">Spring jdbcTemplate 调用 Or</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2017/08/25/hello-world/">Hello World</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
