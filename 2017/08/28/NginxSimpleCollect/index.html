@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Java | coder | pfff&#39;s blog">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="pengfei">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Nginx 简单整理"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Java | coder | pfff&#39;s blog" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="私塾"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Nginx 简单整理 - 私塾</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    主页
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    归档
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    关于
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    标签
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    分类
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    联系
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2017/08/28/NginxSimpleCollect/">
+                Nginx 简单整理
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-08-28</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h2 id="1-特色说明"><a href="#1-特色说明" class="headerlink" title="1. 特色说明"></a>1. 特色说明</h2><ol>
+<li>Nginx (“engine x”) 是一个高性能的 HTTP 和 反向代理 服务器，也是一个 IMAP/POP3/SMTP 代理服务器。</li>
+<li>作为Web服务器，nginx处理静态文件、索引文件以及自动索引效率非常高</li>
+<li>作为代理服务器，Nginx可以实现无缓存的反向代理加速，提高网站运行速度</li>
+<li>作为负载均衡服务器，Nginx既可以在内部直接支持Rails和PHP，也可以支持HTTP代理服务器，对外进行服务。同时支持简单的容错和利用算法进行负载均衡</li>
+<li>在高可用性方面，Nginx支持热部署，启动速度特别迅速，因此可以在不间断服务的情况下，对软件版本或者配置进行升级，即使运行数月也无需重新启动，几乎可以做到7×24小时的不间断运行。</li>
+</ol>
+<a id="more"></a>
+<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h2><h3 id="2-1-Linux环境下安装"><a href="#2-1-Linux环境下安装" class="headerlink" title="2.1 Linux环境下安装"></a>2.1 <code>Linux</code>环境下安装</h3><ol>
+<li>安装位置<br>源码目录:/usr/local/devtools<br>安装目录:/opt/nginx<br>cpu核心数:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@iZ28af1xn4uZ devtools]# grep &apos;core id&apos; /proc/cpuinfo | sort -u | wc -l</div><div class="line">1</div></pre></td></tr></table></figure>
+<ol>
+<li>安装软件必需环境<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rpm -qa|grep gcc # 检查有木有</div><div class="line">yum install -y gcc # 没有的话就安装(centos)</div><div class="line">apt-get install -y gcc # ubuntu</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. gcc gcc-c++</div><div class="line">2. pcre pcre-devel</div><div class="line">3. zlib zlib-devel</div><div class="line">4. openssl openssl-devel</div></pre></td></tr></table></figure>
+<ol>
+<li>内核参数优化<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysctl.conf # 编辑配置文件</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">fs.file-max = 999999</div><div class="line">net.ipv4.tcp_tw_reuse = 1</div><div class="line">net.ipv4.tcp_keepalive_time = 600</div><div class="line">net.ipv4.tcp_fin_timeout = 30</div><div class="line">net.ipv4.tcp_max_tw_buckets = 5000</div><div class="line">net.ipv4.ip_local_port_range = 1024 61000</div><div class="line">net.ipv4.tcp_rmem = 4096 32768 262142</div><div class="line">net.ipv4.tcp_wmem = 4096 32768 262142</div><div class="line">net.core.netdev_max_backlog = 8096</div><div class="line">net.core.rmem_default = 262144</div><div class="line">net.core.wmem_default = 262144</div><div class="line">net.core.rmem_max = 2097152</div><div class="line">net.core.wmem_max = 2097152</div><div class="line">net.ipv4.tcp_syncookies = 1</div><div class="line">net.ipv4.tcp_max_syn.backlog=1024</div></pre></td></tr></table></figure>
+<ol>
+<li>安装<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd nginx-1.4.7</div><div class="line">./configure --prefix=/opt/nginx </div><div class="line">make </div><div class="line">make install</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="2-2-Windows环境下安装"><a href="#2-2-Windows环境下安装" class="headerlink" title="2.2 Windows环境下安装"></a>2.2 <code>Windows</code>环境下安装</h3><ol>
+<li><a href="http://nginx.org/en/download.html" target="_blank" rel="external">下载</a>解压，绿色版直接用</li>
+</ol>
+<h2 id="3-常用命令"><a href="#3-常用命令" class="headerlink" title="3. 常用命令"></a>3. 常用命令</h2><ol>
+<li><p>启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/nginx # 默认读取配置文件启动</div><div class="line">/nginx -c /pathtoconfig/nginx.conf # 读取指定配置文件启动（建议使用默认的配置文件，配置文件多了时间长会弄混）</div><div class="line">/nginx -p /pathtonginx/nginx # 指定Nginxi的安装目录</div><div class="line">/nginx -g &quot;pid /var/nginx/test.pid&quot; # 临时指定全局配置项并生效（实例：把pid写入test.pid文件中）</div></pre></td></tr></table></figure>
+</li>
+<li><p>检验配置文件是否有误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/nginx -t</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看版本或参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/nginx -v # 显示Nginx版本信息</div><div class="line">/nginx -V # 先死编译阶段参数 就是configure时的参数</div></pre></td></tr></table></figure>
+</li>
+<li><p>停止服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/nginx -s stop # 强杀master进程</div><div class="line">/nginx -s quit # 正常处理完当前请求再关闭服务</div></pre></td></tr></table></figure>
+</li>
+<li><p>重载配置项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/nginx -s reload # 使运行中的Nginx服务重载nginx.conf配置文件（下午我说错了 纠正）</div></pre></td></tr></table></figure>
+</li>
+<li><p>平滑升级（linux）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a. kill -s SIGUSR2 &lt;nginx master pid&gt; # 重命名nginx的pid文件，如将/usr/local/nginx/logs/nginx.pid -&gt; nginx.pid.oldbin 这样新的nginx才有可能启动成功</div><div class="line">b. 启动新版本的nginx</div><div class="line">c. kill -s SIGQUIT &lt;nginx master pid&gt; # 以“优雅”的方式关闭旧版本Nginx，随后只有新版本Nginx服务运行</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><a href="https://www.nginx.com/resources/wiki/start/topics/tutorials/commandline/" target="_blank" rel="external">官方wiki</a></p>
+<h2 id="4-常用配置说明"><a href="#4-常用配置说明" class="headerlink" title="4. 常用配置说明"></a>4. 常用配置说明</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#user  nobody; # 指定Nginx Worker进程运行用户以及用户组，默认nobody</div><div class="line">worker_processes  1; # 指定Nginx要开启的进程数，如果是多核 CPU，建议指定CPU的数量</div><div class="line"></div><div class="line">#error_log  logs/error.log; # 定义全局错误日志文件，级别：debug、info、notice、warn、error、crit（可以参照log4j理解）</div><div class="line">#error_log  logs/error.log  notice;</div><div class="line">#error_log  logs/error.log  info;</div><div class="line"></div><div class="line">#pid        logs/nginx.pid; # master 进程 Id存储位置</div><div class="line"></div><div class="line"></div><div class="line">events &#123;</div><div class="line">    worker_connections  1024; # Nginx每个进程的最大连接数，默认1024</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">http &#123;</div><div class="line">    include       mime.types;</div><div class="line">    default_type  application/octet-stream;</div><div class="line"></div><div class="line">    # 定义Nginx日志的输出格式</div><div class="line">    #log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</div><div class="line">    #                  &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</div><div class="line">    #                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</div><div class="line"></div><div class="line">    #访问日志存放路径</div><div class="line">    #access_log  logs/access.log  main;</div><div class="line"></div><div class="line">    sendfile        on; #开启高效文件传输模式。需要把tcp_nopush和tcp_nodelay设置为on，防止网络阻塞</div><div class="line">    #tcp_nopush     on;</div><div class="line"></div><div class="line">    #keepalive_timeout  0;</div><div class="line">    keepalive_timeout  65;#设置客户端连接保持活动的超时时间，超时之后，服务器关闭该连接</div><div class="line"></div><div class="line">    #gzip  on;#开启或关闭gzip模块</div><div class="line"></div><div class="line">    server &#123;</div><div class="line">        listen       80; #Nginx监听端口</div><div class="line">        server_name  localhost; #指定IP地址或域名，多个域名用空格分开</div><div class="line"></div><div class="line">        #charset koi8-r; #设置网页的默认编码格式 一般utf-8</div><div class="line"></div><div class="line">        #access_log  logs/host.access.log  main;</div><div class="line"></div><div class="line">        # 通过过滤用户请求的url来确定是否走该配置块</div><div class="line">        location / &#123;</div><div class="line">            root   html; # 映射访问的本地目录 相对路径或绝对路径</div><div class="line">            index  index.html index.htm; # index设定访问的默认首页地址</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        #error_page  404              /404.html;</div><div class="line"></div><div class="line">        # redirect server error pages to the static page /50x.html</div><div class="line">        #</div><div class="line">        error_page   500 502 503 504  /50x.html;</div><div class="line">        location = /50x.html &#123;</div><div class="line">            root   html;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        # proxy the PHP scripts to Apache listening on 127.0.0.1:80</div><div class="line">        #</div><div class="line">        #location ~ \.php$ &#123;</div><div class="line">        #    proxy_pass   http://127.0.0.1;</div><div class="line">        #&#125;</div><div class="line"></div><div class="line">        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</div><div class="line">        #</div><div class="line">        #location ~ \.php$ &#123;</div><div class="line">        #    root           html;</div><div class="line">        #    fastcgi_pass   127.0.0.1:9000;</div><div class="line">        #    fastcgi_index  index.php;</div><div class="line">        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</div><div class="line">        #    include        fastcgi_params;</div><div class="line">        #&#125;</div><div class="line"></div><div class="line">        # deny access to .htaccess files, if Apache&apos;s document root</div><div class="line">        # concurs with nginx&apos;s one</div><div class="line">        #</div><div class="line">        #location ~ /\.ht &#123;</div><div class="line">        #    deny  all;</div><div class="line">        #&#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    # another virtual host using mix of IP-, name-, and port-based configuration</div><div class="line">    #</div><div class="line">    #server &#123;</div><div class="line">    #    listen       8000;</div><div class="line">    #    listen       somename:8080;</div><div class="line">    #    server_name  somename  alias  another.alias;</div><div class="line"></div><div class="line">    #    location / &#123;</div><div class="line">    #        root   html;</div><div class="line">    #        index  index.html index.htm;</div><div class="line">    #    &#125;</div><div class="line">    #&#125;</div><div class="line"></div><div class="line">    # HTTPS server</div><div class="line">    #</div><div class="line">    #server &#123;</div><div class="line">    #    listen       443 ssl;</div><div class="line">    #    server_name  localhost;</div><div class="line"></div><div class="line">    #    ssl_certificate      cert.pem;</div><div class="line">    #    ssl_certificate_key  cert.key;</div><div class="line"></div><div class="line">    #    ssl_session_cache    shared:SSL:1m;</div><div class="line">    #    ssl_session_timeout  5m;</div><div class="line"></div><div class="line">    #    ssl_ciphers  HIGH:!aNULL:!MD5;</div><div class="line">    #    ssl_prefer_server_ciphers  on;</div><div class="line"></div><div class="line">    #    location / &#123;</div><div class="line">    #        root   html;</div><div class="line">    #        index  index.html index.htm;</div><div class="line">    #    &#125;</div><div class="line">    #&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="5-反向代理"><a href="#5-反向代理" class="headerlink" title="5. 反向代理"></a>5. 反向代理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 上游服务器列表</div><div class="line">upstream tomcats &#123;</div><div class="line">    server 127.0.0.1:8080; # 指定后端服务器的IP地址和端口</div><div class="line">    server 127.0.0.1:9080;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">location ^~ /a1 &#123;</div><div class="line">    proxy_pass http://tomcats; # 负载均衡(upstream)名称</div><div class="line"></div><div class="line">    #proxy_set_header:设置由后端的服务器获取用户的主机名或者真实IP地址，以及代理者的真实IP地址</div><div class="line">    proxy_set_header Host $host:$server_port; # 客户端真实ip和端口号</div><div class="line">    proxy_set_header X-Real-IP $remote_addr;</div><div class="line">    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="6-docker-主机命令"><a href="#6-docker-主机命令" class="headerlink" title="6 docker 主机命令"></a>6 docker 主机命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ docker-machine start # 开机</div><div class="line">$ docker-machine stop # 关机</div><div class="line">$ docker-machine restart # 重启</div></pre></td></tr></table></figure>
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    blog.shenshenshou.top
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2017/08/28/NginxSomeExample/">Nginx 小例子</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2017/08/28/NginxSimpleCollect/">Nginx 简单整理</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2017/08/28/DockerInDevApply/">Docker在日常开发中的应用</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2017/08/25/Install-Docker-Toolbox-on-Windows/">在windows7上安装Docker Toolbo</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
