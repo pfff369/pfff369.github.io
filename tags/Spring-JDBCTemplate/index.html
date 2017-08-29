@@ -12,7 +12,7 @@
     
     <title>
         
-            Spring jdbcTemplate 调用 Oracle 存储过程 | 
+            标签: Spring JDBCTemplate | 
         
         私塾
     </title>
@@ -35,8 +35,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="pengfei">
-    <meta name="description" itemprop="description" content="偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子">
-    <meta name="keywords" content="Java | blog | Nginx | 程序员,Spring JDBCTemplate">
+    <meta name="description" itemprop="description" content="Java | coder | pfff&#39;s blog">
+    <meta name="keywords" content="Java | blog | Nginx | 程序员">
 
     <!-- Site Verification -->
     <meta name="google-site-verification" content="4i9QBgtaQ_Se9oRd9-rt8gFqm-F2i4BywP1OdLteMdg" />
@@ -65,62 +65,29 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://blog.shenshenshou.top">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Spring jdbcTemplate 调用 Oracle 存储过程 | 私塾">
+    <meta property="og:title" content="标签: Spring JDBCTemplate | 私塾">
     <meta property="og:image" content="/img/favicon.png" />
-    <meta property="og:description" content="偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子">
-    <meta property="og:article:tag" content="Spring JDBCTemplate"> 
-
+    <meta property="og:description" content="Java | coder | pfff&#39;s blog">
     
-        <meta property="article:published_time" content="8月 25, 2017" />
-        <meta property="article:modified_time" content="8月 29, 2017" />
+
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="Spring jdbcTemplate 调用 Oracle 存储过程 | 私塾">
-    <meta name="twitter:description" content="偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子">
+    <meta name="twitter:title" content="标签: Spring JDBCTemplate | 私塾">
+    <meta name="twitter:description" content="Java | coder | pfff&#39;s blog">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="http://blog.shenshenshou.top" />
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html" />
+        <link rel="canonical" href="http://blog.shenshenshou.top/tags/Spring-JDBCTemplate/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "publisher": {
-        "@type": "Organization",
-        "name": "私塾",
-        "logo": "/img/favicon.png"
-    },
-    "author": {
-        "@type": "Person",
-        "name": "pengfei",
-        "image": {
-            "@type": "ImageObject",
-            "url": "/img/favicon.png"
-        },
-        "description": "夏天夏天悄悄过去，开着压路机，压死你压死你，不让你<strong>喘</strong>气~~"
-    },
-    "headline": "Spring jdbcTemplate 调用 Oracle 存储过程",
-    "url": "http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html",
-    "datePublished": "8月 25, 2017",
-    "dateModified": "8月 29, 2017",
-    "description": "偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "http://blog.shenshenshou.top"
-    }
-}
-</script>
 
 
     
@@ -316,268 +283,96 @@
                         </button>
                     
 
-                    <!-- Post TOC -->
-
+                    <!-- Index Module -->
+<div class="material-index mdl-grid">
     
-    <!-- Back Button -->
-    <!--
-    <div class="material-back" id="backhome-div" tabindex="0">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
-           href="#" onclick="window.history.back();return false;"
-           target="_self"
-           role="button"
-           data-upgraded=",MaterialButton,MaterialRipple">
-            <i class="material-icons" role="presentation">arrow_back</i>
-            <span class="mdl-button__ripple-container">
-                <span class="mdl-ripple"></span>
-            </span>
-        </a>
-    </div>
-    -->
+    <div class="locate-thumbnail-symbol"></div>
 
-    <!-- Left aligned menu below button -->
-    <button id="post-toc-trigger-btn"
-        class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">format_list_numbered</i>
-    </button>
-
-    
-    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#描述"><span class="post-toc-text">描述</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第一步"><span class="post-toc-text">第一步</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二步"><span class="post-toc-text">第二步</span></a></li></ol>
-    </ul>
+    <!-- Pin on top -->
     
 
-
-
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-    <!-- Paradox Post Header -->
+    <!-- Normal Post -->
+    
+        
+            
+                <!-- Paradox Thumbnail -->
+                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script type="text/ls-javascript" id="post-thumbnail-script">
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
-</script>
-
         
     
-            <p class="article-headline-p">
-                Spring jdbcTemplate 调用 Oracle 存储过程
-            </p>
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/08/25/SpringJDBCTemplateCallProduce/">Spring jdbcTemplate 调用 Oracle 存储过程</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/08/25/SpringJDBCTemplateCallProduce/" target="_self">阅读全文</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="pengfei's avatar">
+            </div>
+            <div>
+                <strong>pengfei</strong>
+                <span>8月 25, 2017</span>
+            </div>
         </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/技术向/">技术向</a>
+            </span>
 
+            
 
+            
 
-
-
-                
-                    <!-- Paradox Post Info -->
-                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
     </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>pengfei</strong>
-        <span>8月 25, 2017</span>
-    </div>
-
-    <div class="section-spacer"></div>
-
-    <!-- Favorite -->
-    <!--
-        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-            <i class="material-icons" role="presentation">favorite</i>
-            <span class="visuallyhidden">favorites</span>
-        </button>
-    -->
-
-    <!-- Qrcode -->
-    
-        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">devices other</i>
-    <span class="visuallyhidden">devices other</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
-    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-    
-        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/">
-    
-</ul>
-    
-
-    <!-- Tags (bookmark) -->
-    
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/Spring-JDBCTemplate/">Spring JDBCTemplate</a>
-    </ul>
-    
-
-    <!-- Share -->
-    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-
-    
-
-    <!-- Share Weibo -->
-    
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Spring jdbcTemplate 调用 Oracle 存储过程&url=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html&pic=&searchPic=false&style=simple" target="_blank">
-            <li class="mdl-menu__item">
-                分享到微博
-            </li>
-        </a>
-    
-
-    <!-- Share Twitter -->
-    
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Spring jdbcTemplate 调用 Oracle 存储过程&url=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html&via=pengfei" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Twitter
-            </li>
-        </a>
-    
-
-    <!-- Share Facebook -->
-    
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Facebook
-            </li>
-        </a>
-    
-
-    <!-- Share Google+ -->
-    
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Google+
-            </li>
-        </a>
-    
-
-    <!-- Share LinkedIn -->
-    
-
-    <!-- Share QQ -->
-    
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=私塾&title=Spring jdbcTemplate 调用 Oracle 存储过程&summary=Java | coder | pfff&#39;s blog&pics=http://blog.shenshenshou.top/img/favicon.png&url=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 QQ
-            </li>
-        </a>
-    
-
-    <!-- Share Telegram -->
-    
-</ul>
-
 </div>
 
-                
-
-                <!-- Post Content -->
-                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+            
+            
+        
     
-        <p>偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子</p>
-<a id="more"></a>
-<script src="//git.oschina.net/pengfeii/Demo-Resp/star_widget_preview"></script>
-
-<h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><blockquote>
-<p>需求: 有一个雇员表,里面有一个deptNo字段标识部门,我想查询DeptNo为1和2的雇员,并把他们分组罗列出来</p>
-</blockquote>
-<h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h4><p>创建存储过程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">create or replace procedure p_emp_list (</div><div class="line">       param1 in varchar2,</div><div class="line">       param2 in varchar2,</div><div class="line">       CUR_OUT_1 OUT SYS_REFCURSOR,</div><div class="line">       CUR_OUT_2 OUT SYS_REFCURSOR</div><div class="line">) is</div><div class="line">begin</div><div class="line">      open CUR_OUT_1 for</div><div class="line">           select deptno, empname from employee where deptno = param1;</div><div class="line">      open CUR_OUT_2 for</div><div class="line">           select deptno, empname from employee where deptno = param2;</div><div class="line">end p_emp_list;</div></pre></td></tr></table></figure>
-<p>该过程有4个参数,前两个作为传入条件:两个不同的DeptNo,后两个得出的不同部门的结果集,至于Sql,为了省事,只查询了部门标号和雇员姓名用以说明</p>
-<h4 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h4><p>编写DAO</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">public List&lt;List&lt;Employee&gt;&gt; listEmployee(final String[] depts) &#123;</div><div class="line">    List&lt;List&lt;Employee&gt;&gt; resultList = (List&lt;List&lt;Employee&gt;&gt;) jdbcTemplate.execute(</div><div class="line">            new CallableStatementCreator() &#123;</div><div class="line">                public CallableStatement createCallableStatement(Connection con)</div><div class="line">                        throws SQLException &#123;</div><div class="line">                    String sqlProc = &quot;&#123;CALL P_EMP_LIST(?, ?, ?, ?)&#125;&quot;; // 调用存储过程的SQL</div><div class="line">                    CallableStatement cs = con.prepareCall(sqlProc);</div><div class="line">                    cs.setString(1, depts[0]);// 设置输入参数的值 部门编号1</div><div class="line">                    cs.setString(2, depts[1]);// 设置输入参数的值 部门编号2</div><div class="line">                    cs.registerOutParameter(3, OracleTypes.CURSOR);// 注册输出参数的类型 游标</div><div class="line">                    cs.registerOutParameter(4, OracleTypes.CURSOR);// 注册输出参数的类型 游标</div><div class="line">                    return cs;</div><div class="line">                &#125;</div><div class="line">            &#125;, new CallableStatementCallback() &#123;</div><div class="line">                public List doInCallableStatement(CallableStatement cs)</div><div class="line">                        throws SQLException, DataAccessException &#123;</div><div class="line">                    </div><div class="line">                    cs.execute();</div><div class="line">                    List list = new ArrayList(); // 存储所有的查询结果</div><div class="line">                    List&lt;Employee&gt; results1 = new ArrayList&lt;Employee&gt;(); // 存放部门1的结果</div><div class="line">                    ResultSet rs = (ResultSet) cs.getObject(3); // 获取存储过程第一个sql的值</div><div class="line">                    // 接收部门1所有雇员对象</div><div class="line">                    while (rs.next()) &#123;</div><div class="line">                        Employee e = new Employee();</div><div class="line">                        e.setDeptNo(rs.getString(&quot;deptNo&quot;));</div><div class="line">                        e.setEmpName(rs.getString(&quot;empName&quot;));</div><div class="line">                        results1.add(e);</div><div class="line">                    &#125;</div><div class="line">                    List&lt;Employee&gt; results2 = new ArrayList&lt;Employee&gt;(); // 存放部门2的结果</div><div class="line">                    rs = (ResultSet) cs.getObject(4); // 获取存储过程第二个sql的值</div><div class="line">                    // 接收部门2所有雇员对象</div><div class="line">                    while (rs.next()) &#123;</div><div class="line">                        Employee e = new Employee();</div><div class="line">                        e.setDeptNo(String.valueOf(rs.getObject(1)));</div><div class="line">                        e.setEmpName(String.valueOf(rs.getObject(2)));</div><div class="line">                        results2.add(e);</div><div class="line">                    &#125;</div><div class="line">                    rs.close(); // 关闭结果集</div><div class="line">                    list.add(results1);</div><div class="line">                    list.add(results2);</div><div class="line">                    </div><div class="line">                    return list;</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">    return resultList;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>找个入口执行下(因为是借以前demo的空,所以随便加了个方法)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Controller</div><div class="line">@RequestMapping(&quot;/dept&quot;)</div><div class="line">public class DeptBean &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>方法:接收连个参数作为不同的部门编号 然后调用刚才写的逻辑</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 分组查询</div><div class="line"> */</div><div class="line">@RequestMapping(&quot;/liste&quot;)</div><div class="line">public String liste(</div><div class="line">        @RequestParam(value=&quot;deptno&quot;, required=true) String deptno,</div><div class="line">        @RequestParam(value=&quot;deptno2&quot;, required=true) String deptno2,</div><div class="line">        Map&lt;String, List&lt;Dept&gt;&gt; model) &#123;</div><div class="line">    </div><div class="line">    System.out.println(deptno);</div><div class="line">    System.out.println(deptno2);</div><div class="line">    </div><div class="line">    List&lt;List&lt;Employee&gt;&gt; list = deptService.listEmployee(new String[]&#123;deptno, deptno2&#125;);</div><div class="line">    </div><div class="line">    return list.size() &gt; 0 ? &quot;/success&quot; : &quot;/error&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>调用地址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://localhost:8080/mvc1/dept/liste?deptno=1&amp;deptno2=2</div></pre></td></tr></table></figure>
-<p>附 控制台结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">1</div><div class="line">2</div><div class="line">1</div><div class="line">小明</div><div class="line">1</div><div class="line">小红</div><div class="line">1</div><div class="line">小白</div><div class="line">0---------------------</div><div class="line">2</div><div class="line">小绿</div><div class="line">2</div><div class="line">小黑</div></pre></td></tr></table></figure>
 
     
 
     
-</div>
+        <script type="text/ls-javascript" id="thumbnail-script">
+    var randomNum;
 
+    var locatePost = $('.locate-thumbnail-symbol').next();
+    for(var i = 0; i < 10; i++) {
+        randomNum = Math.floor(Math.random() * 19 + 1);
 
-                
+        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
+        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
 
-                <!-- Post Comments -->
-                
-                    
-    <!-- 使用 Gitment -->
-<div id="gitmentContainer" style="max-width: 90%; margin: 1pc 3pc; padding-top: 0;"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-	var gitment = new Gitment({
-	  id: location.href, // 可选。默认为 location.href
-	  owner: 'pfff369',
-	  repo: 'pfff369.github.io',
-	  oauth: {
-	    client_id: '37565adbdb80ae13b27a',
-	    client_secret: '1b0200f2b5ad7c0a103356bb1070baed403dda19',
-	  },
-	})
-	gitment.render('gitmentContainer')
+        locatePost = locatePost.next();
+    }
 </script>
 
-                
-            </div>
-
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
     
-        <a href="/2017/08/25/Install-Docker-Toolbox-on-Windows/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
-
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-</nav>
-
-        </div>
-    </div>
-
+</div>
 
 
                     
@@ -778,14 +573,6 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
-
-                    
-                        <!-- Footer Top Button -->
-                        <div id="back-to-top" class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
-</div>
 
                     
 

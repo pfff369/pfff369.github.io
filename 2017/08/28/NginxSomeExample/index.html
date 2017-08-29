@@ -35,17 +35,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="pengfei">
-    <meta name="description" itemprop="description" content="1. 根据请求的域名选择不同的Server块配置
+    <meta name="description" itemprop="description" content="1. 根据请求的域名选择不同的Server块配置Host:
+
 
 本地: 192.168.0.221 
 虚拟机: 192.168.0.222
 
-4个Tomcat在本地 
 
+Servers:
+
+
+4个Tomcat在本地 
 1个Nginx在虚拟机
 
 ">
-    <meta name="keywords" content="Java | blog | Nginx | 程序员">
+    <meta name="keywords" content="Java | blog | Nginx | 程序员,Nginx">
 
     <!-- Site Verification -->
     <meta name="google-site-verification" content="4i9QBgtaQ_Se9oRd9-rt8gFqm-F2i4BywP1OdLteMdg" />
@@ -76,32 +80,40 @@
     <meta property="og:type" content="blog">
     <meta property="og:title" content="Nginx 小例子 | 私塾">
     <meta property="og:image" content="/img/favicon.png" />
-    <meta property="og:description" content="1. 根据请求的域名选择不同的Server块配置
+    <meta property="og:description" content="1. 根据请求的域名选择不同的Server块配置Host:
+
 
 本地: 192.168.0.221 
 虚拟机: 192.168.0.222
 
-4个Tomcat在本地 
 
+Servers:
+
+
+4个Tomcat在本地 
 1个Nginx在虚拟机
 
 ">
-    
+    <meta property="og:article:tag" content="Nginx"> 
 
     
         <meta property="article:published_time" content="8月 28, 2017" />
-        <meta property="article:modified_time" content="8月 28, 2017" />
+        <meta property="article:modified_time" content="8月 29, 2017" />
     
 
     <!-- The Twitter Card protocol -->
     <meta name="twitter:title" content="Nginx 小例子 | 私塾">
-    <meta name="twitter:description" content="1. 根据请求的域名选择不同的Server块配置
+    <meta name="twitter:description" content="1. 根据请求的域名选择不同的Server块配置Host:
+
 
 本地: 192.168.0.221 
 虚拟机: 192.168.0.222
 
-4个Tomcat在本地 
 
+Servers:
+
+
+4个Tomcat在本地 
 1个Nginx在虚拟机
 
 ">
@@ -140,14 +152,18 @@
     "headline": "Nginx 小例子",
     "url": "http://blog.shenshenshou.top/2017/08/28/NginxSomeExample/index.html",
     "datePublished": "8月 28, 2017",
-    "dateModified": "8月 28, 2017",
-    "description": "1. 根据请求的域名选择不同的Server块配置
+    "dateModified": "8月 29, 2017",
+    "description": "1. 根据请求的域名选择不同的Server块配置Host:
+
 
 本地: 192.168.0.221 
 虚拟机: 192.168.0.222
 
-4个Tomcat在本地 
 
+Servers:
+
+
+4个Tomcat在本地 
 1个Nginx在虚拟机
 
 ",
@@ -466,7 +482,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        
+        <a class="post_tag-link" href="/tags/Nginx/">Nginx</a>
     </ul>
     
 
@@ -539,58 +555,81 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h3 id="1-根据请求的域名选择不同的Server块配置"><a href="#1-根据请求的域名选择不同的Server块配置" class="headerlink" title="1. 根据请求的域名选择不同的Server块配置"></a>1. 根据请求的域名选择不同的Server块配置</h3><blockquote>
+        <h3 id="1-根据请求的域名选择不同的Server块配置"><a href="#1-根据请求的域名选择不同的Server块配置" class="headerlink" title="1. 根据请求的域名选择不同的Server块配置"></a>1. 根据请求的域名选择不同的Server块配置</h3><p>Host:</p>
+<blockquote>
 <ul>
 <li>本地: 192.168.0.221 </li>
-<li><p>虚拟机: 192.168.0.222</p>
-</li>
-<li><p>4个Tomcat在本地 </p>
-</li>
+<li>虚拟机: 192.168.0.222</li>
+</ul>
+</blockquote>
+<p>Servers:</p>
+<blockquote>
+<ul>
+<li>4个Tomcat在本地 </li>
 <li>1个Nginx在虚拟机</li>
 </ul>
 </blockquote>
 <a id="more"></a>
 <ol>
-<li><p>修改本地hosts文件</p>
+<li>修改本地hosts文件</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">192.168.0.222 pf.com</div><div class="line">192.168.0.222 p1.pf.com</div><div class="line">192.168.0.222 p2.pf.com</div><div class="line">192.168.0.222 p3.pf.com</div><div class="line">192.168.0.222 p4.pf.com</div></pre></td></tr></table></figure>
-</li>
-<li><p>在<code>nginx/html</code>目录下键测试网页文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@localhost nginx]# ls html/</div><div class="line">50x.html  index.html  p1  p2  p3  p4</div><div class="line">[root@localhost nginx]# ls html/p1</div><div class="line">index.html</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><code>html</code>文件内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">    &lt;title&gt;P1&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;h1&gt;welcome to P1&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
-<p>3.Nginx.conf配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen       80;</div><div class="line">    server_name  p1.pf.com; # 匹配Request Header中的Host</div><div class="line"></div><div class="line">    location / &#123;                       </div><div class="line">        root   html/p1;                   </div><div class="line">        index  index.html index.htm;   </div><div class="line">    &#125;                                  </div><div class="line">    </div><div class="line">    error_page   500 502 503 504  /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root   html;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen       80;</div><div class="line">    server_name  p2.pf.com;</div><div class="line"></div><div class="line">    location / &#123;                       </div><div class="line">        root   html/p2;                   </div><div class="line">        index  index.html index.htm;   </div><div class="line">    &#125;                                  </div><div class="line">    </div><div class="line">    error_page   500 502 503 504  /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root   html;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ol>
-<li>访问测试<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">http://pf.com/</div><div class="line">http://p1.pf.com/</div><div class="line">http://p2.pf.com/</div></pre></td></tr></table></figure>
-</li>
+<li>在<code>nginx/html</code>目录下键测试网页文件</li>
 </ol>
-<h3 id="2-查看反代中不同的请求地址"><a href="#2-查看反代中不同的请求地址" class="headerlink" title="2. 查看反代中不同的请求地址"></a>2. 查看反代中不同的请求地址</h3><p>继续使用上次配置的测试环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Tomcat:</div><div class="line">http://192.168.0.221:8080/a1</div><div class="line">http://192.168.0.221:9080/a1</div><div class="line"></div><div class="line">Nginx:</div><div class="line">http://192.168.0.222/a1/</div><div class="line"></div><div class="line">客户端地址:</div><div class="line">192.168.0.221</div></pre></td></tr></table></figure></p>
-<p>修改<code>JSP</code>文件,追加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">request.getRemoteAddr(): &lt;%=request.getRemoteAddr() %&gt; &lt;br&gt;</div><div class="line">request.getHeader(&quot;WL-Proxy-Client-IP&quot;): &lt;%=request.getHeader(&quot;WL-Proxy-Client-IP&quot;) %&gt; &lt;br&gt;</div><div class="line">request.getHeader(&quot;Proxy-Client-IP&quot;): &lt;%=request.getHeader(&quot;Proxy-Client-IP&quot;) %&gt; &lt;br&gt;</div><div class="line">request.getHeader(&quot;x-forwarded-for&quot;): &lt;%=request.getHeader(&quot;x-forwarded-for&quot;) %&gt; &lt;br&gt;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@localhost nginx]# ls html/</div><div class="line">50x.html  index.html  p1  p2  p3  p4</div><div class="line">[root@localhost nginx]# ls html/p1</div><div class="line">index.html</div></pre></td></tr></table></figure>
+<p><code>html</code>文件内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">    &lt;title&gt;P1&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;h1&gt;welcome to P1&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>3.Nginx.conf配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen       80;</div><div class="line">    server_name  p1.pf.com; # 匹配Request Header中的Host</div><div class="line"></div><div class="line">    location / &#123;                       </div><div class="line">        root   html/p1;                   </div><div class="line">        index  index.html index.htm;   </div><div class="line">    &#125;                                  </div><div class="line">    </div><div class="line">    error_page   500 502 503 504  /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root   html;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen       80;</div><div class="line">    server_name  p2.pf.com;</div><div class="line"></div><div class="line">    location / &#123;                       </div><div class="line">        root   html/p2;                   </div><div class="line">        index  index.html index.htm;   </div><div class="line">    &#125;                                  </div><div class="line">    </div><div class="line">    error_page   500 502 503 504  /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root   html;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>访问测试</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">http://pf.com/</div><div class="line">http://p1.pf.com/</div><div class="line">http://p2.pf.com/</div></pre></td></tr></table></figure>
+<h3 id="2-查看反代中不同的请求地址"><a href="#2-查看反代中不同的请求地址" class="headerlink" title="2. 查看反代中不同的请求地址"></a>2. 查看反代中不同的请求地址</h3><p>继续使用上次配置的测试环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Tomcat:</div><div class="line">http://192.168.0.221:8080/a1</div><div class="line">http://192.168.0.221:9080/a1</div><div class="line"></div><div class="line">Nginx:</div><div class="line">http://192.168.0.222/a1/</div><div class="line"></div><div class="line">客户端地址:</div><div class="line">192.168.0.221</div></pre></td></tr></table></figure>
+<p>修改<code>JSP</code>文件,追加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">request.getRemoteAddr(): &lt;%=request.getRemoteAddr() %&gt; &lt;br&gt;</div><div class="line">request.getHeader(&quot;WL-Proxy-Client-IP&quot;): &lt;%=request.getHeader(&quot;WL-Proxy-Client-IP&quot;) %&gt; &lt;br&gt;</div><div class="line">request.getHeader(&quot;Proxy-Client-IP&quot;): &lt;%=request.getHeader(&quot;Proxy-Client-IP&quot;) %&gt; &lt;br&gt;</div><div class="line">request.getHeader(&quot;x-forwarded-for&quot;): &lt;%=request.getHeader(&quot;x-forwarded-for&quot;) %&gt; &lt;br&gt;</div></pre></td></tr></table></figure>
 <p>其中,<code>Proxy-Client-IP</code> 字段和 <code>WL-Proxy-Client-IP</code> 字段只在 Apache（Weblogic Plug-In Enable）+WebLogic 搭配下出现，其中“WL” 就是 WebLogic 的缩写<br><code>x-forwarded-for</code> 简称 XFF 头 ，只有在通过了 HTTP 代理或者负载均衡服务器时才会添加该项<br><code>REMOTE_ADDR</code>是客户端跟服务器“握手”时的IP,对于未使用反代软件时可获取客户端IP</p>
 <ol>
-<li>默认情况下反向代理是不会转发请求中的Host头部,服务端只能获取代理服务器的Ip地址<br>配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location ^~ /a1 &#123;</div><div class="line">    proxy_pass http://tomcats;</div><div class="line"></div><div class="line">    #proxy_set_header Host $host:$server_port;</div><div class="line">    #proxy_set_header X-Real-IP $remote_addr;</div><div class="line">    #proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>认情况下反向代理是不会转发请求中的Host头部,服务端只能获取代理服务器的Ip地址<br>配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location ^~ /a1 &#123;</div><div class="line">    proxy_pass http://tomcats;</div><div class="line"></div><div class="line">    #proxy_set_header Host $host:$server_port;</div><div class="line">    #proxy_set_header X-Real-IP $remote_addr;</div><div class="line">    #proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://192.168.0.222/a1/</div></pre></td></tr></table></figure></p>
-<p>响应<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">request.getRemoteAddr(): 192.168.0.222 </div><div class="line">request.getHeader(&quot;WL-Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;x-forwarded-for&quot;): null</div></pre></td></tr></table></figure></p>
+<p>请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://192.168.0.222/a1/</div></pre></td></tr></table></figure>
+<p>响应</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">request.getRemoteAddr(): 192.168.0.222 </div><div class="line">request.getHeader(&quot;WL-Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;x-forwarded-for&quot;): null</div></pre></td></tr></table></figure>
 <ol>
-<li>在请求中设置真实的IP地址<br>配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location ^~ /a1 &#123;</div><div class="line">    proxy_pass http://tomcats;</div><div class="line"></div><div class="line">    proxy_set_header Host $host:$server_port;</div><div class="line">    proxy_set_header X-Real-IP $remote_addr;</div><div class="line">    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<li>在请求中设置真实的IP地址</li>
 </ol>
-<p>请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://192.168.0.222/a1/</div></pre></td></tr></table></figure></p>
-<p>响应<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">request.getRemoteAddr(): 192.168.0.222 </div><div class="line">request.getHeader(&quot;WL-Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;x-forwarded-for&quot;): 192.168.0.221</div></pre></td></tr></table></figure></p>
+<p>配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location ^~ /a1 &#123;</div><div class="line">    proxy_pass http://tomcats;</div><div class="line"></div><div class="line">    proxy_set_header Host $host:$server_port;</div><div class="line">    proxy_set_header X-Real-IP $remote_addr;</div><div class="line">    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://192.168.0.222/a1/</div></pre></td></tr></table></figure>
+<p>响应</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">request.getRemoteAddr(): 192.168.0.222 </div><div class="line">request.getHeader(&quot;WL-Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;x-forwarded-for&quot;): 192.168.0.221</div></pre></td></tr></table></figure>
 <ol>
-<li>在请求中设置真实的端口<br>JSP追加<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">request.getServerPort(): &lt;%=request.getServerPort() %&gt; &lt;br&gt;</div></pre></td></tr></table></figure>
-</li>
+<li>在请求中设置真实的端口</li>
 </ol>
-<p>配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">listen       7080;</div><div class="line"></div><div class="line">location ^~ /a1 &#123;</div><div class="line">    proxy_pass http://tomcats;</div><div class="line"></div><div class="line">    proxy_set_header Host $host; # :$server_port</div><div class="line">    proxy_set_header X-Real-IP $remote_addr;</div><div class="line">    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://192.168.0.222:7080/a1/</div></pre></td></tr></table></figure></p>
-<p>响应<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">request.getRemoteAddr(): 192.168.0.222 </div><div class="line">request.getHeader(&quot;WL-Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;x-forwarded-for&quot;): 192.168.0.221 </div><div class="line">request.getServerPort(): 80</div></pre></td></tr></table></figure></p>
-<p>修改配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location ^~ /a1 &#123;</div><div class="line">    proxy_pass http://tomcats;</div><div class="line"></div><div class="line">    proxy_set_header Host $host:$server_port;</div><div class="line">    proxy_set_header X-Real-IP $remote_addr;</div><div class="line">    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>响应<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">request.getRemoteAddr(): 192.168.0.222 </div><div class="line">request.getHeader(&quot;WL-Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;x-forwarded-for&quot;): 192.168.0.221 </div><div class="line">request.getServerPort(): 7080</div></pre></td></tr></table></figure></p>
+<p>JSP追加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">request.getServerPort(): &lt;%=request.getServerPort() %&gt; &lt;br&gt;</div></pre></td></tr></table></figure>
+<p>配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">listen       7080;</div><div class="line"></div><div class="line">location ^~ /a1 &#123;</div><div class="line">    proxy_pass http://tomcats;</div><div class="line"></div><div class="line">    proxy_set_header Host $host; # :$server_port</div><div class="line">    proxy_set_header X-Real-IP $remote_addr;</div><div class="line">    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://192.168.0.222:7080/a1/</div></pre></td></tr></table></figure>
+<p>响应</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">request.getRemoteAddr(): 192.168.0.222 </div><div class="line">request.getHeader(&quot;WL-Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;x-forwarded-for&quot;): 192.168.0.221 </div><div class="line">request.getServerPort(): 80</div></pre></td></tr></table></figure>
+<p>修改配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location ^~ /a1 &#123;</div><div class="line">    proxy_pass http://tomcats;</div><div class="line"></div><div class="line">    proxy_set_header Host $host:$server_port;</div><div class="line">    proxy_set_header X-Real-IP $remote_addr;</div><div class="line">    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>响应</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">request.getRemoteAddr(): 192.168.0.222 </div><div class="line">request.getHeader(&quot;WL-Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;Proxy-Client-IP&quot;): null </div><div class="line">request.getHeader(&quot;x-forwarded-for&quot;): 192.168.0.221 </div><div class="line">request.getServerPort(): 7080</div></pre></td></tr></table></figure>
 <h3 id="3-Nginx反代谷歌"><a href="#3-Nginx反代谷歌" class="headerlink" title="3. Nginx反代谷歌"></a>3. Nginx反代谷歌</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    server_name shenshenshou.top;</div><div class="line">    rewrite ^(.*) https://shenshenshou.top$1 permanent;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">        listen       443;</div><div class="line">        server_name  shenshenshou.top;</div><div class="line">        ssl on;</div><div class="line">        ssl_certificate      cert/214101960730977.pem;</div><div class="line">        ssl_certificate_key  cert/214101960730977.key;</div><div class="line"></div><div class="line">        location / &#123;</div><div class="line"></div><div class="line">            proxy_redirect off; # 取消页面重定向的做法</div><div class="line">            proxy_cookie_domain google.com shenshenshou.top; # 把cookie的作用域替换成我们的域名</div><div class="line">            proxy_pass https://www.google.com; # 上游服务器地址</div><div class="line">            proxy_connect_timeout 60s;</div><div class="line">            proxy_read_timeout 5400s;</div><div class="line">            proxy_send_timeout 5400s;</div><div class="line">            </div><div class="line">            proxy_set_header Host &quot;www.google.com&quot;;</div><div class="line">            proxy_set_header User-Agent $http_user_agent;</div><div class="line">            proxy_set_header Referer https://www.google.com;</div><div class="line">            proxy_set_header Accept-Encoding &quot;&quot;;</div><div class="line">            proxy_set_header X-Real-IP $remote_addr; </div><div class="line">            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; </div><div class="line">            proxy_set_header X-Forwarded-Proto https;</div><div class="line">            proxy_set_header Accept-Language &quot;zh-CN&quot;; # 设置语言为中文</div><div class="line">            proxy_set_header Cookie &quot;PREF=ID=047808f19f6de346:U=0f62f33dd8549d11:FF=2:LD=en-US:NW=1:TM=1325338577:LM=1332142444:GM=1:SG=2:S=rE0SyJh2W1IQ-Maw&quot;;</div><div class="line">            # 传固定的cookie给谷歌，是为了禁止即时搜索，因为开启即时搜索无法替换内容。还有设置为新窗口打开网站，这个符合我们打开链接的习惯</div><div class="line">            sub_filter https://www.google.com.hk shenshenshou.top; # 把谷歌的域名替换成我们的</div><div class="line">            sub_filter https://www.google.com shenshenshou.top; # 把谷歌的域名替换成我们的</div><div class="line">            </div><div class="line">            sub_filter_once off; # 意思是只查找并替换一次。on是开启此功能，off是关闭——默认值是on</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h3 id="4-负载均衡配置"><a href="#4-负载均衡配置" class="headerlink" title="4. 负载均衡配置"></a>4. 负载均衡配置</h3><h4 id="1-权重配置"><a href="#1-权重配置" class="headerlink" title="1. 权重配置"></a>1. 权重配置</h4><p><code>upstream</code>配置<br><code>weight</code>用来配置权重,默认是1,权重越高分配给这台服务器的请求就越多.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">upstream tomcats &#123;</div><div class="line">    server 192.168.0.221:6080;</div><div class="line">    server 192.168.0.221:7080 weight=1;</div><div class="line">    server 192.168.0.221:8080 weight=3;</div><div class="line">    server 192.168.0.221:9080 weight=5;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="2-负载均衡算法"><a href="#2-负载均衡算法" class="headerlink" title="2. 负载均衡算法"></a>2. 负载均衡算法</h4><p>1&gt; <code>ip_hash</code>根据客户IP进行负载均衡,即相同的IP将负载到同一个upstream server,<br>经测试同一个网段的也会负载到同一个upstream server<br>2&gt; 当其中一台机器不可用时,可以使用<code>down</code>参数标识.确保转发策略的一惯性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">upstream tomcats &#123;</div><div class="line">    ip_hash;</div><div class="line">    server 192.168.0.221:6080;</div><div class="line">    server 192.168.0.221:7080;</div><div class="line">    server 192.168.0.221:8080 down;</div><div class="line">    server 192.168.0.221:9080;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="4-负载均衡配置"><a href="#4-负载均衡配置" class="headerlink" title="4. 负载均衡配置"></a>4. 负载均衡配置</h3><h4 id="1-权重配置"><a href="#1-权重配置" class="headerlink" title="1. 权重配置"></a>1. 权重配置</h4><p><code>upstream</code>配置</p>
+<p><code>weight</code>用来配置权重,默认是1,权重越高分配给这台服务器的请求就越多.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">upstream tomcats &#123;</div><div class="line">    server 192.168.0.221:6080;</div><div class="line">    server 192.168.0.221:7080 weight=1;</div><div class="line">    server 192.168.0.221:8080 weight=3;</div><div class="line">    server 192.168.0.221:9080 weight=5;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-负载均衡算法"><a href="#2-负载均衡算法" class="headerlink" title="2. 负载均衡算法"></a>2. 负载均衡算法</h4><p>1&gt; <code>ip_hash</code>根据客户IP进行负载均衡,即相同的IP将负载到同一个upstream server,<br>经测试同一个网段的也会负载到同一个upstream server</p>
+<p>2&gt; 当其中一台机器不可用时,可以使用<code>down</code>参数标识.确保转发策略的一惯性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">upstream tomcats &#123;</div><div class="line">    ip_hash;</div><div class="line">    server 192.168.0.221:6080;</div><div class="line">    server 192.168.0.221:7080;</div><div class="line">    server 192.168.0.221:8080 down;</div><div class="line">    server 192.168.0.221:9080;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
     
 
@@ -743,13 +782,33 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">5</span></a>
             </ul>
         </li>
         
     
 
     <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">collections</i>
+                
+                标签云
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/timeline" title="时间轴">
+                
+                    <i class="material-icons sidebar-material-icons">timeline</i>
+                
+                时间轴
+            </a>
+        </li>
+        
     
 
     <!-- Article Number  -->
