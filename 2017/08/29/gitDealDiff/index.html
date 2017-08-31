@@ -12,7 +12,7 @@
     
     <title>
         
-            分类: 技术向 | 
+            gitDealDiff | 
         
         私塾
     </title>
@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="pengfei">
     <meta name="description" itemprop="description" content="Java | coder | pfff&#39;s blog">
-    <meta name="keywords" content="Java | blog | Nginx | 程序员">
+    <meta name="keywords" content="Java | blog | Nginx | 程序员,原创,Git">
 
     <!-- Site Verification -->
     <meta name="google-site-verification" content="4i9QBgtaQ_Se9oRd9-rt8gFqm-F2i4BywP1OdLteMdg" />
@@ -65,15 +65,18 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://blog.shenshenshou.top">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="分类: 技术向 | 私塾">
+    <meta property="og:title" content="gitDealDiff | 私塾">
     <meta property="og:image" content="/img/favicon.png" />
     <meta property="og:description" content="Java | coder | pfff&#39;s blog">
-    
+    <meta property="og:article:tag" content="原创"> <meta property="og:article:tag" content="Git"> 
 
+    
+        <meta property="article:published_time" content="8月 29, 2017" />
+        <meta property="article:modified_time" content="8月 31, 2017" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="分类: 技术向 | 私塾">
+    <meta name="twitter:title" content="gitDealDiff | 私塾">
     <meta name="twitter:description" content="Java | coder | pfff&#39;s blog">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
@@ -81,13 +84,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://blog.shenshenshou.top/categories/技术向/index.html" />
+        <link rel="canonical" href="http://blog.shenshenshou.top/2017/08/29/gitDealDiff/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "私塾",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "pengfei",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "夏天夏天悄悄过去，开着压路机，压死你压死你，不让你<strong>喘</strong>气~~"
+    },
+    "headline": "gitDealDiff",
+    "url": "http://blog.shenshenshou.top/2017/08/29/gitDealDiff/index.html",
+    "datePublished": "8月 29, 2017",
+    "dateModified": "8月 31, 2017",
+    "description": "Java | coder | pfff&#39;s blog",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://blog.shenshenshou.top"
+    }
+}
+</script>
 
 
     
@@ -283,417 +316,259 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-本地更新文件时存在冲突"><span class="post-toc-text">1. 本地更新文件时存在冲突</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-使用merge命令合并文件-报错-提示存在不能合并的文件"><span class="post-toc-text">2. 使用merge命令合并文件 报错 提示存在不能合并的文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-获取更新"><span class="post-toc-text">3. 获取更新</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-在文件上解决冲突-然后采用合并工具进行合并处理"><span class="post-toc-text">4. 在文件上解决冲突,然后采用合并工具进行合并处理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-查看本地git状态"><span class="post-toc-text">5. 查看本地git状态</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-尝试提交-这里没有add-故报错"><span class="post-toc-text">6. 尝试提交(这里没有add 故报错)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-add后重新提交"><span class="post-toc-text">7. add后重新提交</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-提交成功"><span class="post-toc-text">8. 提交成功</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-推送至远程仓库"><span class="post-toc-text">9. 推送至远程仓库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-检查更新"><span class="post-toc-text">10. 检查更新</span></a></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/29/gitDealDiff/">gitDealDiff</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/29/gitDealDiff/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="pengfei's avatar">
-            </div>
-            <div>
-                <strong>pengfei</strong>
-                <span>8月 29, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/技术向/">技术向</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/28/NginxSomeExample/">Nginx 小例子</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            1. 根据请求的域名选择不同的Server块配置Host:
-
-
-本地: 192.168.0.221 
-虚拟机: 192.168.0.222
-
-
-Servers:
-
-
-4个Tomcat在本地 
-1个Nginx在虚拟机
-
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/28/NginxSomeExample/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="pengfei's avatar">
-            </div>
-            <div>
-                <strong>pengfei</strong>
-                <span>8月 28, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/技术向/">技术向</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/28/NginxSimpleCollect/">Nginx 简单整理</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            1. 特色说明
-Nginx (“engine x”) 是一个高性能的 HTTP 和 反向代理 服务器，也是一个 IMAP/POP3/SMTP 代理服务器。
-作为Web服务器，nginx处理静态文件、索引文件以及自动索引效率非常高
-作为代理服务器，Nginx可以实现无缓存的反向代理加速，提高网站运行速度
-作为负载均衡服务器，Nginx既可以在内部直接支持Rails和PHP，也可以支持HTTP代理服务器，对外进行服务。同时支持简单的容错和利用算法进行负载均衡
-在高可用性方面，Nginx支持热部署，启动速度特别迅速，因此可以在不间断服务的情况下，对软件版本或者配置进行升级，即使运行数月也无需重新启动，几乎可以做到7×24小时的不间断运行。
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/28/NginxSimpleCollect/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="pengfei's avatar">
-            </div>
-            <div>
-                <strong>pengfei</strong>
-                <span>8月 28, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/技术向/">技术向</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/28/DockerInDevApply/">Docker在日常开发中的应用</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            Docker在日常开发中的应用开发时可能会在开发机器上装各种各样的容器，对开发机器造成的压力较大，我们可以采用docker的方式，用来处理各种开发环境的管理。docker对win10之前的系统版本并不友好，推荐使用win10机器安装docker
-docker命令docker search 镜像名: 搜索容器镜像
-docker pull 镜像名: 下载镜像
-docker images: 查看本地所有镜像
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/28/DockerInDevApply/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="pengfei's avatar">
-            </div>
-            <div>
-                <strong>pengfei</strong>
-                <span>8月 28, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/技术向/">技术向</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/25/Install-Docker-Toolbox-on-Windows/">在windows7上安装Docker Toolbox</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-传统桌面系统解决方案. Docker Toolbox是为不符合Docker for Mac和Docker for Windows安装要求的老版Windows和Mac系统准备的. 如果可以的话,还是建议尽快将老版操作系统升级.
-
-Docker Toolbox 为不满足Docker最低系统安装要求的老版系统提供了一个使用Docker的方式.
-如果你还没有准备好,请首先下载安装文件:Get Docker Toolbox for Windows
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/25/Install-Docker-Toolbox-on-Windows/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="pengfei's avatar">
-            </div>
-            <div>
-                <strong>pengfei</strong>
-                <span>8月 25, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/技术向/">技术向</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/25/SpringJDBCTemplateCallProduce/">Spring jdbcTemplate 调用 Oracle 存储过程</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/25/SpringJDBCTemplateCallProduce/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="pengfei's avatar">
-            </div>
-            <div>
-                <strong>pengfei</strong>
-                <span>8月 25, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/技术向/">技术向</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                gitDealDiff
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>pengfei</strong>
+        <span>8月 29, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=http://blog.shenshenshou.top/2017/08/29/gitDealDiff/">
+    
+</ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Git/">Git</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/原创/">原创</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=gitDealDiff&url=http://blog.shenshenshou.top/2017/08/29/gitDealDiff/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=gitDealDiff&url=http://blog.shenshenshou.top/2017/08/29/gitDealDiff/index.html&via=pengfei" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.shenshenshou.top/2017/08/29/gitDealDiff/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://blog.shenshenshou.top/2017/08/29/gitDealDiff/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=私塾&title=gitDealDiff&summary=Java | coder | pfff&#39;s blog&pics=http://blog.shenshenshou.top/img/favicon.png&url=http://blog.shenshenshou.top/2017/08/29/gitDealDiff/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="1-本地更新文件时存在冲突"><a href="#1-本地更新文件时存在冲突" class="headerlink" title="1. 本地更新文件时存在冲突"></a>1. 本地更新文件时存在冲突</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master)</div><div class="line">$ git pull</div><div class="line">Auto-merging src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java</div><div class="line">CONFLICT (add/add): Merge conflict in src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java</div><div class="line">Auto-merging src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java</div><div class="line">CONFLICT (add/add): Merge conflict in src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java</div><div class="line">Auto-merging src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java</div><div class="line">CONFLICT (add/add): Merge conflict in src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java</div><div class="line">Automatic merge failed; fix conflicts and then commit the result.</div></pre></td></tr></table></figure>
+<h2 id="2-使用merge命令合并文件-报错-提示存在不能合并的文件"><a href="#2-使用merge命令合并文件-报错-提示存在不能合并的文件" class="headerlink" title="2. 使用merge命令合并文件 报错 提示存在不能合并的文件"></a>2. 使用<code>merge</code>命令合并文件 报错 提示存在不能合并的文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div><div class="line">$ git merge</div><div class="line">error: merge is not possible because you have unmerged files.</div><div class="line">hint: Fix them up in the work tree, and then use &apos;git add/rm &lt;file&gt;&apos;</div><div class="line">hint: as appropriate to mark resolution and make a commit.</div><div class="line">fatal: Exiting because of an unresolved conflict.</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div></pre></td></tr></table></figure>
+<h2 id="3-获取更新"><a href="#3-获取更新" class="headerlink" title="3. 获取更新"></a>3. 获取更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git fetch</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div></pre></td></tr></table></figure>
+<h2 id="4-在文件上解决冲突-然后采用合并工具进行合并处理"><a href="#4-在文件上解决冲突-然后采用合并工具进行合并处理" class="headerlink" title="4. 在文件上解决冲突,然后采用合并工具进行合并处理"></a>4. 在文件上解决冲突,然后采用合并工具进行合并处理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">$ get mergetool</div><div class="line">bash: get: command not found</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div><div class="line">$ git mergetool</div><div class="line"></div><div class="line">This message is displayed because &apos;merge.tool&apos; is not configured.</div><div class="line">See &apos;git mergetool --tool-help&apos; or &apos;git help config&apos; for more details.</div><div class="line">&apos;git mergetool&apos; will now attempt to use one of the following tools:</div><div class="line">opendiff kdiff3 tkdiff xxdiff meld tortoisemerge gvimdiff diffuse diffmerge ecmerge p4                                                                                              merge araxis bc codecompare emerge vimdiff</div><div class="line">Merging:</div><div class="line">src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java</div><div class="line">src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java</div><div class="line">src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java</div><div class="line"></div><div class="line">Normal merge conflict for &apos;src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java&apos;:</div><div class="line">  &#123;local&#125;: created file</div><div class="line">  &#123;remote&#125;: created file</div><div class="line">Hit return to start merge resolution tool (tortoisemerge):</div><div class="line">tortoisemerge cannot be used without a base</div><div class="line">merge of src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java failed</div><div class="line">Continue merging other unresolved paths (y/n) ? y</div><div class="line"></div><div class="line">Normal merge conflict for &apos;src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java&apos;:</div><div class="line">  &#123;local&#125;: created file</div><div class="line">  &#123;remote&#125;: created file</div><div class="line">Hit return to start merge resolution tool (tortoisemerge): tortoisemerge</div><div class="line">tortoisemerge cannot be used without a base</div><div class="line">merge of src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java failed</div><div class="line">Continue merging other unresolved paths (y/n) ? y</div><div class="line"></div><div class="line">Normal merge conflict for &apos;src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java&apos;:</div><div class="line">  &#123;local&#125;: created file</div><div class="line">  &#123;remote&#125;: created file</div><div class="line">Hit return to start merge resolution tool (tortoisemerge): tortoisemerge</div><div class="line">tortoisemerge cannot be used without a base</div><div class="line">merge of src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java failed</div><div class="line">Continue merging other unresolved paths (y/n) ? y</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div></pre></td></tr></table></figure>
+<h2 id="5-查看本地git状态"><a href="#5-查看本地git状态" class="headerlink" title="5. 查看本地git状态"></a>5. 查看本地git状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Your branch and &apos;origin/master&apos; have diverged,</div><div class="line">and have 2 and 2 different commits each, respectively.</div><div class="line">  (use &quot;git pull&quot; to merge the remote branch into yours)</div><div class="line">You have unmerged paths.</div><div class="line">  (fix conflicts and run &quot;git commit&quot;)</div><div class="line"></div><div class="line">Changes to be committed:</div><div class="line"></div><div class="line">        new file:   src/main/java/com/wisely/highlight_spring4/ch1/event/DemoEvent.java</div><div class="line">        new file:   src/main/java/com/wisely/highlight_spring4/ch1/event/DemoListener.java</div><div class="line">        new file:   src/main/java/com/wisely/highlight_spring4/ch1/event/DemoPublisher.java</div><div class="line">        new file:   src/main/java/com/wisely/highlight_spring4/ch1/event/EventConfig.java</div><div class="line">        new file:   src/main/java/com/wisely/highlight_spring4/ch1/event/Main.java</div><div class="line"></div><div class="line">Unmerged paths:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to mark resolution)</div><div class="line"></div><div class="line">        both added:      src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java</div><div class="line">        both added:      src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java</div><div class="line">        both added:      src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java</div><div class="line"></div><div class="line">Changes not staged for commit:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</div><div class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</div><div class="line"></div><div class="line">        modified:   target/classes/META-INF/maven/com.wisely/highlight_spring4/pom.pro                                                                                              perties</div><div class="line"></div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div></pre></td></tr></table></figure>
+<h2 id="6-尝试提交-这里没有add-故报错"><a href="#6-尝试提交-这里没有add-故报错" class="headerlink" title="6. 尝试提交(这里没有add 故报错)"></a>6. 尝试提交(这里没有add 故报错)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ git commit -m &quot;merge&quot;</div><div class="line">U       src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java</div><div class="line">U       src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java</div><div class="line">U       src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java</div><div class="line">error: commit is not possible because you have unmerged files.</div><div class="line">hint: Fix them up in the work tree, and then use &apos;git add/rm &lt;file&gt;&apos;</div><div class="line">hint: as appropriate to mark resolution and make a commit.</div><div class="line">fatal: Exiting because of an unresolved conflict.</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div><div class="line">$ ^C</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div></pre></td></tr></table></figure>
+<h2 id="7-add后重新提交"><a href="#7-add后重新提交" class="headerlink" title="7. add后重新提交"></a>7. add后重新提交</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ git add *</div><div class="line">warning: LF will be replaced by CRLF in src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java.</div><div class="line">The file will have its original line endings in your working directory.</div><div class="line">warning: LF will be replaced by CRLF in src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java.</div><div class="line">The file will have its original line endings in your working directory.</div><div class="line">The following paths are ignored by one of your .gitignore files:</div><div class="line">target</div><div class="line">Use -f if you really want to add them.</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div></pre></td></tr></table></figure>
+<h2 id="8-提交成功"><a href="#8-提交成功" class="headerlink" title="8. 提交成功"></a>8. 提交成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">$ git commit -m &quot;merge&quot;</div><div class="line">[master 0d7fbd8] merge</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master)</div><div class="line">$ ll</div><div class="line">total 5</div><div class="line">-rw-r--r-- 1 Administrator 197121 1907 十一 26 09:02 pom.xml</div><div class="line">-rw-r--r-- 1 Administrator 197121   18 十二  6 12:48 README.md</div><div class="line">drwxr-xr-x 1 Administrator 197121    0 十一 26 03:35 src/</div><div class="line">drwxr-xr-x 1 Administrator 197121    0 十一 26 03:35 target/</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master)</div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Your branch is ahead of &apos;origin/master&apos; by 3 commits.</div><div class="line">  (use &quot;git push&quot; to publish your local commits)</div><div class="line">nothing to commit, working directory clean</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master)</div></pre></td></tr></table></figure>
+<h2 id="9-推送至远程仓库"><a href="#9-推送至远程仓库" class="headerlink" title="9. 推送至远程仓库"></a>9. 推送至远程仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">$ git push</div><div class="line">warning: push.default is unset; its implicit value has changed in</div><div class="line">Git 2.0 from &apos;matching&apos; to &apos;simple&apos;. To squelch this message</div><div class="line">and maintain the traditional behavior, use:</div><div class="line"></div><div class="line">  git config --global push.default matching</div><div class="line"></div><div class="line">To squelch this message and adopt the new behavior now, use:</div><div class="line"></div><div class="line">  git config --global push.default simple</div><div class="line"></div><div class="line">When push.default is set to &apos;matching&apos;, git will push local branches</div><div class="line">to the remote branches that already exist with the same name.</div><div class="line"></div><div class="line">Since Git 2.0, Git defaults to the more conservative &apos;simple&apos;</div><div class="line">behavior, which only pushes the current branch to the corresponding</div><div class="line">remote branch that &apos;git pull&apos; uses to update the current branch.</div><div class="line"></div><div class="line">See &apos;git help config&apos; and search for &apos;push.default&apos; for further information.</div><div class="line">(the &apos;simple&apos; mode was introduced in Git 1.7.11. Use the similar mode</div><div class="line">&apos;current&apos; instead of &apos;simple&apos; if you sometimes use older versions of Git)</div><div class="line"></div><div class="line">Counting objects: 61, done.</div><div class="line">Delta compression using up to 2 threads.</div><div class="line">Compressing objects: 100% (42/42), done.</div><div class="line">Writing objects: 100% (61/61), 6.69 KiB | 0 bytes/s, done.</div><div class="line">Total 61 (delta 17), reused 0 (delta 0)</div><div class="line">To https://git.coding.net/pengfei/highlight_spring4.git</div><div class="line">   c6d9102..0d7fbd8  master -&gt; master</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master)</div></pre></td></tr></table></figure>
+<h2 id="10-检查更新"><a href="#10-检查更新" class="headerlink" title="10. 检查更新"></a>10. 检查更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git pull</div><div class="line">Already up-to-date.</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master)</div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Your branch is up-to-date with &apos;origin/master&apos;.</div><div class="line">nothing to commit, working directory clean</div></pre></td></tr></table></figure>
+<p>OVER</p>
+
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitment -->
+<div id="gitmentContainer" style="max-width: 90%; margin: 1pc 3pc; padding-top: 0;"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+	var gitment = new Gitment({
+	  owner: 'pfff369',
+	  repo: 'pfff369.github.io',
+	  id: window.location.pathname,
+	  oauth: {
+	    client_id: '37565adbdb80ae13b27a',
+	    client_secret: '1b0200f2b5ad7c0a103356bb1070baed403dda19',
+	  }
+	})
+	gitment.render('gitmentContainer')
+</script>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/08/28/NginxSomeExample/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
