@@ -108,9 +108,9 @@
             
             <tag> 翻译 </tag>
             
-            <tag> tokens </tag>
+            <tag> Tokens </tag>
             
-            <tag> jwt </tag>
+            <tag> Json Web Token </tag>
             
         </tags>
         
@@ -771,9 +771,9 @@
         
         <tags>
             
-            <tag> 翻译 </tag>
-            
             <tag> docker </tag>
+            
+            <tag> 翻译 </tag>
             
         </tags>
         
