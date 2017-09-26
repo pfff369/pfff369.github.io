@@ -12,7 +12,7 @@
     
     <title>
         
-            标签: Java | 
+            Linux学习之Tomcat的基本操作 | 
         
         私塾
     </title>
@@ -35,8 +35,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="pengfei">
-    <meta name="description" itemprop="description" content="Java | coder | pfff&#39;s blog">
-    <meta name="keywords" content="Java | blog | Nginx | 程序员">
+    <meta name="description" itemprop="description" content="1. 常用快捷键
+Ctrl+C 取消当前的操作
+Ctrl+D 退出当前的模式
+Tab 补全命令
+">
+    <meta name="keywords" content="Java | blog | Nginx | 程序员,原创,CentOS,Linux,Tomcat">
 
     <!-- Site Verification -->
     <meta name="google-site-verification" content="4i9QBgtaQ_Se9oRd9-rt8gFqm-F2i4BywP1OdLteMdg" />
@@ -65,29 +69,74 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://blog.shenshenshou.top">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: Java | 私塾">
+    <meta property="og:title" content="Linux学习之Tomcat的基本操作 | 私塾">
     <meta property="og:image" content="/img/favicon.png" />
-    <meta property="og:description" content="Java | coder | pfff&#39;s blog">
-    
+    <meta property="og:description" content="1. 常用快捷键
+Ctrl+C 取消当前的操作
+Ctrl+D 退出当前的模式
+Tab 补全命令
+">
+    <meta property="og:article:tag" content="原创"> <meta property="og:article:tag" content="CentOS"> <meta property="og:article:tag" content="Linux"> <meta property="og:article:tag" content="Tomcat"> 
 
+    
+        <meta property="article:published_time" content="8月 31, 2017" />
+        <meta property="article:modified_time" content="9月 01, 2017" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="标签: Java | 私塾">
-    <meta name="twitter:description" content="Java | coder | pfff&#39;s blog">
+    <meta name="twitter:title" content="Linux学习之Tomcat的基本操作 | 私塾">
+    <meta name="twitter:description" content="1. 常用快捷键
+Ctrl+C 取消当前的操作
+Ctrl+D 退出当前的模式
+Tab 补全命令
+">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="http://blog.shenshenshou.top" />
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://blog.shenshenshou.top/tags/Java/index.html" />
+        <link rel="canonical" href="http://blog.shenshenshou.top/2017/08/31/TomcatSimpleOperateOnLinux/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "私塾",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "pengfei",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "夏天夏天悄悄过去，开着压路机，压死你压死你，不让你<strong>喘</strong>气~~"
+    },
+    "headline": "Linux学习之Tomcat的基本操作",
+    "url": "http://blog.shenshenshou.top/2017/08/31/TomcatSimpleOperateOnLinux/index.html",
+    "datePublished": "8月 31, 2017",
+    "dateModified": "9月 01, 2017",
+    "description": "1. 常用快捷键
+Ctrl+C 取消当前的操作
+Ctrl+D 退出当前的模式
+Tab 补全命令
+",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://blog.shenshenshou.top"
+    }
+}
+</script>
 
 
     
@@ -283,97 +332,323 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-常用快捷键"><span class="post-toc-text">1. 常用快捷键</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-常用命令"><span class="post-toc-text">2. 常用命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-具体操作"><span class="post-toc-text">3. 具体操作</span></a></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/31/captureTomcatRequsetByFiddler4/">通过Fiddler4拦截Eclipse中部署的Tomcat的请求</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            1.双击Servers面板中需要对其进行请求拦截的Tomcat,打开其配置页面
-2...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/31/captureTomcatRequsetByFiddler4/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="pengfei's avatar">
-            </div>
-            <div>
-                <strong>pengfei</strong>
-                <span>8月 31, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/技术向/">技术向</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                Linux学习之Tomcat的基本操作
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>pengfei</strong>
+        <span>8月 31, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=http://blog.shenshenshou.top/2017/08/31/TomcatSimpleOperateOnLinux/">
+    
+</ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/CentOS/">CentOS</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Linux/">Linux</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Tomcat/">Tomcat</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/原创/">原创</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Linux学习之Tomcat的基本操作&url=http://blog.shenshenshou.top/2017/08/31/TomcatSimpleOperateOnLinux/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Linux学习之Tomcat的基本操作&url=http://blog.shenshenshou.top/2017/08/31/TomcatSimpleOperateOnLinux/index.html&via=pengfei" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.shenshenshou.top/2017/08/31/TomcatSimpleOperateOnLinux/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://blog.shenshenshou.top/2017/08/31/TomcatSimpleOperateOnLinux/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=私塾&title=Linux学习之Tomcat的基本操作&summary=Java | coder | pfff&#39;s blog&pics=http://blog.shenshenshou.top/img/favicon.png&url=http://blog.shenshenshou.top/2017/08/31/TomcatSimpleOperateOnLinux/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="1-常用快捷键"><a href="#1-常用快捷键" class="headerlink" title="1. 常用快捷键"></a>1. 常用快捷键</h2><ul>
+<li><code>Ctrl+C</code> 取消当前的操作</li>
+<li><code>Ctrl+D</code> 退出当前的模式</li>
+<li><code>Tab</code> 补全命令</li>
+</ul>
+<a id="more"></a>
+<h2 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h2><ul>
+<li><code>ls</code>查看指定目录（linux上的目录即windows上的文件夹）下的内容</li>
+<li><code>cd</code>切换到指定目录<ol>
+<li>绝对路径 即完整路径，比如你想进入Tomcat目录，假设你处在<code>/</code>根目录下面，那么，你可以通过<code>cd</code>加完整目录的形式进入该目录，即：<code>cd /usr/local/devtools/$tomcat/</code>进入到tomcat文件夹</li>
+<li>相对路径 即相对与当前目录的路径，假设你已经在tomcat目录里，你想进入他的配置文件夹<code>conf</code>，那么你就可以直接<code>cd conf</code></li>
+</ol>
+</li>
+<li><code>mkdir</code> 新建目录（文件夹）<ol>
+<li><code>-p</code> 需要时创建目标目录的上层目录，但即使这些目录已存在也不当作错误处理</li>
+</ol>
+</li>
+<li><code>cp</code> 将源文件复制至目标文件，或将多个源文件复制至目标目录<ol>
+<li><code>-f</code> 如果目标文件无法打开则将其移除并重试</li>
+<li><code>-R</code>,<code>-r</code> 递归复制目录及其子目录内的所有内容</li>
+</ol>
+</li>
+<li><code>rm</code> 删除文件（慎用）<ol>
+<li><code>-f</code> 强制删除</li>
+<li><code>-r</code>, <code>-R</code> 递归删除目录及其内容</li>
+</ol>
+</li>
+<li><code>mv</code> 将源文件重命名为目标文件，或将源文件移动至指定目录<ol>
+<li><code>-i</code> 覆盖前询问</li>
+</ol>
+</li>
+<li><code>tar</code> 用来压缩和解压文件。tar本身不具有压缩功能，他是调用压缩功能实现的<ol>
+<li><code>tar -czvf ar_test.tar.gz ar_test</code> 将<code>ar_test</code>里的内容打包压缩成<code>ar_test.tar.gz</code></li>
+<li><code>tar zxvf ar_test.tar.gz</code> 解压<code>ar_test.tar.gz</code>到当前目录</li>
+</ol>
+</li>
+<li><code>ps</code> 在<code>Linux</code>系统上的进程查看命令<ol>
+<li><code>ps -ef</code>   #显示所有进程的UID,PPIP,C与STIME栏位</li>
+</ol>
+</li>
+<li><code>kill</code>发送指定的信号到相应进程。不指定信号将发送SIGTERM（15）终止指定进程。若仍无法终止该程序可用“-KILL” 参数，其发送的信号为SIGKILL(9) ，将强制结束进程，使用ps命令或者jobs 命令可以查看进程号。root用户将影响用户的进程，非root用户只能影响自己的进程</li>
+<li><code>tail</code> 输出文件的末尾部分<ol>
+<li><code>-f</code> 当文件增长时,输出后续添加的数据</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-具体操作"><a href="#3-具体操作" class="headerlink" title="3. 具体操作"></a>3. 具体操作</h2><ul>
+<li><p>关停服务器<br>  1.通过<code>Tomcat</code>自带的执行文件(注：<code>.sh</code>文件是<code>Linux</code>上的可执行文件，执行方法是在文件名之前加<code>./</code>)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/bin# ./shutdown.sh</div></pre></td></tr></table></figure>
+<p>  2.通过杀进程（一般在<code>shutdown.sh</code>关不掉<code>Tomcat</code>的情况下使用）</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># ps -ef|grep tomcat # 查看有关于tomcat的进程信息</div><div class="line"># kill -9 4178  # 杀死指定的Tomcat进程 -9 是信号 4178是查出来的进程id</div><div class="line"># ps -ef|grep tomcat # 检查一遍</div></pre></td></tr></table></figure>
+</li>
+<li><p>备份项目</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/webapps# tar -zcvf ROOT.tar.gz ROOT # 压缩项目</div><div class="line">/webapps# mkdir -p ../../backup/20151015_01 #新建备份目录</div><div class="line">/webapps# mv ROOT.tar.gz  ../../backup/20151015_01/ # 移动文件</div></pre></td></tr></table></figure>
+</li>
+<li><p>更换项目</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/webapps# tar -zxvf ROOT.tar.gz # 解压项目</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除历史缓存文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/work# rm -rf Catalina* # 删除缓存文件</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动服务器</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/bin# ./startup.sh # 启动tomcat</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看日志</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/logs# tail -f catalina.out #动态查看启动日志</div></pre></td></tr></table></figure></li>
+</ul>
+
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitment -->
+<div id="gitmentContainer" style="max-width: 90%; margin: 1pc 3pc; padding-top: 0;"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+	var gitment = new Gitment({
+	  owner: 'pfff369',
+	  repo: 'pfff369.github.io',
+	  id: window.location.pathname,
+	  oauth: {
+	    client_id: '37565adbdb80ae13b27a',
+	    client_secret: '1b0200f2b5ad7c0a103356bb1070baed403dda19',
+	  }
+	})
+	gitment.render('gitmentContainer')
+</script>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/08/31/LinuxModifyTimeZone/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/08/31/captureTomcatRequsetByFiddler4/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -574,6 +849,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 

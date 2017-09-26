@@ -3,17 +3,327 @@
   
     
     <entry>
-      <title><![CDATA[通过Fiddler4拦截Eclipse中部署的Tomcat的请求]]></title>
-      <url>/2017/08/31/captureTomcatRequsetByFiddler4/</url>
-      <content type="html"><![CDATA[<ol>
-<li>双击<code>Servers</code>面板中需要对其进行请求拦截的<code>Tomcat</code>,打开其配置页面</li>
-<li>点击<code>Open launch configuration</code>准备设置其运行时配置</li>
-<li><p>切换到<code>Arguments</code>页面,在<code>VM arguments</code>输入框中追加设置代理参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-Dhttp.proxySet=&quot;true&quot; -Dhttp.proxyHost=&quot;127.0.0.1&quot; -Dhttp.proxyPort=&quot;8888&quot;</div></pre></td></tr></table></figure>
+      <title><![CDATA[Oracle Stream单表复制环境]]></title>
+      <url>/2017/08/31/OracleStreamSingleTableDuplicate/</url>
+      <content type="html"><![CDATA[<h2 id="1-实验环境"><a href="#1-实验环境" class="headerlink" title="1. 实验环境"></a>1. 实验环境</h2><blockquote>
+<p>客户机 A</p>
+<ol>
+<li>OS: Redhat 5.1 x64</li>
+<li>DB：Oracle 11G r2</li>
+<li>SID： orcl</li>
+</ol>
+<p>客户机 B</p>
+<ol>
+<li>OS: Win7 x64</li>
+<li>DB：Oracle 11G r2</li>
+<li>SID： devtest</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+<h2 id="2-要求配置"><a href="#2-要求配置" class="headerlink" title="2. 要求配置"></a>2. 要求配置</h2><h3 id="2-1-初始化参数的修改"><a href="#2-1-初始化参数的修改" class="headerlink" title="2.1 初始化参数的修改"></a>2.1 初始化参数的修改</h3><h4 id="2-1-1-global-names-必须设置为true，global-name-db-name-db-domain"><a href="#2-1-1-global-names-必须设置为true，global-name-db-name-db-domain" class="headerlink" title="2.1.1 global_names 必须设置为true，global_name=db_name+db_domain"></a>2.1.1 global_names 必须设置为true，global_name=db_name+db_domain</h4><ol>
+<li><p>查看<code>db_domain</code>方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; show parameter db_domain;</div></pre></td></tr></table></figure>
 </li>
-<li><p>在上一步的代理端口要与<code>Fiddler</code>中配置的相同,可以在<code>Tools</code> - <code>Fiddler Options</code> - <code>connections</code>面板中查看</p>
+<li><p>修改<code>db_domain</code>方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  SQL&gt; alter system set db_domain = &apos;com&apos; scope=spfile;</div><div class="line">SQL&gt; shutdown immediate</div><div class="line">SQL&gt; startup</div><div class="line">SQL&gt; show parameter db_domain;</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看<code>global_names</code>方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">SQL&gt; show parameter global_name; #</div><div class="line">print&gt;</div><div class="line">NAME                                 TYPE        VALUE</div><div class="line">------------------------------------ ----------- ------------------------------</div><div class="line">global_names                         boolean     FALSE</div><div class="line"></div><div class="line">SQL&gt; select * from global_name;</div><div class="line">print&gt;</div><div class="line">GLOBAL_NAME</div><div class="line">------------------------------------------------------------------------------</div><div class="line">ORCL.LOCALDOMAIN</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改<code>global_names</code></p>
+<blockquote>
+<p>修改后 客户端连接也要改 <code>DEVTEST.COM</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SQL&gt; alter system set global_names = true;</div><div class="line">SQL&gt; alter database rename global_name to DEVTEST.COM</div></pre></td></tr></table></figure>
 </li>
 </ol>
+<h4 id="2-1-2-job-queue-processes-必须-gt-2"><a href="#2-1-2-job-queue-processes-必须-gt-2" class="headerlink" title="2.1.2 job_queue_processes 必须&gt;2"></a>2.1.2 job_queue_processes 必须&gt;2</h4><blockquote>
+<p><code>job_queue_processes</code> 设定job队列可以启动的进程数,该参数决定了job作业能够使用的总进程数</p>
+</blockquote>
+<ol>
+<li><p>查看<code>job_queue_processes</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; show parameter job_queue_processes;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改<code>job_queue_processes</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; alter system set job_queue_processes=N;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-1-3-compatible，必须高于10-2-0，并且target中该参数值不能低于source-database"><a href="#2-1-3-compatible，必须高于10-2-0，并且target中该参数值不能低于source-database" class="headerlink" title="2.1.3 compatible，必须高于10.2.0，并且target中该参数值不能低于source database."></a>2.1.3 compatible，必须高于10.2.0，并且target中该参数值不能低于source database.</h4><ol>
+<li>查看兼容性参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; show parameter compatible;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-1-3-streams-pool-size-指定适当的大小-建议不小于200M-，当然如果设置了sga-target，该参数也可由系统自动调节"><a href="#2-1-3-streams-pool-size-指定适当的大小-建议不小于200M-，当然如果设置了sga-target，该参数也可由系统自动调节" class="headerlink" title="2.1.3 streams_pool_size, 指定适当的大小 ( 建议不小于200M) ，当然如果设置了sga_target，该参数也可由系统自动调节"></a>2.1.3 streams_pool_size, 指定适当的大小 ( 建议不小于200M) ，当然如果设置了sga_target，该参数也可由系统自动调节</h4><ol>
+<li><p>查看语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; show parameter streams_pool_size;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; alter system set streams_pool_size=25m scope=spfile;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-1-3-修改数据库时间格式（非必须）"><a href="#2-1-3-修改数据库时间格式（非必须）" class="headerlink" title="2.1.3 修改数据库时间格式（非必须）"></a>2.1.3 修改数据库时间格式（非必须）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alter system set nls_date_format=&apos;YYYY-MM-DD HH24:MI:SS&apos; scope=spfile;</div></pre></td></tr></table></figure>
+<h3 id="2-2-source数据库启用归档模式"><a href="#2-2-source数据库启用归档模式" class="headerlink" title="2.2 source数据库启用归档模式"></a>2.2 source数据库启用归档模式</h3><ol>
+<li><p>创建归档日志地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; mkdir /data/devtest/archivefile/</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置开启归档模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SQL&gt; alter system set log_archive_dest_1=&apos;LOCATION=/data/devtest/archivefile/&apos; scope=spfile;</div><div class="line">SQL&gt; alter system set log_archive_format=&apos;%t_%s_%r.arc&apos; scope=spfile;</div><div class="line">SQL&gt; shut immediate;</div><div class="line">SQL&gt; startup mount;</div><div class="line">SQL&gt; alter database archivelog;</div><div class="line">SQL&gt; alter database open;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="2-3-互建Database-Link"><a href="#2-3-互建Database-Link" class="headerlink" title="2.3 互建Database Link"></a>2.3 互建Database Link</h3><ol>
+<li><p>查看<code>DB_Link</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; select * from dba_db_links;</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除<code>DB_Link</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; drop public database link ORCL_LOCALDOMAIN;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建<code>DB_Link</code></p>
+<ul>
+<li><p>在监听文件增加被链接库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ORCL =</div><div class="line">(DESCRIPTION =</div><div class="line">  (ADDRESS_LIST =</div><div class="line">    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.252)(PORT = 1521))</div><div class="line">  )</div><div class="line">  (CONNECT_DATA =</div><div class="line">    (SERVICE_NAME = orcl)</div><div class="line">  )</div><div class="line">)</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建<code>DB_Link</code></p>
+<blockquote>
+<p>tip: 因为在之前设置了<code>global_names=true</code> 所以<code>database link</code>名称必须与被链接数据库<code>global_name</code>一致</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> SQL&gt; create public database link ORCL.LOCALDOMAIN connect to jwyc identified by</div><div class="line">jwyc using &apos;ORCL&apos;;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="3-创建用户及搭建环境"><a href="#3-创建用户及搭建环境" class="headerlink" title="3. 创建用户及搭建环境"></a>3. 创建用户及搭建环境</h2><blockquote>
+<p>通过更改命令行提示，来区分source库和target库操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SQL&gt; set sqlprompt &apos;barnch source&gt; &apos;; # 从</div><div class="line">SQL&gt; set sqlprompt &apos;center target&gt; &apos;; # 主</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="3-1-创建一个专用于streams的表空间-和一个Streams管理员，并且将logminer的数据字典从system表空间转移到新建的表空间，防止撑满system表空间"><a href="#3-1-创建一个专用于streams的表空间-和一个Streams管理员，并且将logminer的数据字典从system表空间转移到新建的表空间，防止撑满system表空间" class="headerlink" title="3.1 创建一个专用于streams的表空间,和一个Streams管理员，并且将logminer的数据字典从system表空间转移到新建的表空间，防止撑满system表空间"></a>3.1 创建一个专用于streams的表空间,和一个Streams管理员，并且将logminer的数据字典从system表空间转移到新建的表空间，防止撑满system表空间</h3><ol>
+<li>从库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">barnch source&gt; create tablespace stream_tbs datafile &apos;F:/app/Administrator/orada</div><div class="line">ta/devtest/stream_tbs01.dbf&apos; size 100m autoextend on maxsize unlimited segment space management auto;</div><div class="line"></div><div class="line">表空间已创建。</div><div class="line"></div><div class="line">barnch source&gt; execute dbms_logmnr_d.set_tablespace(&apos;stream_tbs&apos;);</div><div class="line"></div><div class="line">PL/SQL 过程已成功完成。</div><div class="line"></div><div class="line">barnch source&gt; create user stradmin identified by stradmin default tablespace stream_tbs;</div><div class="line"></div><div class="line">用户已创建。</div><div class="line"></div><div class="line">barnch source&gt; grant dba to stradmin;</div><div class="line"></div><div class="line">授权成功。</div></pre></td></tr></table></figure>
+<ol>
+<li>主库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">center target&gt; create tablespace stream_tbs datafile &apos;/u01/app/oracle/oradata/orcl/stream_tbs01.dbf&apos; size 100m autoextend on maxsize unlimited segment space management auto;</div><div class="line"></div><div class="line">Tablespace created.</div><div class="line"></div><div class="line">center target&gt; execute dbms_logmnr_d.set_tablespace(&apos;stream_tbs&apos;);</div><div class="line"></div><div class="line">PL/SQL procedure successfully completed.</div><div class="line"></div><div class="line">center target&gt; create user stradmin identified by stradmin default tablespace stream_tbs;</div><div class="line"></div><div class="line">User created.</div><div class="line"></div><div class="line">center target&gt; grant dba to stradmin;</div><div class="line"></div><div class="line">Grant succeeded.</div></pre></td></tr></table></figure>
+<h3 id="3-2-创建队列"><a href="#3-2-创建队列" class="headerlink" title="3.2  创建队列"></a>3.2  创建队列</h3><ol>
+<li>从库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">barnch source&gt; exec dbms_streams_adm.set_up_queue();</div><div class="line"></div><div class="line">PL/SQL 过程已成功完成。</div></pre></td></tr></table></figure>
+<ol>
+<li>主库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">center target&gt; exec dbms_streams_adm.set_up_queue();</div><div class="line"></div><div class="line">PL/SQL procedure successfully completed.</div></pre></td></tr></table></figure>
+<h2 id="4-配置复制过程"><a href="#4-配置复制过程" class="headerlink" title="4 配置复制过程"></a>4 配置复制过程</h2><h3 id="4-1-首先到source数据库"><a href="#4-1-首先到source数据库" class="headerlink" title="4.1 首先到source数据库"></a>4.1 首先到source数据库</h3><ul>
+<li><p>创建捕获规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">barnch source&gt; begin</div><div class="line">	</div><div class="line">	     dbms_streams_adm.add_table_rules(</div><div class="line">	</div><div class="line">	     table_name =&gt; &apos;jwyc.car_mot&apos;,</div><div class="line">	</div><div class="line">	     streams_type =&gt; &apos;capture&apos;,</div><div class="line">	</div><div class="line">	     streams_name =&gt; &apos;capture_stream&apos;,</div><div class="line">	</div><div class="line">	     queue_name =&gt; &apos;stradmin.streams_queue&apos;,</div><div class="line">	</div><div class="line">	     include_dml =&gt; true,</div><div class="line">	</div><div class="line">	     include_ddl =&gt; true,</div><div class="line">	</div><div class="line">	     inclusion_rule =&gt; true);</div><div class="line">	</div><div class="line">	  end;</div><div class="line">	  /</div><div class="line"></div><div class="line">PL/SQL 过程已成功完成。</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建传播规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">barnch source&gt; begin</div><div class="line">  </div><div class="line">      dbms_streams_adm.add_table_propagation_rules(</div><div class="line">  </div><div class="line">      table_name =&gt; &apos;jwyc.car_mot&apos;,</div><div class="line">  </div><div class="line">      streams_name =&gt; &apos;sour_to_targ&apos;,</div><div class="line">  </div><div class="line">      source_queue_name =&gt; &apos;stradmin.streams_queue&apos;,</div><div class="line">  </div><div class="line">       destination_queue_name =&gt; &apos;stradmin.streams_queue@ORCL.LOCALDOMAIN&apos;,</div><div class="line">  </div><div class="line">       include_dml =&gt; true,</div><div class="line">  </div><div class="line">       include_ddl =&gt; true,</div><div class="line">  </div><div class="line">       source_database =&gt; &apos;DEVTEST.COM&apos;,</div><div class="line">  </div><div class="line">       inclusion_rule =&gt; true,</div><div class="line">  </div><div class="line">       queue_to_queue =&gt; true);</div><div class="line">  </div><div class="line">    end;</div><div class="line">    /</div><div class="line"></div><div class="line">  PL/SQL 过程已成功完成。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-2-切换到target数据库"><a href="#4-2-切换到target数据库" class="headerlink" title="4.2 切换到target数据库"></a>4.2 切换到target数据库</h3><ul>
+<li><p>创建应用规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">begin</div><div class="line"></div><div class="line"> dbms_streams_adm.add_table_rules(</div><div class="line"></div><div class="line"> table_name =&gt; &apos;jwyc.car_mot&apos;,</div><div class="line"></div><div class="line"> streams_type =&gt; &apos;apply&apos;,</div><div class="line"></div><div class="line"> streams_name =&gt; &apos;apply_stream&apos;,</div><div class="line"></div><div class="line"> queue_name =&gt; &apos;stradmin.streams_queue&apos;,</div><div class="line"></div><div class="line"> include_dml =&gt; true,</div><div class="line"></div><div class="line"> include_ddl =&gt; true,</div><div class="line"></div><div class="line"> source_database =&gt; &apos;DEVTEST.COM&apos;,</div><div class="line"></div><div class="line"> inclusion_rule =&gt; true);</div><div class="line"></div><div class="line">end;</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化数据</p>
+</li>
+<li><p>设置起始应用的scn值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">DECLARE</div><div class="line"></div><div class="line">  iscn  NUMBER;</div><div class="line"></div><div class="line">  BEGIN</div><div class="line"></div><div class="line">  iscn := DBMS_FLASHBACK.GET_SYSTEM_CHANGE_NUMBER();</div><div class="line"></div><div class="line">  DBMS_APPLY_ADM.SET_TABLE_INSTANTIATION_SCN@ORCL.LOCALDOMAIN(</div><div class="line"></div><div class="line">  source_object_name    =&gt; &apos;jwyc.car_mot&apos;,</div><div class="line"></div><div class="line">  source_database_name  =&gt; &apos;DEVTEST.COM&apos;,</div><div class="line"></div><div class="line">  instantiation_scn     =&gt; iscn);</div><div class="line"></div><div class="line">END;</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动应用进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">exec dbms_apply_adm.start_apply(&apos;apply_stream&apos;);</div><div class="line"></div><div class="line">select apply_name,status from dba_apply;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-3-切换到source数据库，启动捕获进程"><a href="#4-3-切换到source数据库，启动捕获进程" class="headerlink" title="4.3 切换到source数据库，启动捕获进程"></a>4.3 切换到source数据库，启动捕获进程</h3><ul>
+<li><p>启动捕获进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">exec dbms_capture_adm.start_capture(&apos;capture_stream&apos;);</div><div class="line"></div><div class="line">select capture_name,status from dba_capture;</div></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 原创 </tag>
+            
+            <tag> Oracle Stream </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Oracle安装先决条件配置]]></title>
+      <url>/2017/08/31/OracleInstallPrevOnLinux/</url>
+      <content type="html"><![CDATA[<h2 id="1-Oracle安装必需包安装"><a href="#1-Oracle安装必需包安装" class="headerlink" title="1. Oracle安装必需包安装"></a>1. Oracle安装必需包安装</h2><a id="more"></a>
+<h3 id="1-1-必需软件包列表"><a href="#1-1-必需软件包列表" class="headerlink" title="1.1 必需软件包列表"></a>1.1 必需软件包列表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">binutils-2.20.51.0.2-5.11.el6 (x86_64)</div><div class="line">compat-libcap1-1.10-1 (x86_64)</div><div class="line">compat-libstdc++-33-3.2.3-69.el6 (x86_64)</div><div class="line">compat-libstdc++-33-3.2.3-69.el6.i686</div><div class="line">gcc-4.4.4-13.el6 (x86_64)</div><div class="line">gcc-c++-4.4.4-13.el6 (x86_64)</div><div class="line">glibc-2.12-1.7.el6 (i686)</div><div class="line">glibc-2.12-1.7.el6 (x86_64)</div><div class="line">glibc-devel-2.12-1.7.el6 (x86_64)</div><div class="line">glibc-devel-2.12-1.7.el6.i686</div><div class="line">ksh</div><div class="line">libgcc-4.4.4-13.el6 (i686)</div><div class="line">libgcc-4.4.4-13.el6 (x86_64)</div><div class="line">libstdc++-4.4.4-13.el6 (x86_64)</div><div class="line">libstdc++-4.4.4-13.el6.i686</div><div class="line">libstdc++-devel-4.4.4-13.el6 (x86_64)</div><div class="line">libstdc++-devel-4.4.4-13.el6.i686</div><div class="line">libaio-0.3.107-10.el6 (x86_64)</div><div class="line">libaio-0.3.107-10.el6.i686</div><div class="line">libaio-devel-0.3.107-10.el6 (x86_64)</div><div class="line">libaio-devel-0.3.107-10.el6.i686</div><div class="line">make-3.81-19.el6</div><div class="line">sysstat-9.0.4-11.el6 (x86_64)</div><div class="line"></div><div class="line">unixODBC-2.2.14-11.el6 (x86_64) or later</div><div class="line">unixODBC-2.2.14-11.el6.i686 or later</div><div class="line">unixODBC-devel-2.2.14-11.el6 (x86_64) or later</div><div class="line">unixODBC-devel-2.2.14-11.el6.i686 or later</div></pre></td></tr></table></figure>
+<h3 id="1-2-检查方法"><a href="#1-2-检查方法" class="headerlink" title="1.2 检查方法"></a>1.2 检查方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; rpm -qa|grep &lt;package name&gt;</div></pre></td></tr></table></figure>
+<h3 id="1-3-安装方法"><a href="#1-3-安装方法" class="headerlink" title="1.3 安装方法"></a>1.3 安装方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; yum install -y &lt;package name&gt; # 在线安装</div><div class="line">&gt; rpm -ivh &lt;full-package name&gt; # 手动下载rpm包离线安装</div></pre></td></tr></table></figure>
+<h2 id="2-Oracle-用户和用户组"><a href="#2-Oracle-用户和用户组" class="headerlink" title="2. Oracle 用户和用户组"></a>2. Oracle 用户和用户组</h2><h3 id="2-1-检测文件"><a href="#2-1-检测文件" class="headerlink" title="2.1 检测文件"></a>2.1 检测文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; vim /etc/oraInst.loc  # 1. 新增配置文件</div><div class="line">#  contents</div><div class="line">inventory_loc=/u01/app/oraInventory</div><div class="line">inst_group=oinstall</div></pre></td></tr></table></figure>
+<h3 id="2-2-新建用户和用户组"><a href="#2-2-新建用户和用户组" class="headerlink" title="2.2 新建用户和用户组"></a>2.2 新建用户和用户组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 建组</div><div class="line">&gt; /usr/sbin/groupadd oinstall</div><div class="line">&gt; /usr/sbin/groupadd dba</div><div class="line"># 建用户</div><div class="line">&gt; /usr/sbin/useradd -g oinstall -G dba oracle</div><div class="line">&gt; passwd oracle</div></pre></td></tr></table></figure>
+<h2 id="3-配置系统参数"><a href="#3-配置系统参数" class="headerlink" title="3. 配置系统参数"></a>3. 配置系统参数</h2><h3 id="3-1-内核参数"><a href="#3-1-内核参数" class="headerlink" title="3.1 内核参数"></a>3.1 内核参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; vim /etc/sysctl.conf</div></pre></td></tr></table></figure>
+<blockquote>
+<p>请注意 以下参数可能在<code>sysctl.conf</code>已经出现，只需要添加不存在的即可，在<code>vim</code>中命令模式下输入<code>\</code>后跟单词即可搜索全文<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fs.aio-max-nr = 1048576</div><div class="line">fs.file-max = 6815744</div><div class="line">kernel.shmall = 2097152</div><div class="line">kernel.shmmax = 536870912</div><div class="line">kernel.shmmni = 4096</div><div class="line">kernel.sem = 250 32000 100 128</div><div class="line">net.ipv4.ip_local_port_range = 9000 65500</div><div class="line">net.core.rmem_default = 262144</div><div class="line">net.core.rmem_max = 4194304</div><div class="line">net.core.wmem_default = 262144</div><div class="line">net.core.wmem_max = 1048576</div></pre></td></tr></table></figure></p>
+<p>指定用户组创建<code>shared memory segments</code>权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo 501 &gt; /proc/sys/vm/hugetlb_shm_group</div></pre></td></tr></table></figure></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;  /sbin/sysctl -p # 使生效</div></pre></td></tr></table></figure>
+<h3 id="3-2-修改资源使用资源限制文件"><a href="#3-2-修改资源使用资源限制文件" class="headerlink" title="3.2 修改资源使用资源限制文件"></a>3.2 修改资源使用资源限制文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; vim /etc/security/limits.conf</div><div class="line">oracle soft nproc 2047</div><div class="line">oracle hard nproc 16384</div><div class="line">oracle soft nofile 1024</div><div class="line">oracle hard nofile 65536</div></pre></td></tr></table></figure>
+<h2 id="4-创建安装目录"><a href="#4-创建安装目录" class="headerlink" title="4. 创建安装目录"></a>4. 创建安装目录</h2><h3 id="4-1-创建目录"><a href="#4-1-创建目录" class="headerlink" title="4.1 创建目录"></a>4.1 创建目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; mkdir -pm 755 /u01/app # 新建并修改默认权限目录</div><div class="line">&gt; chown -R oracle:oinstall /u01/app/ # 修改拥有人</div><div class="line">&gt; mkdir -pm 755 /u01/oraInventory</div><div class="line">&gt; chown oracle:oinstall /u01/oraInventory/</div></pre></td></tr></table></figure>
+<h3 id="4-2-配置用户环境变量"><a href="#4-2-配置用户环境变量" class="headerlink" title="4.2 配置用户环境变量"></a>4.2 配置用户环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; vim /home/oracle/.bash_profile</div><div class="line">export ORACLE_SID=orcl</div><div class="line">export ORACLE_HOME=/u01/app/oracle/product/11.2.0/dbhome_1</div><div class="line">export PATH=$ORACLE_HOME/bin:$PATH</div><div class="line">export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH</div></pre></td></tr></table></figure>
+<h2 id="5-禁用selinux"><a href="#5-禁用selinux" class="headerlink" title="5.  禁用selinux"></a>5.  禁用<code>selinux</code></h2><blockquote>
+<p>不禁用的话在使用<code>sqlplus</code>时会有一些奇葩的问题，所以…</p>
+</blockquote>
+<h3 id="5-1-将SELINUX-enforcing修改成SELINUX-disabled"><a href="#5-1-将SELINUX-enforcing修改成SELINUX-disabled" class="headerlink" title="5.1 将SELINUX=enforcing修改成SELINUX=disabled"></a>5.1 将<code>SELINUX=enforcing</code>修改成<code>SELINUX=disabled</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; vim etc/selinux/config</div><div class="line">SELINUX=disabled</div></pre></td></tr></table></figure>
+<blockquote>
+<p>引用：<a href="http://docs.oracle.com/cd/E11882_01/install.112/e24326.pdf#pdfjs.action=download" target="_blank" rel="external">Oracle install guide</a></p>
+</blockquote>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 原创 </tag>
+            
+            <tag> Oracle </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[CentOS配置yum源]]></title>
+      <url>/2017/08/31/ConfigYumRepoOnRHEL/</url>
+      <content type="html"><![CDATA[<h2 id="1-添加centos源文件"><a href="#1-添加centos源文件" class="headerlink" title="1. 添加centos源文件"></a>1. 添加centos源文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/yum.repos.d/centos.repo</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="2-修改网易源"><a href="#2-修改网易源" class="headerlink" title="2. 修改网易源"></a>2. 修改网易源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">[base]</div><div class="line">name=CentOS-$releasever - Base</div><div class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch</div><div class="line">&amp;repo=os</div><div class="line">baseurl=http://mirrors.163.com/centos/6/os/i386/</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=http://mirrors.163.com/centos/6/os/i386/RPM-GPG-KEY-CentOS-6</div><div class="line"></div><div class="line">#released updates</div><div class="line">[updates]</div><div class="line">name=CentOS-$releasever - Updates</div><div class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch</div><div class="line">&amp;repo=updates</div><div class="line">baseurl=http://mirrors.163.com/centos/6/updates/i386/</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=http://mirrors.163.com/centos/6/os/i386/RPM-GPG-KEY-CentOS-6</div><div class="line"></div><div class="line">#additional packages that may be useful</div><div class="line">[extras]</div><div class="line">name=CentOS-$releasever - Extras</div><div class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch</div><div class="line">&amp;repo=extras</div><div class="line">baseurl=http://mirrors.163.com/centos/6/extras/i386/</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=http://mirrors.163.com/centos/6/os/i386/RPM-GPG-KEY-CentOS-6</div><div class="line"></div><div class="line">#additional packages that extend functionality of existing packages</div><div class="line">[centosplus]</div><div class="line">name=CentOS-$releasever - Plus</div><div class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch</div><div class="line">&amp;repo=centosplus</div><div class="line">baseurl=http://mirrors.163.com/centos/6/centosplus/i386/</div><div class="line">gpgcheck=1</div><div class="line">enabled=0</div><div class="line">gpgkey=http://mirrors.163.com/centos/6/os/i386/RPM-GPG-KEY-CentOS-6</div><div class="line"></div><div class="line">#contrib - packages by Centos Users</div><div class="line">[contrib]</div><div class="line">name=CentOS-$releasever - Contrib</div><div class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch</div><div class="line">&amp;repo=contrib</div><div class="line">baseurl=http://mirrors.163.com/centos/6/contrib/i386/</div><div class="line">gpgcheck=1</div><div class="line">enabled=0</div><div class="line">gpgkey=http://mirrors.163.com/centos/6/os/i386/RPM-GPG-KEY-CentOS-6</div></pre></td></tr></table></figure>]]></content>
+      
+        
+        <tags>
+            
+            <tag> 原创 </tag>
+            
+            <tag> CentOS </tag>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Linux修改时区]]></title>
+      <url>/2017/08/31/LinuxModifyTimeZone/</url>
+      <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt; tzselect # 时区选择工具</div><div class="line">&gt; 5 # 5) Asia</div><div class="line">&gt; 9 # 9) China</div><div class="line">&gt; 1 # 1) east China - Beijing, Guangdong, Shanghai, etc.</div><div class="line">&gt; 1 # 1) Yes</div><div class="line"></div><div class="line">&gt; vim /etc/sysconfig/clock</div><div class="line">ZONE=Asia/Shanghai</div><div class="line">&gt; rm /etc/localtime</div><div class="line">&gt; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</div><div class="line">&gt; reboot</div></pre></td></tr></table></figure>]]></content>
+      
+        
+        <tags>
+            
+            <tag> 原创 </tag>
+            
+            <tag> CentOS </tag>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Linux学习之Tomcat的基本操作]]></title>
+      <url>/2017/08/31/TomcatSimpleOperateOnLinux/</url>
+      <content type="html"><![CDATA[<h2 id="1-常用快捷键"><a href="#1-常用快捷键" class="headerlink" title="1. 常用快捷键"></a>1. 常用快捷键</h2><ul>
+<li><code>Ctrl+C</code> 取消当前的操作</li>
+<li><code>Ctrl+D</code> 退出当前的模式</li>
+<li><code>Tab</code> 补全命令</li>
+</ul>
+<a id="more"></a>
+<h2 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h2><ul>
+<li><code>ls</code>查看指定目录（linux上的目录即windows上的文件夹）下的内容</li>
+<li><code>cd</code>切换到指定目录<ol>
+<li>绝对路径 即完整路径，比如你想进入Tomcat目录，假设你处在<code>/</code>根目录下面，那么，你可以通过<code>cd</code>加完整目录的形式进入该目录，即：<code>cd /usr/local/devtools/$tomcat/</code>进入到tomcat文件夹</li>
+<li>相对路径 即相对与当前目录的路径，假设你已经在tomcat目录里，你想进入他的配置文件夹<code>conf</code>，那么你就可以直接<code>cd conf</code></li>
+</ol>
+</li>
+<li><code>mkdir</code> 新建目录（文件夹）<ol>
+<li><code>-p</code> 需要时创建目标目录的上层目录，但即使这些目录已存在也不当作错误处理</li>
+</ol>
+</li>
+<li><code>cp</code> 将源文件复制至目标文件，或将多个源文件复制至目标目录<ol>
+<li><code>-f</code> 如果目标文件无法打开则将其移除并重试</li>
+<li><code>-R</code>,<code>-r</code> 递归复制目录及其子目录内的所有内容</li>
+</ol>
+</li>
+<li><code>rm</code> 删除文件（慎用）<ol>
+<li><code>-f</code> 强制删除</li>
+<li><code>-r</code>, <code>-R</code> 递归删除目录及其内容</li>
+</ol>
+</li>
+<li><code>mv</code> 将源文件重命名为目标文件，或将源文件移动至指定目录<ol>
+<li><code>-i</code> 覆盖前询问</li>
+</ol>
+</li>
+<li><code>tar</code> 用来压缩和解压文件。tar本身不具有压缩功能，他是调用压缩功能实现的<ol>
+<li><code>tar -czvf ar_test.tar.gz ar_test</code> 将<code>ar_test</code>里的内容打包压缩成<code>ar_test.tar.gz</code></li>
+<li><code>tar zxvf ar_test.tar.gz</code> 解压<code>ar_test.tar.gz</code>到当前目录</li>
+</ol>
+</li>
+<li><code>ps</code> 在<code>Linux</code>系统上的进程查看命令<ol>
+<li><code>ps -ef</code>   #显示所有进程的UID,PPIP,C与STIME栏位</li>
+</ol>
+</li>
+<li><code>kill</code>发送指定的信号到相应进程。不指定信号将发送SIGTERM（15）终止指定进程。若仍无法终止该程序可用“-KILL” 参数，其发送的信号为SIGKILL(9) ，将强制结束进程，使用ps命令或者jobs 命令可以查看进程号。root用户将影响用户的进程，非root用户只能影响自己的进程</li>
+<li><code>tail</code> 输出文件的末尾部分<ol>
+<li><code>-f</code> 当文件增长时,输出后续添加的数据</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-具体操作"><a href="#3-具体操作" class="headerlink" title="3. 具体操作"></a>3. 具体操作</h2><ul>
+<li><p>关停服务器<br>  1.通过<code>Tomcat</code>自带的执行文件(注：<code>.sh</code>文件是<code>Linux</code>上的可执行文件，执行方法是在文件名之前加<code>./</code>)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/bin# ./shutdown.sh</div></pre></td></tr></table></figure>
+<p>  2.通过杀进程（一般在<code>shutdown.sh</code>关不掉<code>Tomcat</code>的情况下使用）</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># ps -ef|grep tomcat # 查看有关于tomcat的进程信息</div><div class="line"># kill -9 4178  # 杀死指定的Tomcat进程 -9 是信号 4178是查出来的进程id</div><div class="line"># ps -ef|grep tomcat # 检查一遍</div></pre></td></tr></table></figure>
+</li>
+<li><p>备份项目</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/webapps# tar -zcvf ROOT.tar.gz ROOT # 压缩项目</div><div class="line">/webapps# mkdir -p ../../backup/20151015_01 #新建备份目录</div><div class="line">/webapps# mv ROOT.tar.gz  ../../backup/20151015_01/ # 移动文件</div></pre></td></tr></table></figure>
+</li>
+<li><p>更换项目</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/webapps# tar -zxvf ROOT.tar.gz # 解压项目</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除历史缓存文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/work# rm -rf Catalina* # 删除缓存文件</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动服务器</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/bin# ./startup.sh # 启动tomcat</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看日志</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/logs# tail -f catalina.out #动态查看启动日志</div></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术向 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 原创 </tag>
+            
+            <tag> CentOS </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> Tomcat </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[通过Fiddler4拦截Eclipse中部署的Tomcat的请求]]></title>
+      <url>/2017/08/31/captureTomcatRequsetByFiddler4/</url>
+      <content type="html"><![CDATA[<p>1.双击<code>Servers</code>面板中需要对其进行请求拦截的<code>Tomcat</code>,打开其配置页面</p>
+<p>2.点击<code>Open launch configuration</code>准备设置其运行时配置</p>
+<p>3.切换到<code>Arguments</code>页面,在<code>VM arguments</code>输入框中追加设置代理参数</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-Dhttp.proxySet=&quot;true&quot; -Dhttp.proxyHost=&quot;127.0.0.1&quot; -Dhttp.proxyPort=&quot;8888&quot;</div></pre></td></tr></table></figure>
+</code></pre><p>4.在上一步的代理端口要与<code>Fiddler</code>中配置的相同,可以在<code>Tools</code> - <code>Fiddler Options</code> - <code>connections</code>面板中查看</p>
 ]]></content>
       
         <categories>
@@ -40,9 +350,10 @@
     </entry>
     
     <entry>
-      <title><![CDATA[gitDealDiff]]></title>
+      <title><![CDATA[Git提交冲突处理]]></title>
       <url>/2017/08/29/gitDealDiff/</url>
-      <content type="html"><![CDATA[<h2 id="1-本地更新文件时存在冲突"><a href="#1-本地更新文件时存在冲突" class="headerlink" title="1. 本地更新文件时存在冲突"></a>1. 本地更新文件时存在冲突</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master)</div><div class="line">$ git pull</div><div class="line">Auto-merging src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java</div><div class="line">CONFLICT (add/add): Merge conflict in src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java</div><div class="line">Auto-merging src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java</div><div class="line">CONFLICT (add/add): Merge conflict in src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java</div><div class="line">Auto-merging src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java</div><div class="line">CONFLICT (add/add): Merge conflict in src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java</div><div class="line">Automatic merge failed; fix conflicts and then commit the result.</div></pre></td></tr></table></figure>
+      <content type="html"><![CDATA[<h2 id="1-本地更新文件时存在冲突"><a href="#1-本地更新文件时存在冲突" class="headerlink" title="1. 本地更新文件时存在冲突"></a>1. 本地更新文件时存在冲突</h2><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master)</div><div class="line">$ git pull</div><div class="line">Auto-merging src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java</div><div class="line">CONFLICT (add/add): Merge conflict in src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java</div><div class="line">Auto-merging src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java</div><div class="line">CONFLICT (add/add): Merge conflict in src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java</div><div class="line">Auto-merging src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java</div><div class="line">CONFLICT (add/add): Merge conflict in src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java</div><div class="line">Automatic merge failed; fix conflicts and then commit the result.</div></pre></td></tr></table></figure>
 <h2 id="2-使用merge命令合并文件-报错-提示存在不能合并的文件"><a href="#2-使用merge命令合并文件-报错-提示存在不能合并的文件" class="headerlink" title="2. 使用merge命令合并文件 报错 提示存在不能合并的文件"></a>2. 使用<code>merge</code>命令合并文件 报错 提示存在不能合并的文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div><div class="line">$ git merge</div><div class="line">error: merge is not possible because you have unmerged files.</div><div class="line">hint: Fix them up in the work tree, and then use &apos;git add/rm &lt;file&gt;&apos;</div><div class="line">hint: as appropriate to mark resolution and make a commit.</div><div class="line">fatal: Exiting because of an unresolved conflict.</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div></pre></td></tr></table></figure>
 <h2 id="3-获取更新"><a href="#3-获取更新" class="headerlink" title="3. 获取更新"></a>3. 获取更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git fetch</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div></pre></td></tr></table></figure>
 <h2 id="4-在文件上解决冲突-然后采用合并工具进行合并处理"><a href="#4-在文件上解决冲突-然后采用合并工具进行合并处理" class="headerlink" title="4. 在文件上解决冲突,然后采用合并工具进行合并处理"></a>4. 在文件上解决冲突,然后采用合并工具进行合并处理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">$ get mergetool</div><div class="line">bash: get: command not found</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div><div class="line">$ git mergetool</div><div class="line"></div><div class="line">This message is displayed because &apos;merge.tool&apos; is not configured.</div><div class="line">See &apos;git mergetool --tool-help&apos; or &apos;git help config&apos; for more details.</div><div class="line">&apos;git mergetool&apos; will now attempt to use one of the following tools:</div><div class="line">opendiff kdiff3 tkdiff xxdiff meld tortoisemerge gvimdiff diffuse diffmerge ecmerge p4                                                                                              merge araxis bc codecompare emerge vimdiff</div><div class="line">Merging:</div><div class="line">src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java</div><div class="line">src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java</div><div class="line">src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java</div><div class="line"></div><div class="line">Normal merge conflict for &apos;src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java&apos;:</div><div class="line">  &#123;local&#125;: created file</div><div class="line">  &#123;remote&#125;: created file</div><div class="line">Hit return to start merge resolution tool (tortoisemerge):</div><div class="line">tortoisemerge cannot be used without a base</div><div class="line">merge of src/main/java/com/wisely/highlight_spring4/ch1/profile/DemoBean.java failed</div><div class="line">Continue merging other unresolved paths (y/n) ? y</div><div class="line"></div><div class="line">Normal merge conflict for &apos;src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java&apos;:</div><div class="line">  &#123;local&#125;: created file</div><div class="line">  &#123;remote&#125;: created file</div><div class="line">Hit return to start merge resolution tool (tortoisemerge): tortoisemerge</div><div class="line">tortoisemerge cannot be used without a base</div><div class="line">merge of src/main/java/com/wisely/highlight_spring4/ch1/profile/Main.java failed</div><div class="line">Continue merging other unresolved paths (y/n) ? y</div><div class="line"></div><div class="line">Normal merge conflict for &apos;src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java&apos;:</div><div class="line">  &#123;local&#125;: created file</div><div class="line">  &#123;remote&#125;: created file</div><div class="line">Hit return to start merge resolution tool (tortoisemerge): tortoisemerge</div><div class="line">tortoisemerge cannot be used without a base</div><div class="line">merge of src/main/java/com/wisely/highlight_spring4/ch1/profile/ProfileConfig.java failed</div><div class="line">Continue merging other unresolved paths (y/n) ? y</div><div class="line"></div><div class="line">Administrator@yangpf MINGW64 /d/JIYW_2016SD01_JDQYWL/highlight_spring4 (master|MERGING)</div></pre></td></tr></table></figure>
@@ -287,6 +598,118 @@
     </entry>
     
     <entry>
+      <title><![CDATA[JSON Web Token 应用实例]]></title>
+      <url>/2017/08/28/get-started-for-token/</url>
+      <content type="html"><![CDATA[<h2 id="1-Token是啥"><a href="#1-Token是啥" class="headerlink" title="1. Token是啥"></a>1. <code>Token</code>是啥</h2><p><code>Token</code>是服务端生成的一串字符串，以作客户端进行请求的一个令牌，当第一次登录后，服务器生成一个<code>Token</code>便将此<code>Token</code>返回给客户端，以后客户端只需带上这个<code>Token</code>前来请求数据即可，无需再次带上用户名和密码。</p>
+<h2 id="2-为什么要使用Token"><a href="#2-为什么要使用Token" class="headerlink" title="2. 为什么要使用Token"></a>2. 为什么要使用<code>Token</code></h2><p><code>Token</code>的目的是为了减轻服务器的压力，减少频繁的查询数据库，使服务器更加健壮。</p>
+<h2 id="3-JWT标准"><a href="#3-JWT标准" class="headerlink" title="3. JWT标准"></a>3. <code>JWT</code>标准</h2><h3 id="3-1-JSON-Web-Token-定义"><a href="#3-1-JSON-Web-Token-定义" class="headerlink" title="3.1 JSON Web Token 定义"></a>3.1 JSON Web Token 定义</h3><p>JSON Web Token (JWT)是一个开放标准(<a href="https://tools.ietf.org/html/rfc7519" target="_blank" rel="external">RFC 7519</a>)，定义了一种紧凑(<code>Compact</code>)且独立(<code>Self-contained</code>)的方式，用于将各方之间的信息安全地传输为<code>JSON</code>对象。传输信息包含数字签名，可以进行校验并可信的。JWT可以通过秘钥（使用HMAC算法）或使用RSA的公钥/私钥进行签名。</p>
+<p><strong>概念解读</strong></p>
+<blockquote>
+<p><code>Compact</code>: 由于<code>jwt</code>的尺寸较小，可以通过<code>URL</code>，<code>POST</code>参数以及<code>HTTP header</code>中发送。此外，<code>jwt</code>较小的尺寸意味着传输的更快</p>
+<p><code>Self-contained</code>: <code>JWT</code>载荷中包含用户的所有必要信息，避免了需要多次查查库的操作。</p>
+</blockquote>
+<h3 id="3-2-JSON-Web-Token-应用场景"><a href="#3-2-JSON-Web-Token-应用场景" class="headerlink" title="3.2 JSON Web Token 应用场景"></a>3.2 JSON Web Token 应用场景</h3><blockquote>
+<p><code>认证</code>（<code>Authentication</code>）：<code>JWT</code>最常见的场景就是用户认证，一旦用户成功登录以后，每一个后来的请求都需要包含服务端反馈的<code>JWT</code>信息，通过该<code>token</code>允许用户访问路由、服务以及资源。现在，<code>JWT</code>也被广泛的应用于单点登录（<code>Single Sign On</code>）,其主要优势在于使用更小的开销并能够轻松的适用于跨域场景。</p>
+<p><code>信息交流</code>（<code>Information Exchange</code>）: <code>JWT</code>在各方之间安全传输信息是一个非常好的选择。基于<code>JWT</code>可被签名的特性，可以通过公/私钥的方式确定你要发送的目标方。此外，每个<code>JWT</code>的签名是通过其头部和载荷部分计算得出的，你可以确认传送的内容信息有没有被篡改。</p>
+</blockquote>
+<h3 id="3-3-JSON-Web-Token-构成"><a href="#3-3-JSON-Web-Token-构成" class="headerlink" title="3.3 JSON Web Token 构成"></a>3.3 JSON Web Token 构成</h3><p><code>JSON Web Tokens</code>包含三部分并用<code>.</code>分隔, 分别是：</p>
+<pre><code>* `Header` 头信息
+* `Payload` 载荷
+* `Signature` 签名
+</code></pre><p>因此，一个<code>jwt</code>信息通常是这个样子滴：<br><code>xxxxxx.yyyyyyy.zzzzzzz</code></p>
+<p>下面详细了解这三个部分</p>
+<p><strong><code>Header</code> 头信息</strong></p>
+<p><code>JWT</code>的头部通常包含两部分内容：<code>token</code>的类型以及用到的加密算法。例如HMAC SHA256或RSA</p>
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;alg&quot;: &quot;HS256&quot;,</div><div class="line">  &quot;typ&quot;: &quot;JWT&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后将这部分通过<code>Base64</code>加密并作为<code>JWT</code>的第一部分。</p>
+<p><strong><code>Payload</code> 载荷</strong></p>
+<p><code>Token</code>的第二部分就是载荷，这部分包含一些声明。这些声明主要包括一些实体（通常是用户）信息和一些额外的元数据信息。这些声明分为三种类型：保留(<code>reserved</code>)声明、公共(<code>public</code>)声明以及私有(<code>private</code>)声明</p>
+<ul>
+<li><p><strong>保留(<code>reserved</code>)声明</strong>: 这是一个预定义的声明集合，不强制使用，推荐使用。提供了一些有用的，互操作性的声明。（较短的声明名称是为了jwt更紧凑，更利于传输）</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">iss: JWT签发者</div><div class="line">sub: JWT所面向的用户</div><div class="line">aud: JWT接收方</div><div class="line">exp(expires): 过期时间，这里是一个Unix时间戳</div><div class="line">iat(issued at): 签发时间，这里是一个Unix时间戳</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>公共(<code>public</code>)声明</strong>: 这些是由使用<code>JWT</code>的人们定义的，为了防止冲突可以在<code>IANA JSON Web Token Registry</code>中注册。</p>
+</li>
+<li><p><strong>私有(<code>private</code>)声明</strong>: 这些是使用<code>JWT</code>的各方之间共享信息的自定义声明。</p>
+</li>
+</ul>
+<p>实例</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</div><div class="line">  &quot;name&quot;: &quot;John Doe&quot;,</div><div class="line">  &quot;admin&quot;: true</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><p>然后将payload进行<code>Base64</code>加密组成<code>JWT</code>的第二部分。</p>
+<p><strong><code>Signature</code> 签名</strong></p>
+<p>创建签名时需要你准备好加密后的头、载荷信息，一个密钥和指定的算法类型。最后进行签名。</p>
+<p>例如你使用<code>HMAC SHA256</code>算法进行签名的话需要采用下面的方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">HMACSHA256(</div><div class="line">  base64UrlEncode(header) + &quot;.&quot; +</div><div class="line">  base64UrlEncode(payload),</div><div class="line">  secret)</div></pre></td></tr></table></figure>
+<p>这个签名用于确认发送方的数据有没有在信息传输过程中被篡改。</p>
+<p><strong>合体</strong></p>
+<p>将处理后的三部分信息通过<code>.</code>连接成一个字符串，可以轻松的在<code>HTTP</code>环境中进行传递。并且与基于XML的规范(例如<code>SAML</code>)相比，其结构更紧凑更利于传输。</p>
+<p>下面就是一个<code>JWT</code>实例，包含加密后的头和载荷，并通过一个密钥进行签名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</div></pre></td></tr></table></figure>
+<p>可以去生成并校验<code>JWT</code>。<br>如果要使用JWT并将这些概念付诸实践，可以使用<a href="http://jwt.io" target="_blank" rel="external">jwt.io.Debugger</a>对JWT进行解码，验证和生成。</p>
+<h2 id="4-JWT实例"><a href="#4-JWT实例" class="headerlink" title="4. JWT实例"></a>4. <code>JWT</code>实例</h2><h3 id="4-1-流程设计"><a href="#4-1-流程设计" class="headerlink" title="4.1 流程设计"></a>4.1 流程设计</h3><p><img src="https://cdn.auth0.com/content/jwt/jwt-diagram.png" alt="认证流程"></p>
+<h3 id="4-2-贴代码"><a href="#4-2-贴代码" class="headerlink" title="4.2 贴代码"></a>4.2 贴代码</h3><blockquote>
+<p>客户端：Vue.js<br>应用模块：<br>  axios.js 请求发起<br>  qs.js 字符串JSON对象转换<br>  js-base64 前端Base64解密<br>服务端：Spring Boot<br>应用类库：<br>  MyBatis3 数据库操作<br>  fastjson 字符串JSON对象转换<br>  commons-codec 加密解密库</p>
+</blockquote>
+<ol>
+<li>客户端提交登录请求</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">export const login = (&#123; commit &#125;, form) =&gt; &#123;</div><div class="line">  </div><div class="line">  return Vue.http.post(API.USER_LOGIN, qs.stringify(form)).then(data =&gt; &#123;</div><div class="line">    return data</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>服务端认证并生成Token</li>
+</ol>
+<p>// Controller 请求接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">@CrossOrigin // 跨域</div><div class="line">@RestController // Rest请求</div><div class="line">@RequestMapping(&quot;/login&quot;) // 作用域</div><div class="line">public class LoginController &#123;</div><div class="line"></div><div class="line">    @ApiOperation(value=&quot;用户认证接口&quot;, notes=&quot;&quot;)</div><div class="line">    @ApiImplicitParams(&#123;</div><div class="line">            @ApiImplicitParam(name = &quot;username&quot;, value = &quot;用户名&quot;, required = true, dataType = &quot;String&quot;),</div><div class="line">            @ApiImplicitParam(name = &quot;password&quot;, value = &quot;密码&quot;, required = true, dataType = &quot;String&quot;)</div><div class="line">    &#125;)</div><div class="line">    @RequestMapping(path=&quot;/checkUser&quot;, method = RequestMethod.POST) // </div><div class="line">    public ResponseEntity&lt;R&gt; login(@RequestParam String username, @RequestParam String password) &#123;</div><div class="line">        </div><div class="line">        R r = null;</div><div class="line">        try &#123;</div><div class="line">            r = loginServiceImpl.login(username, password);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            r = R.fail(&quot;系统内部异常,请稍后再试&quot;);</div><div class="line">        &#125;</div><div class="line">        return new ResponseEntity&lt;&gt;(r, HttpStatus.OK);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>// 认证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">@Service</div><div class="line">public class LoginServiceImpl implements LoginService &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * &lt;b&gt;功能：登录验证&lt;/b&gt;&lt;br&gt;</div><div class="line">     * &lt;br&gt;</div><div class="line">     * @Author:pfyangf , 2017年9月18日</div><div class="line">     * @param cUsrNme 用户名</div><div class="line">     * @param cPasswd 密码</div><div class="line">     * @return SysToken</div><div class="line">     **/</div><div class="line">    public R login(String cUsrNme, String cPasswd)&#123;</div><div class="line">        R r = R.ok();</div><div class="line">        if(StringUtils.isEmpty(cUsrNme) || StringUtils.isEmpty(cPasswd))&#123;</div><div class="line">            r.change(500, &quot;用户名及密码不能为空&quot;);</div><div class="line">        &#125;</div><div class="line">        SysUser user = sysUserMapper.findByUsername(cUsrNme);</div><div class="line">        if(null == user || !cPasswd.equals(user.getCPasswd()))&#123;</div><div class="line">            r.change(500, &quot;用户名密码不匹配&quot;);</div><div class="line">        &#125;else &#123;</div><div class="line">            r.put(&quot;data&quot;, jwtTokenServiceImpl.createToken(user)); // 创建Token</div><div class="line">            sysUserMapper.changeLastLoginDate(user.getCPkId()); // 修改用户最后登录时间</div><div class="line">        &#125;</div><div class="line">        return r;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>// 生成Token<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">@Service(&quot;jwtTokenServiceImpl&quot;)</div><div class="line">public class JwtTokenServiceImpl implements TokenService &#123;</div><div class="line">    </div><div class="line">    @Value(&quot;$&#123;auth.tokens.expires&#125;&quot;)</div><div class="line">    private Integer authTokensExpires; // token超时时间</div><div class="line">    @Value(&quot;$&#123;auth.tokens.secret&#125;&quot;)</div><div class="line">    private String authTokensSecret; // token盐</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public SysToken createToken(SysUser user) &#123;</div><div class="line">        // 1. header</div><div class="line">        SysJWTHeader jwtHeader = new SysJWTHeader();</div><div class="line">        String headerBase = Base64Util.encode(JSON.toJSONString(jwtHeader));</div><div class="line">        // 2. payload</div><div class="line">        SysJWTPayload jwtPayload = new SysJWTPayload();</div><div class="line">        String jti = CommonUtil.getUuid();</div><div class="line">        jwtPayload.setJti(jti); // jwt 唯一标识</div><div class="line">        Calendar cal = Calendar.getInstance(); // 当前时间</div><div class="line">        jwtPayload.setIat(cal.getTime().getTime()); // 签发时间</div><div class="line">        cal.add(Calendar.MINUTE, authTokensExpires);</div><div class="line">        jwtPayload.setExp(cal.getTime().getTime()); // 设置超时时间</div><div class="line">        jwtPayload.setSub(user.getCPkId()); // 用户主键</div><div class="line">        jwtPayload.setUser(user); // 用户信息</div><div class="line">        String payloadBase = Base64Util.encode(JSON.toJSONString(jwtPayload));</div><div class="line">        // 3. sign</div><div class="line">        String encodedString = headerBase.concat(&quot;.&quot;).concat(payloadBase);</div><div class="line">        String signature = HMACSHA256Util.getSHA256Secure(encodedString, authTokensSecret); </div><div class="line">        // 4. 服务端暂存</div><div class="line">        String userId = user.getCPkId();</div><div class="line">        TokenStorageManager.getTokenStorage().put(userId, jti);</div><div class="line">        return new SysToken(userId, encodedString.concat(&quot;.&quot;).concat(signature));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>// 服务端存储token主键<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class TokenStorageManager &#123;</div><div class="line"></div><div class="line">    private static ConcurrentHashMap&lt;String, String&gt; tokenStorage = null; // token仓库</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * &lt;b&gt;功能：获取暂存map&lt;/b&gt;&lt;br&gt;</div><div class="line">     * &lt;br&gt;</div><div class="line">     * @Author:pfyangf , 2017年9月22日</div><div class="line">     * @return ConcurrentHashMap&lt;String,String&gt;</div><div class="line">     **/</div><div class="line">    public static ConcurrentHashMap&lt;String, String&gt; getTokenStorage()&#123;</div><div class="line">        if(null == tokenStorage)&#123;</div><div class="line">            synchronized (TokenStorageManager.class) &#123;</div><div class="line">                if(null == tokenStorage)&#123;</div><div class="line">                    tokenStorage = new ConcurrentHashMap&lt;&gt;();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return tokenStorage;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>客户端解析token并保存</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">let token = data.data.token;</div><div class="line">if(null != token &amp;&amp; token.length &gt; 0)&#123;</div><div class="line">  let tokenArr = token.split(&apos;.&apos;);</div><div class="line">  let tokenObjArr = tokenArr.map((item, index) =&gt; &#123;</div><div class="line">    return index != 2 ? qs.parse(Base64.decode(item)) : item;</div><div class="line">    // return index != 2 ? JSON2.parse(Base64.decode(item)) : item;</div><div class="line">  &#125;);</div><div class="line">  commit(SET_EXP, tokenObjArr[1]) // 暂存payload</div><div class="line">  commit(SET_USERINFO, tokenObjArr[1].user) // 暂存用户信息</div><div class="line">  commit(SET_TOKEN, token) // 暂存token</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>客户端发出业务请求要求携带token</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">http.interceptors.request.use(function(config) &#123;</div><div class="line">  if (config.appendToken === false) &#123; // 无需 TOKEN 注入</div><div class="line">    NProgress.start()</div><div class="line">    return config</div><div class="line">  &#125;</div><div class="line">  const token = store.state.user.token</div><div class="line"></div><div class="line">  /**</div><div class="line">   * TOKEN 注入</div><div class="line">   * </div><div class="line">   * 此处直接在 query (GET方法) 或者 form-data (POST PUT DELETE 等方法) 注入session 参数</div><div class="line">   * ！实际情况请根据前后端的API规范进行定义</div><div class="line">   */</div><div class="line">  // 自定义token过长 索性直接放header中</div><div class="line">  if(token)&#123;</div><div class="line">    config.headers.authToken = token;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  NProgress.start()</div><div class="line">  return config</div><div class="line">&#125;, function(error) &#123;</div><div class="line">  return Promise.reject(error)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>// 包含jwt请求内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">GET /qz/user/getRecords?page=1 HTTP/1.1</div><div class="line">Host: localhost:8088</div><div class="line">Connection: keep-alive</div><div class="line">Pragma: no-cache</div><div class="line">Cache-Control: no-cache</div><div class="line">Accept: application/json, text/plain, */*</div><div class="line">Origin: http://localhost:9999</div><div class="line">User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36</div><div class="line">authToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDY0MDgzODQyMzMsImlhdCI6MTUwNjQwNjU4NDIzMywianRpIjoiY2YzNzYyNzExNjQyNDg0MzhhYmNhNGRhNzIzN2I1M2IiLCJzdWIiOiIxIiwidXNlciI6eyJjQWRtaW4iOiIxIiwiY0VtYWlsIjoiYWRtaW5Ac3NzLnRvcCIsImNNb2JpbGVQaG9uZSI6IjEzMDAxNzEyMDk5IiwiY05tZSI6IuWNleeLrCIsImNQYXNzd2QiOiIxMjMiLCJjUGtJZCI6IjEiLCJjU2FsdCI6ImFkbWluIiwiY1N0YXR1cyI6IjEiLCJjVXNyTm1lIjoiYWRtaW4iLCJuQWdlIjoxMSwidENydERhdGUiOjE1MDA0MjkwOTYwMDAsInRMYXN0TG9naW5EYXRlIjoxNTA2NDA2MDcwMDAwLCJ0VXBkRGF0ZSI6MTUwNjQwNjA3MDAwMH19.PKO7NEf0lfStaZ/Nu61RjxGlWTEF5QS7vPjK7VvmTCo=</div><div class="line">Referer: http://localhost:9999/users/</div><div class="line">Accept-Encoding: gzip, deflate, br</div><div class="line">Accept-Language: zh-CN,zh;q=0.8,en;q=0.6</div></pre></td></tr></table></figure></p>
+<ol>
+<li>服务端验证token合法性并响应业务请求</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">@CrossOrigin // 跨域</div><div class="line">@RestController // Rest请求</div><div class="line">@RequestMapping(&quot;/user&quot;) // 作用域</div><div class="line">public class SysUserController &#123;</div><div class="line">    </div><div class="line">    @Autowired</div><div class="line">    private SysUserService sysUserServiceImpl; // 登录业务</div><div class="line"></div><div class="line">    /**</div><div class="line">     * &lt;b&gt;功能：退出&lt;/b&gt;&lt;br&gt;</div><div class="line">     * &lt;br&gt;</div><div class="line">     * @Author:pfyangf , 2017年9月18日</div><div class="line">     * @param user</div><div class="line">     * @return ResponseEntity&lt;ResultModel&gt;</div><div class="line">     **/</div><div class="line">    @RequestMapping(path=&quot;/getRecords&quot;, method = RequestMethod.GET) // </div><div class="line">    @Authorization</div><div class="line">    public ResponseEntity&lt;R&gt; getRecords(UserVO user) &#123;</div><div class="line">        R r = null;</div><div class="line">        try &#123;</div><div class="line">            r = sysUserServiceImpl.findByPage(user);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            r = R.fail(&quot;系统内部异常,请稍后再试&quot;);</div><div class="line">        &#125;</div><div class="line">        return new ResponseEntity&lt;&gt;(r, HttpStatus.OK);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>客户端退出</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Vue.http.post(API.USER_LOGOUT).then(data =&gt; &#123;</div><div class="line">    commit(SET_TOKEN, &apos;&apos;);</div><div class="line">&#125;).catch(error =&gt; &#123;</div><div class="line">    commit(SET_TOKEN, &apos;&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ol>
+<li>服务端退出</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@ApiOperation(value=&quot;退出登录&quot;, notes=&quot;&quot;)</div><div class="line">@RequestMapping(path=&quot;/logout&quot;, method = RequestMethod.POST)</div><div class="line">@Authorization</div><div class="line">public ResponseEntity&lt;R&gt; logout(@CurrentUser SysUser user) &#123;</div><div class="line">    </div><div class="line">    R r = null;</div><div class="line">    try &#123;</div><div class="line">        r = loginServiceImpl.logout(user.getCPkId());</div><div class="line">    &#125; catch (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        r = R.fail(&quot;系统内部异常,请稍后再试&quot;);</div><div class="line">    &#125;</div><div class="line">    return new ResponseEntity&lt;&gt;(r, HttpStatus.OK);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public R logout(String userId) &#123;</div><div class="line">    R r = R.ok(&quot;退出成功&quot;);</div><div class="line">    if(StringUtils.isEmpty(userId))&#123;</div><div class="line">        r.change(500, &quot;用户编号不存在&quot;);</div><div class="line">    &#125; else &#123;</div><div class="line">    //  guavaTokenServiceImpl.deleteToken(userId);</div><div class="line">        jwtTokenServiceImpl.deleteToken(userId);</div><div class="line">    &#125;</div><div class="line">    return r;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void deleteToken(String userId) &#123;</div><div class="line">    TokenStorageManager.getTokenStorage().remove(userId);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://jwt.io/" target="_blank" rel="external">jwt官网</a></p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术向 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 原创 </tag>
+            
+            <tag> tokens </tag>
+            
+            <tag> jwt </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[在windows7上安装Docker Toolbox]]></title>
       <url>/2017/08/25/Install-Docker-Toolbox-on-Windows/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -346,9 +769,9 @@
         
         <tags>
             
-            <tag> docker </tag>
-            
             <tag> 翻译 </tag>
+            
+            <tag> docker </tag>
             
         </tags>
         

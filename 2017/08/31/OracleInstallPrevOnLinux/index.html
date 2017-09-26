@@ -12,7 +12,7 @@
     
     <title>
         
-            标签: Java | 
+            Oracle安装先决条件配置 | 
         
         私塾
     </title>
@@ -35,8 +35,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="pengfei">
-    <meta name="description" itemprop="description" content="Java | coder | pfff&#39;s blog">
-    <meta name="keywords" content="Java | blog | Nginx | 程序员">
+    <meta name="description" itemprop="description" content="1. Oracle安装必需包安装">
+    <meta name="keywords" content="Java | blog | Nginx | 程序员,原创,Oracle">
 
     <!-- Site Verification -->
     <meta name="google-site-verification" content="4i9QBgtaQ_Se9oRd9-rt8gFqm-F2i4BywP1OdLteMdg" />
@@ -65,29 +65,62 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://blog.shenshenshou.top">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: Java | 私塾">
+    <meta property="og:title" content="Oracle安装先决条件配置 | 私塾">
     <meta property="og:image" content="/img/favicon.png" />
-    <meta property="og:description" content="Java | coder | pfff&#39;s blog">
-    
+    <meta property="og:description" content="1. Oracle安装必需包安装">
+    <meta property="og:article:tag" content="原创"> <meta property="og:article:tag" content="Oracle"> 
 
+    
+        <meta property="article:published_time" content="8月 31, 2017" />
+        <meta property="article:modified_time" content="9月 01, 2017" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="标签: Java | 私塾">
-    <meta name="twitter:description" content="Java | coder | pfff&#39;s blog">
+    <meta name="twitter:title" content="Oracle安装先决条件配置 | 私塾">
+    <meta name="twitter:description" content="1. Oracle安装必需包安装">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="http://blog.shenshenshou.top" />
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://blog.shenshenshou.top/tags/Java/index.html" />
+        <link rel="canonical" href="http://blog.shenshenshou.top/2017/08/31/OracleInstallPrevOnLinux/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "私塾",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "pengfei",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "夏天夏天悄悄过去，开着压路机，压死你压死你，不让你<strong>喘</strong>气~~"
+    },
+    "headline": "Oracle安装先决条件配置",
+    "url": "http://blog.shenshenshou.top/2017/08/31/OracleInstallPrevOnLinux/index.html",
+    "datePublished": "8月 31, 2017",
+    "dateModified": "9月 01, 2017",
+    "description": "1. Oracle安装必需包安装",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://blog.shenshenshou.top"
+    }
+}
+</script>
 
 
     
@@ -283,97 +316,278 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Oracle安装必需包安装"><span class="post-toc-text">1. Oracle安装必需包安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-必需软件包列表"><span class="post-toc-text">1.1 必需软件包列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-检查方法"><span class="post-toc-text">1.2 检查方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-安装方法"><span class="post-toc-text">1.3 安装方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Oracle-用户和用户组"><span class="post-toc-text">2. Oracle 用户和用户组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-检测文件"><span class="post-toc-text">2.1 检测文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-新建用户和用户组"><span class="post-toc-text">2.2 新建用户和用户组</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-配置系统参数"><span class="post-toc-text">3. 配置系统参数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-内核参数"><span class="post-toc-text">3.1 内核参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-修改资源使用资源限制文件"><span class="post-toc-text">3.2 修改资源使用资源限制文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-创建安装目录"><span class="post-toc-text">4. 创建安装目录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-创建目录"><span class="post-toc-text">4.1 创建目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-配置用户环境变量"><span class="post-toc-text">4.2 配置用户环境变量</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-禁用selinux"><span class="post-toc-text">5.  禁用selinux</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-1-将SELINUX-enforcing修改成SELINUX-disabled"><span class="post-toc-text">5.1 将SELINUX=enforcing修改成SELINUX=disabled</span></a></li></ol></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/31/captureTomcatRequsetByFiddler4/">通过Fiddler4拦截Eclipse中部署的Tomcat的请求</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            1.双击Servers面板中需要对其进行请求拦截的Tomcat,打开其配置页面
-2...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/31/captureTomcatRequsetByFiddler4/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="pengfei's avatar">
-            </div>
-            <div>
-                <strong>pengfei</strong>
-                <span>8月 31, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/技术向/">技术向</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                Oracle安装先决条件配置
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>pengfei</strong>
+        <span>8月 31, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=http://blog.shenshenshou.top/2017/08/31/OracleInstallPrevOnLinux/">
+    
+</ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Oracle/">Oracle</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/原创/">原创</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Oracle安装先决条件配置&url=http://blog.shenshenshou.top/2017/08/31/OracleInstallPrevOnLinux/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Oracle安装先决条件配置&url=http://blog.shenshenshou.top/2017/08/31/OracleInstallPrevOnLinux/index.html&via=pengfei" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.shenshenshou.top/2017/08/31/OracleInstallPrevOnLinux/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://blog.shenshenshou.top/2017/08/31/OracleInstallPrevOnLinux/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=私塾&title=Oracle安装先决条件配置&summary=Java | coder | pfff&#39;s blog&pics=http://blog.shenshenshou.top/img/favicon.png&url=http://blog.shenshenshou.top/2017/08/31/OracleInstallPrevOnLinux/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="1-Oracle安装必需包安装"><a href="#1-Oracle安装必需包安装" class="headerlink" title="1. Oracle安装必需包安装"></a>1. Oracle安装必需包安装</h2><a id="more"></a>
+<h3 id="1-1-必需软件包列表"><a href="#1-1-必需软件包列表" class="headerlink" title="1.1 必需软件包列表"></a>1.1 必需软件包列表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">binutils-2.20.51.0.2-5.11.el6 (x86_64)</div><div class="line">compat-libcap1-1.10-1 (x86_64)</div><div class="line">compat-libstdc++-33-3.2.3-69.el6 (x86_64)</div><div class="line">compat-libstdc++-33-3.2.3-69.el6.i686</div><div class="line">gcc-4.4.4-13.el6 (x86_64)</div><div class="line">gcc-c++-4.4.4-13.el6 (x86_64)</div><div class="line">glibc-2.12-1.7.el6 (i686)</div><div class="line">glibc-2.12-1.7.el6 (x86_64)</div><div class="line">glibc-devel-2.12-1.7.el6 (x86_64)</div><div class="line">glibc-devel-2.12-1.7.el6.i686</div><div class="line">ksh</div><div class="line">libgcc-4.4.4-13.el6 (i686)</div><div class="line">libgcc-4.4.4-13.el6 (x86_64)</div><div class="line">libstdc++-4.4.4-13.el6 (x86_64)</div><div class="line">libstdc++-4.4.4-13.el6.i686</div><div class="line">libstdc++-devel-4.4.4-13.el6 (x86_64)</div><div class="line">libstdc++-devel-4.4.4-13.el6.i686</div><div class="line">libaio-0.3.107-10.el6 (x86_64)</div><div class="line">libaio-0.3.107-10.el6.i686</div><div class="line">libaio-devel-0.3.107-10.el6 (x86_64)</div><div class="line">libaio-devel-0.3.107-10.el6.i686</div><div class="line">make-3.81-19.el6</div><div class="line">sysstat-9.0.4-11.el6 (x86_64)</div><div class="line"></div><div class="line">unixODBC-2.2.14-11.el6 (x86_64) or later</div><div class="line">unixODBC-2.2.14-11.el6.i686 or later</div><div class="line">unixODBC-devel-2.2.14-11.el6 (x86_64) or later</div><div class="line">unixODBC-devel-2.2.14-11.el6.i686 or later</div></pre></td></tr></table></figure>
+<h3 id="1-2-检查方法"><a href="#1-2-检查方法" class="headerlink" title="1.2 检查方法"></a>1.2 检查方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; rpm -qa|grep &lt;package name&gt;</div></pre></td></tr></table></figure>
+<h3 id="1-3-安装方法"><a href="#1-3-安装方法" class="headerlink" title="1.3 安装方法"></a>1.3 安装方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; yum install -y &lt;package name&gt; # 在线安装</div><div class="line">&gt; rpm -ivh &lt;full-package name&gt; # 手动下载rpm包离线安装</div></pre></td></tr></table></figure>
+<h2 id="2-Oracle-用户和用户组"><a href="#2-Oracle-用户和用户组" class="headerlink" title="2. Oracle 用户和用户组"></a>2. Oracle 用户和用户组</h2><h3 id="2-1-检测文件"><a href="#2-1-检测文件" class="headerlink" title="2.1 检测文件"></a>2.1 检测文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; vim /etc/oraInst.loc  # 1. 新增配置文件</div><div class="line">#  contents</div><div class="line">inventory_loc=/u01/app/oraInventory</div><div class="line">inst_group=oinstall</div></pre></td></tr></table></figure>
+<h3 id="2-2-新建用户和用户组"><a href="#2-2-新建用户和用户组" class="headerlink" title="2.2 新建用户和用户组"></a>2.2 新建用户和用户组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 建组</div><div class="line">&gt; /usr/sbin/groupadd oinstall</div><div class="line">&gt; /usr/sbin/groupadd dba</div><div class="line"># 建用户</div><div class="line">&gt; /usr/sbin/useradd -g oinstall -G dba oracle</div><div class="line">&gt; passwd oracle</div></pre></td></tr></table></figure>
+<h2 id="3-配置系统参数"><a href="#3-配置系统参数" class="headerlink" title="3. 配置系统参数"></a>3. 配置系统参数</h2><h3 id="3-1-内核参数"><a href="#3-1-内核参数" class="headerlink" title="3.1 内核参数"></a>3.1 内核参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; vim /etc/sysctl.conf</div></pre></td></tr></table></figure>
+<blockquote>
+<p>请注意 以下参数可能在<code>sysctl.conf</code>已经出现，只需要添加不存在的即可，在<code>vim</code>中命令模式下输入<code>\</code>后跟单词即可搜索全文<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fs.aio-max-nr = 1048576</div><div class="line">fs.file-max = 6815744</div><div class="line">kernel.shmall = 2097152</div><div class="line">kernel.shmmax = 536870912</div><div class="line">kernel.shmmni = 4096</div><div class="line">kernel.sem = 250 32000 100 128</div><div class="line">net.ipv4.ip_local_port_range = 9000 65500</div><div class="line">net.core.rmem_default = 262144</div><div class="line">net.core.rmem_max = 4194304</div><div class="line">net.core.wmem_default = 262144</div><div class="line">net.core.wmem_max = 1048576</div></pre></td></tr></table></figure></p>
+<p>指定用户组创建<code>shared memory segments</code>权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo 501 &gt; /proc/sys/vm/hugetlb_shm_group</div></pre></td></tr></table></figure></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;  /sbin/sysctl -p # 使生效</div></pre></td></tr></table></figure>
+<h3 id="3-2-修改资源使用资源限制文件"><a href="#3-2-修改资源使用资源限制文件" class="headerlink" title="3.2 修改资源使用资源限制文件"></a>3.2 修改资源使用资源限制文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; vim /etc/security/limits.conf</div><div class="line">oracle soft nproc 2047</div><div class="line">oracle hard nproc 16384</div><div class="line">oracle soft nofile 1024</div><div class="line">oracle hard nofile 65536</div></pre></td></tr></table></figure>
+<h2 id="4-创建安装目录"><a href="#4-创建安装目录" class="headerlink" title="4. 创建安装目录"></a>4. 创建安装目录</h2><h3 id="4-1-创建目录"><a href="#4-1-创建目录" class="headerlink" title="4.1 创建目录"></a>4.1 创建目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; mkdir -pm 755 /u01/app # 新建并修改默认权限目录</div><div class="line">&gt; chown -R oracle:oinstall /u01/app/ # 修改拥有人</div><div class="line">&gt; mkdir -pm 755 /u01/oraInventory</div><div class="line">&gt; chown oracle:oinstall /u01/oraInventory/</div></pre></td></tr></table></figure>
+<h3 id="4-2-配置用户环境变量"><a href="#4-2-配置用户环境变量" class="headerlink" title="4.2 配置用户环境变量"></a>4.2 配置用户环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; vim /home/oracle/.bash_profile</div><div class="line">export ORACLE_SID=orcl</div><div class="line">export ORACLE_HOME=/u01/app/oracle/product/11.2.0/dbhome_1</div><div class="line">export PATH=$ORACLE_HOME/bin:$PATH</div><div class="line">export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH</div></pre></td></tr></table></figure>
+<h2 id="5-禁用selinux"><a href="#5-禁用selinux" class="headerlink" title="5.  禁用selinux"></a>5.  禁用<code>selinux</code></h2><blockquote>
+<p>不禁用的话在使用<code>sqlplus</code>时会有一些奇葩的问题，所以…</p>
+</blockquote>
+<h3 id="5-1-将SELINUX-enforcing修改成SELINUX-disabled"><a href="#5-1-将SELINUX-enforcing修改成SELINUX-disabled" class="headerlink" title="5.1 将SELINUX=enforcing修改成SELINUX=disabled"></a>5.1 将<code>SELINUX=enforcing</code>修改成<code>SELINUX=disabled</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; vim etc/selinux/config</div><div class="line">SELINUX=disabled</div></pre></td></tr></table></figure>
+<blockquote>
+<p>引用：<a href="http://docs.oracle.com/cd/E11882_01/install.112/e24326.pdf#pdfjs.action=download" target="_blank" rel="external">Oracle install guide</a></p>
+</blockquote>
+
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitment -->
+<div id="gitmentContainer" style="max-width: 90%; margin: 1pc 3pc; padding-top: 0;"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+	var gitment = new Gitment({
+	  owner: 'pfff369',
+	  repo: 'pfff369.github.io',
+	  id: window.location.pathname,
+	  oauth: {
+	    client_id: '37565adbdb80ae13b27a',
+	    client_secret: '1b0200f2b5ad7c0a103356bb1070baed403dda19',
+	  }
+	})
+	gitment.render('gitmentContainer')
+</script>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/08/31/OracleStreamSingleTableDuplicate/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/08/31/ConfigYumRepoOnRHEL/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -574,6 +788,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 

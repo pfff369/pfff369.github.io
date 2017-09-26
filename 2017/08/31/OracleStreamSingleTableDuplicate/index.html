@@ -12,7 +12,7 @@
     
     <title>
         
-            标签: Java | 
+            Oracle Stream单表复制环境 | 
         
         私塾
     </title>
@@ -35,8 +35,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="pengfei">
-    <meta name="description" itemprop="description" content="Java | coder | pfff&#39;s blog">
-    <meta name="keywords" content="Java | blog | Nginx | 程序员">
+    <meta name="description" itemprop="description" content="1. 实验环境
+客户机 A
+
+OS: Redhat 5.1 x64
+DB：Oracle 11G r2
+SID： orcl
+
+客户机 B
+
+OS: Win7 x64
+DB：Oracle 11G r2
+SID： devtest
+
+">
+    <meta name="keywords" content="Java | blog | Nginx | 程序员,原创,Oracle Stream">
 
     <!-- Site Verification -->
     <meta name="google-site-verification" content="4i9QBgtaQ_Se9oRd9-rt8gFqm-F2i4BywP1OdLteMdg" />
@@ -65,29 +78,101 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://blog.shenshenshou.top">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: Java | 私塾">
+    <meta property="og:title" content="Oracle Stream单表复制环境 | 私塾">
     <meta property="og:image" content="/img/favicon.png" />
-    <meta property="og:description" content="Java | coder | pfff&#39;s blog">
-    
+    <meta property="og:description" content="1. 实验环境
+客户机 A
 
+OS: Redhat 5.1 x64
+DB：Oracle 11G r2
+SID： orcl
+
+客户机 B
+
+OS: Win7 x64
+DB：Oracle 11G r2
+SID： devtest
+
+">
+    <meta property="og:article:tag" content="原创"> <meta property="og:article:tag" content="Oracle Stream"> 
+
+    
+        <meta property="article:published_time" content="8月 31, 2017" />
+        <meta property="article:modified_time" content="9月 01, 2017" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="标签: Java | 私塾">
-    <meta name="twitter:description" content="Java | coder | pfff&#39;s blog">
+    <meta name="twitter:title" content="Oracle Stream单表复制环境 | 私塾">
+    <meta name="twitter:description" content="1. 实验环境
+客户机 A
+
+OS: Redhat 5.1 x64
+DB：Oracle 11G r2
+SID： orcl
+
+客户机 B
+
+OS: Win7 x64
+DB：Oracle 11G r2
+SID： devtest
+
+">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="http://blog.shenshenshou.top" />
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://blog.shenshenshou.top/tags/Java/index.html" />
+        <link rel="canonical" href="http://blog.shenshenshou.top/2017/08/31/OracleStreamSingleTableDuplicate/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "私塾",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "pengfei",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "夏天夏天悄悄过去，开着压路机，压死你压死你，不让你<strong>喘</strong>气~~"
+    },
+    "headline": "Oracle Stream单表复制环境",
+    "url": "http://blog.shenshenshou.top/2017/08/31/OracleStreamSingleTableDuplicate/index.html",
+    "datePublished": "8月 31, 2017",
+    "dateModified": "9月 01, 2017",
+    "description": "1. 实验环境
+客户机 A
+
+OS: Redhat 5.1 x64
+DB：Oracle 11G r2
+SID： orcl
+
+客户机 B
+
+OS: Win7 x64
+DB：Oracle 11G r2
+SID： devtest
+
+",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://blog.shenshenshou.top"
+    }
+}
+</script>
 
 
     
@@ -283,97 +368,377 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-实验环境"><span class="post-toc-text">1. 实验环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-要求配置"><span class="post-toc-text">2. 要求配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-初始化参数的修改"><span class="post-toc-text">2.1 初始化参数的修改</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1-1-global-names-必须设置为true，global-name-db-name-db-domain"><span class="post-toc-text">2.1.1 global_names 必须设置为true，global_name=db_name+db_domain</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1-2-job-queue-processes-必须-gt-2"><span class="post-toc-text">2.1.2 job_queue_processes 必须>2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1-3-compatible，必须高于10-2-0，并且target中该参数值不能低于source-database"><span class="post-toc-text">2.1.3 compatible，必须高于10.2.0，并且target中该参数值不能低于source database.</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1-3-streams-pool-size-指定适当的大小-建议不小于200M-，当然如果设置了sga-target，该参数也可由系统自动调节"><span class="post-toc-text">2.1.3 streams_pool_size, 指定适当的大小 ( 建议不小于200M) ，当然如果设置了sga_target，该参数也可由系统自动调节</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1-3-修改数据库时间格式（非必须）"><span class="post-toc-text">2.1.3 修改数据库时间格式（非必须）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-source数据库启用归档模式"><span class="post-toc-text">2.2 source数据库启用归档模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-互建Database-Link"><span class="post-toc-text">2.3 互建Database Link</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-创建用户及搭建环境"><span class="post-toc-text">3. 创建用户及搭建环境</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-创建一个专用于streams的表空间-和一个Streams管理员，并且将logminer的数据字典从system表空间转移到新建的表空间，防止撑满system表空间"><span class="post-toc-text">3.1 创建一个专用于streams的表空间,和一个Streams管理员，并且将logminer的数据字典从system表空间转移到新建的表空间，防止撑满system表空间</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-创建队列"><span class="post-toc-text">3.2  创建队列</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-配置复制过程"><span class="post-toc-text">4 配置复制过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-首先到source数据库"><span class="post-toc-text">4.1 首先到source数据库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-切换到target数据库"><span class="post-toc-text">4.2 切换到target数据库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-切换到source数据库，启动捕获进程"><span class="post-toc-text">4.3 切换到source数据库，启动捕获进程</span></a></li></ol></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/31/captureTomcatRequsetByFiddler4/">通过Fiddler4拦截Eclipse中部署的Tomcat的请求</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            1.双击Servers面板中需要对其进行请求拦截的Tomcat,打开其配置页面
-2...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/31/captureTomcatRequsetByFiddler4/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="pengfei's avatar">
-            </div>
-            <div>
-                <strong>pengfei</strong>
-                <span>8月 31, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/技术向/">技术向</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                Oracle Stream单表复制环境
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>pengfei</strong>
+        <span>8月 31, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=http://blog.shenshenshou.top/2017/08/31/OracleStreamSingleTableDuplicate/">
+    
+</ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Oracle-Stream/">Oracle Stream</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/原创/">原创</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Oracle Stream单表复制环境&url=http://blog.shenshenshou.top/2017/08/31/OracleStreamSingleTableDuplicate/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Oracle Stream单表复制环境&url=http://blog.shenshenshou.top/2017/08/31/OracleStreamSingleTableDuplicate/index.html&via=pengfei" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.shenshenshou.top/2017/08/31/OracleStreamSingleTableDuplicate/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://blog.shenshenshou.top/2017/08/31/OracleStreamSingleTableDuplicate/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=私塾&title=Oracle Stream单表复制环境&summary=Java | coder | pfff&#39;s blog&pics=http://blog.shenshenshou.top/img/favicon.png&url=http://blog.shenshenshou.top/2017/08/31/OracleStreamSingleTableDuplicate/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="1-实验环境"><a href="#1-实验环境" class="headerlink" title="1. 实验环境"></a>1. 实验环境</h2><blockquote>
+<p>客户机 A</p>
+<ol>
+<li>OS: Redhat 5.1 x64</li>
+<li>DB：Oracle 11G r2</li>
+<li>SID： orcl</li>
+</ol>
+<p>客户机 B</p>
+<ol>
+<li>OS: Win7 x64</li>
+<li>DB：Oracle 11G r2</li>
+<li>SID： devtest</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+<h2 id="2-要求配置"><a href="#2-要求配置" class="headerlink" title="2. 要求配置"></a>2. 要求配置</h2><h3 id="2-1-初始化参数的修改"><a href="#2-1-初始化参数的修改" class="headerlink" title="2.1 初始化参数的修改"></a>2.1 初始化参数的修改</h3><h4 id="2-1-1-global-names-必须设置为true，global-name-db-name-db-domain"><a href="#2-1-1-global-names-必须设置为true，global-name-db-name-db-domain" class="headerlink" title="2.1.1 global_names 必须设置为true，global_name=db_name+db_domain"></a>2.1.1 global_names 必须设置为true，global_name=db_name+db_domain</h4><ol>
+<li><p>查看<code>db_domain</code>方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; show parameter db_domain;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改<code>db_domain</code>方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  SQL&gt; alter system set db_domain = &apos;com&apos; scope=spfile;</div><div class="line">SQL&gt; shutdown immediate</div><div class="line">SQL&gt; startup</div><div class="line">SQL&gt; show parameter db_domain;</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看<code>global_names</code>方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">SQL&gt; show parameter global_name; #</div><div class="line">print&gt;</div><div class="line">NAME                                 TYPE        VALUE</div><div class="line">------------------------------------ ----------- ------------------------------</div><div class="line">global_names                         boolean     FALSE</div><div class="line"></div><div class="line">SQL&gt; select * from global_name;</div><div class="line">print&gt;</div><div class="line">GLOBAL_NAME</div><div class="line">------------------------------------------------------------------------------</div><div class="line">ORCL.LOCALDOMAIN</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改<code>global_names</code></p>
+<blockquote>
+<p>修改后 客户端连接也要改 <code>DEVTEST.COM</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SQL&gt; alter system set global_names = true;</div><div class="line">SQL&gt; alter database rename global_name to DEVTEST.COM</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-1-2-job-queue-processes-必须-gt-2"><a href="#2-1-2-job-queue-processes-必须-gt-2" class="headerlink" title="2.1.2 job_queue_processes 必须&gt;2"></a>2.1.2 job_queue_processes 必须&gt;2</h4><blockquote>
+<p><code>job_queue_processes</code> 设定job队列可以启动的进程数,该参数决定了job作业能够使用的总进程数</p>
+</blockquote>
+<ol>
+<li><p>查看<code>job_queue_processes</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; show parameter job_queue_processes;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改<code>job_queue_processes</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; alter system set job_queue_processes=N;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-1-3-compatible，必须高于10-2-0，并且target中该参数值不能低于source-database"><a href="#2-1-3-compatible，必须高于10-2-0，并且target中该参数值不能低于source-database" class="headerlink" title="2.1.3 compatible，必须高于10.2.0，并且target中该参数值不能低于source database."></a>2.1.3 compatible，必须高于10.2.0，并且target中该参数值不能低于source database.</h4><ol>
+<li>查看兼容性参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; show parameter compatible;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-1-3-streams-pool-size-指定适当的大小-建议不小于200M-，当然如果设置了sga-target，该参数也可由系统自动调节"><a href="#2-1-3-streams-pool-size-指定适当的大小-建议不小于200M-，当然如果设置了sga-target，该参数也可由系统自动调节" class="headerlink" title="2.1.3 streams_pool_size, 指定适当的大小 ( 建议不小于200M) ，当然如果设置了sga_target，该参数也可由系统自动调节"></a>2.1.3 streams_pool_size, 指定适当的大小 ( 建议不小于200M) ，当然如果设置了sga_target，该参数也可由系统自动调节</h4><ol>
+<li><p>查看语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; show parameter streams_pool_size;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; alter system set streams_pool_size=25m scope=spfile;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-1-3-修改数据库时间格式（非必须）"><a href="#2-1-3-修改数据库时间格式（非必须）" class="headerlink" title="2.1.3 修改数据库时间格式（非必须）"></a>2.1.3 修改数据库时间格式（非必须）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alter system set nls_date_format=&apos;YYYY-MM-DD HH24:MI:SS&apos; scope=spfile;</div></pre></td></tr></table></figure>
+<h3 id="2-2-source数据库启用归档模式"><a href="#2-2-source数据库启用归档模式" class="headerlink" title="2.2 source数据库启用归档模式"></a>2.2 source数据库启用归档模式</h3><ol>
+<li><p>创建归档日志地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; mkdir /data/devtest/archivefile/</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置开启归档模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SQL&gt; alter system set log_archive_dest_1=&apos;LOCATION=/data/devtest/archivefile/&apos; scope=spfile;</div><div class="line">SQL&gt; alter system set log_archive_format=&apos;%t_%s_%r.arc&apos; scope=spfile;</div><div class="line">SQL&gt; shut immediate;</div><div class="line">SQL&gt; startup mount;</div><div class="line">SQL&gt; alter database archivelog;</div><div class="line">SQL&gt; alter database open;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="2-3-互建Database-Link"><a href="#2-3-互建Database-Link" class="headerlink" title="2.3 互建Database Link"></a>2.3 互建Database Link</h3><ol>
+<li><p>查看<code>DB_Link</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; select * from dba_db_links;</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除<code>DB_Link</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQL&gt; drop public database link ORCL_LOCALDOMAIN;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建<code>DB_Link</code></p>
+<ul>
+<li><p>在监听文件增加被链接库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ORCL =</div><div class="line">(DESCRIPTION =</div><div class="line">  (ADDRESS_LIST =</div><div class="line">    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.252)(PORT = 1521))</div><div class="line">  )</div><div class="line">  (CONNECT_DATA =</div><div class="line">    (SERVICE_NAME = orcl)</div><div class="line">  )</div><div class="line">)</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建<code>DB_Link</code></p>
+<blockquote>
+<p>tip: 因为在之前设置了<code>global_names=true</code> 所以<code>database link</code>名称必须与被链接数据库<code>global_name</code>一致</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> SQL&gt; create public database link ORCL.LOCALDOMAIN connect to jwyc identified by</div><div class="line">jwyc using &apos;ORCL&apos;;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="3-创建用户及搭建环境"><a href="#3-创建用户及搭建环境" class="headerlink" title="3. 创建用户及搭建环境"></a>3. 创建用户及搭建环境</h2><blockquote>
+<p>通过更改命令行提示，来区分source库和target库操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SQL&gt; set sqlprompt &apos;barnch source&gt; &apos;; # 从</div><div class="line">SQL&gt; set sqlprompt &apos;center target&gt; &apos;; # 主</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="3-1-创建一个专用于streams的表空间-和一个Streams管理员，并且将logminer的数据字典从system表空间转移到新建的表空间，防止撑满system表空间"><a href="#3-1-创建一个专用于streams的表空间-和一个Streams管理员，并且将logminer的数据字典从system表空间转移到新建的表空间，防止撑满system表空间" class="headerlink" title="3.1 创建一个专用于streams的表空间,和一个Streams管理员，并且将logminer的数据字典从system表空间转移到新建的表空间，防止撑满system表空间"></a>3.1 创建一个专用于streams的表空间,和一个Streams管理员，并且将logminer的数据字典从system表空间转移到新建的表空间，防止撑满system表空间</h3><ol>
+<li>从库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">barnch source&gt; create tablespace stream_tbs datafile &apos;F:/app/Administrator/orada</div><div class="line">ta/devtest/stream_tbs01.dbf&apos; size 100m autoextend on maxsize unlimited segment space management auto;</div><div class="line"></div><div class="line">表空间已创建。</div><div class="line"></div><div class="line">barnch source&gt; execute dbms_logmnr_d.set_tablespace(&apos;stream_tbs&apos;);</div><div class="line"></div><div class="line">PL/SQL 过程已成功完成。</div><div class="line"></div><div class="line">barnch source&gt; create user stradmin identified by stradmin default tablespace stream_tbs;</div><div class="line"></div><div class="line">用户已创建。</div><div class="line"></div><div class="line">barnch source&gt; grant dba to stradmin;</div><div class="line"></div><div class="line">授权成功。</div></pre></td></tr></table></figure>
+<ol>
+<li>主库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">center target&gt; create tablespace stream_tbs datafile &apos;/u01/app/oracle/oradata/orcl/stream_tbs01.dbf&apos; size 100m autoextend on maxsize unlimited segment space management auto;</div><div class="line"></div><div class="line">Tablespace created.</div><div class="line"></div><div class="line">center target&gt; execute dbms_logmnr_d.set_tablespace(&apos;stream_tbs&apos;);</div><div class="line"></div><div class="line">PL/SQL procedure successfully completed.</div><div class="line"></div><div class="line">center target&gt; create user stradmin identified by stradmin default tablespace stream_tbs;</div><div class="line"></div><div class="line">User created.</div><div class="line"></div><div class="line">center target&gt; grant dba to stradmin;</div><div class="line"></div><div class="line">Grant succeeded.</div></pre></td></tr></table></figure>
+<h3 id="3-2-创建队列"><a href="#3-2-创建队列" class="headerlink" title="3.2  创建队列"></a>3.2  创建队列</h3><ol>
+<li>从库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">barnch source&gt; exec dbms_streams_adm.set_up_queue();</div><div class="line"></div><div class="line">PL/SQL 过程已成功完成。</div></pre></td></tr></table></figure>
+<ol>
+<li>主库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">center target&gt; exec dbms_streams_adm.set_up_queue();</div><div class="line"></div><div class="line">PL/SQL procedure successfully completed.</div></pre></td></tr></table></figure>
+<h2 id="4-配置复制过程"><a href="#4-配置复制过程" class="headerlink" title="4 配置复制过程"></a>4 配置复制过程</h2><h3 id="4-1-首先到source数据库"><a href="#4-1-首先到source数据库" class="headerlink" title="4.1 首先到source数据库"></a>4.1 首先到source数据库</h3><ul>
+<li><p>创建捕获规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">barnch source&gt; begin</div><div class="line">	</div><div class="line">	     dbms_streams_adm.add_table_rules(</div><div class="line">	</div><div class="line">	     table_name =&gt; &apos;jwyc.car_mot&apos;,</div><div class="line">	</div><div class="line">	     streams_type =&gt; &apos;capture&apos;,</div><div class="line">	</div><div class="line">	     streams_name =&gt; &apos;capture_stream&apos;,</div><div class="line">	</div><div class="line">	     queue_name =&gt; &apos;stradmin.streams_queue&apos;,</div><div class="line">	</div><div class="line">	     include_dml =&gt; true,</div><div class="line">	</div><div class="line">	     include_ddl =&gt; true,</div><div class="line">	</div><div class="line">	     inclusion_rule =&gt; true);</div><div class="line">	</div><div class="line">	  end;</div><div class="line">	  /</div><div class="line"></div><div class="line">PL/SQL 过程已成功完成。</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建传播规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">barnch source&gt; begin</div><div class="line">  </div><div class="line">      dbms_streams_adm.add_table_propagation_rules(</div><div class="line">  </div><div class="line">      table_name =&gt; &apos;jwyc.car_mot&apos;,</div><div class="line">  </div><div class="line">      streams_name =&gt; &apos;sour_to_targ&apos;,</div><div class="line">  </div><div class="line">      source_queue_name =&gt; &apos;stradmin.streams_queue&apos;,</div><div class="line">  </div><div class="line">       destination_queue_name =&gt; &apos;stradmin.streams_queue@ORCL.LOCALDOMAIN&apos;,</div><div class="line">  </div><div class="line">       include_dml =&gt; true,</div><div class="line">  </div><div class="line">       include_ddl =&gt; true,</div><div class="line">  </div><div class="line">       source_database =&gt; &apos;DEVTEST.COM&apos;,</div><div class="line">  </div><div class="line">       inclusion_rule =&gt; true,</div><div class="line">  </div><div class="line">       queue_to_queue =&gt; true);</div><div class="line">  </div><div class="line">    end;</div><div class="line">    /</div><div class="line"></div><div class="line">  PL/SQL 过程已成功完成。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-2-切换到target数据库"><a href="#4-2-切换到target数据库" class="headerlink" title="4.2 切换到target数据库"></a>4.2 切换到target数据库</h3><ul>
+<li><p>创建应用规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">begin</div><div class="line"></div><div class="line"> dbms_streams_adm.add_table_rules(</div><div class="line"></div><div class="line"> table_name =&gt; &apos;jwyc.car_mot&apos;,</div><div class="line"></div><div class="line"> streams_type =&gt; &apos;apply&apos;,</div><div class="line"></div><div class="line"> streams_name =&gt; &apos;apply_stream&apos;,</div><div class="line"></div><div class="line"> queue_name =&gt; &apos;stradmin.streams_queue&apos;,</div><div class="line"></div><div class="line"> include_dml =&gt; true,</div><div class="line"></div><div class="line"> include_ddl =&gt; true,</div><div class="line"></div><div class="line"> source_database =&gt; &apos;DEVTEST.COM&apos;,</div><div class="line"></div><div class="line"> inclusion_rule =&gt; true);</div><div class="line"></div><div class="line">end;</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化数据</p>
+</li>
+<li><p>设置起始应用的scn值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">DECLARE</div><div class="line"></div><div class="line">  iscn  NUMBER;</div><div class="line"></div><div class="line">  BEGIN</div><div class="line"></div><div class="line">  iscn := DBMS_FLASHBACK.GET_SYSTEM_CHANGE_NUMBER();</div><div class="line"></div><div class="line">  DBMS_APPLY_ADM.SET_TABLE_INSTANTIATION_SCN@ORCL.LOCALDOMAIN(</div><div class="line"></div><div class="line">  source_object_name    =&gt; &apos;jwyc.car_mot&apos;,</div><div class="line"></div><div class="line">  source_database_name  =&gt; &apos;DEVTEST.COM&apos;,</div><div class="line"></div><div class="line">  instantiation_scn     =&gt; iscn);</div><div class="line"></div><div class="line">END;</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动应用进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">exec dbms_apply_adm.start_apply(&apos;apply_stream&apos;);</div><div class="line"></div><div class="line">select apply_name,status from dba_apply;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-3-切换到source数据库，启动捕获进程"><a href="#4-3-切换到source数据库，启动捕获进程" class="headerlink" title="4.3 切换到source数据库，启动捕获进程"></a>4.3 切换到source数据库，启动捕获进程</h3><ul>
+<li><p>启动捕获进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">exec dbms_capture_adm.start_capture(&apos;capture_stream&apos;);</div><div class="line"></div><div class="line">select capture_name,status from dba_capture;</div></pre></td></tr></table></figure></li>
+</ul>
+
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitment -->
+<div id="gitmentContainer" style="max-width: 90%; margin: 1pc 3pc; padding-top: 0;"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+	var gitment = new Gitment({
+	  owner: 'pfff369',
+	  repo: 'pfff369.github.io',
+	  id: window.location.pathname,
+	  oauth: {
+	    client_id: '37565adbdb80ae13b27a',
+	    client_secret: '1b0200f2b5ad7c0a103356bb1070baed403dda19',
+	  }
+	})
+	gitment.render('gitmentContainer')
+</script>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/08/31/OracleInstallPrevOnLinux/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -574,6 +939,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 

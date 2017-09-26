@@ -12,7 +12,7 @@
     
     <title>
         
-            Spring jdbcTemplate 调用 Oracle 存储过程 | 
+            JSON Web Token 应用实例 | 
         
         私塾
     </title>
@@ -35,8 +35,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="pengfei">
-    <meta name="description" itemprop="description" content="偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子">
-    <meta name="keywords" content="Java | blog | Nginx | 程序员,原创,Spring JDBCTemplate">
+    <meta name="description" itemprop="description" content="Java | coder | pfff&#39;s blog">
+    <meta name="keywords" content="Java | blog | Nginx | 程序员,原创,tokens,jwt">
 
     <!-- Site Verification -->
     <meta name="google-site-verification" content="4i9QBgtaQ_Se9oRd9-rt8gFqm-F2i4BywP1OdLteMdg" />
@@ -65,26 +65,26 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://blog.shenshenshou.top">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Spring jdbcTemplate 调用 Oracle 存储过程 | 私塾">
+    <meta property="og:title" content="JSON Web Token 应用实例 | 私塾">
     <meta property="og:image" content="/img/favicon.png" />
-    <meta property="og:description" content="偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子">
-    <meta property="og:article:tag" content="原创"> <meta property="og:article:tag" content="Spring JDBCTemplate"> 
+    <meta property="og:description" content="Java | coder | pfff&#39;s blog">
+    <meta property="og:article:tag" content="原创"> <meta property="og:article:tag" content="tokens"> <meta property="og:article:tag" content="jwt"> 
 
     
-        <meta property="article:published_time" content="8月 25, 2017" />
-        <meta property="article:modified_time" content="8月 31, 2017" />
+        <meta property="article:published_time" content="8月 28, 2017" />
+        <meta property="article:modified_time" content="9月 26, 2017" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="Spring jdbcTemplate 调用 Oracle 存储过程 | 私塾">
-    <meta name="twitter:description" content="偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子">
+    <meta name="twitter:title" content="JSON Web Token 应用实例 | 私塾">
+    <meta name="twitter:description" content="Java | coder | pfff&#39;s blog">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="http://blog.shenshenshou.top" />
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html" />
+        <link rel="canonical" href="http://blog.shenshenshou.top/2017/08/28/get-started-for-token/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -110,11 +110,11 @@
         },
         "description": "夏天夏天悄悄过去，开着压路机，压死你压死你，不让你<strong>喘</strong>气~~"
     },
-    "headline": "Spring jdbcTemplate 调用 Oracle 存储过程",
-    "url": "http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html",
-    "datePublished": "8月 25, 2017",
-    "dateModified": "8月 31, 2017",
-    "description": "偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子",
+    "headline": "JSON Web Token 应用实例",
+    "url": "http://blog.shenshenshou.top/2017/08/28/get-started-for-token/index.html",
+    "datePublished": "8月 28, 2017",
+    "dateModified": "9月 26, 2017",
+    "description": "Java | coder | pfff&#39;s blog",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://blog.shenshenshou.top"
@@ -343,7 +343,7 @@
 
     
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#描述"><span class="post-toc-text">描述</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第一步"><span class="post-toc-text">第一步</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二步"><span class="post-toc-text">第二步</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Token是啥"><span class="post-toc-text">1. Token是啥</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-为什么要使用Token"><span class="post-toc-text">2. 为什么要使用Token</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-JWT标准"><span class="post-toc-text">3. JWT标准</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-JSON-Web-Token-定义"><span class="post-toc-text">3.1 JSON Web Token 定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-JSON-Web-Token-应用场景"><span class="post-toc-text">3.2 JSON Web Token 应用场景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-JSON-Web-Token-构成"><span class="post-toc-text">3.3 JSON Web Token 构成</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-JWT实例"><span class="post-toc-text">4. JWT实例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-流程设计"><span class="post-toc-text">4.1 流程设计</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-贴代码"><span class="post-toc-text">4.2 贴代码</span></a></li></ol></li></ol>
     </ul>
     
 
@@ -376,7 +376,7 @@
         
     
             <p class="article-headline-p">
-                Spring jdbcTemplate 调用 Oracle 存储过程
+                JSON Web Token 应用实例
             </p>
         </div>
 
@@ -395,7 +395,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>pengfei</strong>
-        <span>8月 25, 2017</span>
+        <span>8月 28, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -417,7 +417,7 @@
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
     <li class="mdl-menu__item">在其它设备中阅读本文章</li>
     
-        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/">
+        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=http://blog.shenshenshou.top/2017/08/28/get-started-for-token/">
     
 </ul>
     
@@ -430,7 +430,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/Spring-JDBCTemplate/">Spring JDBCTemplate</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/原创/">原创</a>
+        <a class="post_tag-link" href="/tags/jwt/">jwt</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/tokens/">tokens</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/原创/">原创</a>
     </ul>
     
 
@@ -446,7 +446,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Spring jdbcTemplate 调用 Oracle 存储过程&url=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JSON Web Token 应用实例&url=http://blog.shenshenshou.top/2017/08/28/get-started-for-token/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -455,7 +455,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Spring jdbcTemplate 调用 Oracle 存储过程&url=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html&via=pengfei" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JSON Web Token 应用实例&url=http://blog.shenshenshou.top/2017/08/28/get-started-for-token/index.html&via=pengfei" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -464,7 +464,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.shenshenshou.top/2017/08/28/get-started-for-token/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -473,7 +473,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://blog.shenshenshou.top/2017/08/28/get-started-for-token/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -485,7 +485,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=私塾&title=Spring jdbcTemplate 调用 Oracle 存储过程&summary=Java | coder | pfff&#39;s blog&pics=http://blog.shenshenshou.top/img/favicon.png&url=http://blog.shenshenshou.top/2017/08/25/SpringJDBCTemplateCallProduce/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=私塾&title=JSON Web Token 应用实例&summary=Java | coder | pfff&#39;s blog&pics=http://blog.shenshenshou.top/img/favicon.png&url=http://blog.shenshenshou.top/2017/08/28/get-started-for-token/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -503,26 +503,94 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>偶尔,我们需要在数据库中处理一些东西,所以在写的程序中操作存储过程也是必须用到的一部分.下面就举一个在SpringTemplate下调用存储过程的小例子</p>
-<a id="more"></a>
-<script src="//git.oschina.net/pengfeii/Demo-Resp/star_widget_preview"></script>
-
-<h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><blockquote>
-<p>需求: 有一个雇员表,里面有一个deptNo字段标识部门,我想查询DeptNo为1和2的雇员,并把他们分组罗列出来</p>
+        <h2 id="1-Token是啥"><a href="#1-Token是啥" class="headerlink" title="1. Token是啥"></a>1. <code>Token</code>是啥</h2><p><code>Token</code>是服务端生成的一串字符串，以作客户端进行请求的一个令牌，当第一次登录后，服务器生成一个<code>Token</code>便将此<code>Token</code>返回给客户端，以后客户端只需带上这个<code>Token</code>前来请求数据即可，无需再次带上用户名和密码。</p>
+<h2 id="2-为什么要使用Token"><a href="#2-为什么要使用Token" class="headerlink" title="2. 为什么要使用Token"></a>2. 为什么要使用<code>Token</code></h2><p><code>Token</code>的目的是为了减轻服务器的压力，减少频繁的查询数据库，使服务器更加健壮。</p>
+<h2 id="3-JWT标准"><a href="#3-JWT标准" class="headerlink" title="3. JWT标准"></a>3. <code>JWT</code>标准</h2><h3 id="3-1-JSON-Web-Token-定义"><a href="#3-1-JSON-Web-Token-定义" class="headerlink" title="3.1 JSON Web Token 定义"></a>3.1 JSON Web Token 定义</h3><p>JSON Web Token (JWT)是一个开放标准(<a href="https://tools.ietf.org/html/rfc7519" target="_blank" rel="external">RFC 7519</a>)，定义了一种紧凑(<code>Compact</code>)且独立(<code>Self-contained</code>)的方式，用于将各方之间的信息安全地传输为<code>JSON</code>对象。传输信息包含数字签名，可以进行校验并可信的。JWT可以通过秘钥（使用HMAC算法）或使用RSA的公钥/私钥进行签名。</p>
+<p><strong>概念解读</strong></p>
+<blockquote>
+<p><code>Compact</code>: 由于<code>jwt</code>的尺寸较小，可以通过<code>URL</code>，<code>POST</code>参数以及<code>HTTP header</code>中发送。此外，<code>jwt</code>较小的尺寸意味着传输的更快</p>
+<p><code>Self-contained</code>: <code>JWT</code>载荷中包含用户的所有必要信息，避免了需要多次查查库的操作。</p>
 </blockquote>
-<h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h4><p>创建存储过程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">create or replace procedure p_emp_list (</div><div class="line">       param1 in varchar2,</div><div class="line">       param2 in varchar2,</div><div class="line">       CUR_OUT_1 OUT SYS_REFCURSOR,</div><div class="line">       CUR_OUT_2 OUT SYS_REFCURSOR</div><div class="line">) is</div><div class="line">begin</div><div class="line">      open CUR_OUT_1 for</div><div class="line">           select deptno, empname from employee where deptno = param1;</div><div class="line">      open CUR_OUT_2 for</div><div class="line">           select deptno, empname from employee where deptno = param2;</div><div class="line">end p_emp_list;</div></pre></td></tr></table></figure>
-<p>该过程有4个参数,前两个作为传入条件:两个不同的DeptNo,后两个得出的不同部门的结果集,至于Sql,为了省事,只查询了部门标号和雇员姓名用以说明</p>
-<h4 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h4><p>编写DAO</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">public List&lt;List&lt;Employee&gt;&gt; listEmployee(final String[] depts) &#123;</div><div class="line">    List&lt;List&lt;Employee&gt;&gt; resultList = (List&lt;List&lt;Employee&gt;&gt;) jdbcTemplate.execute(</div><div class="line">            new CallableStatementCreator() &#123;</div><div class="line">                public CallableStatement createCallableStatement(Connection con)</div><div class="line">                        throws SQLException &#123;</div><div class="line">                    String sqlProc = &quot;&#123;CALL P_EMP_LIST(?, ?, ?, ?)&#125;&quot;; // 调用存储过程的SQL</div><div class="line">                    CallableStatement cs = con.prepareCall(sqlProc);</div><div class="line">                    cs.setString(1, depts[0]);// 设置输入参数的值 部门编号1</div><div class="line">                    cs.setString(2, depts[1]);// 设置输入参数的值 部门编号2</div><div class="line">                    cs.registerOutParameter(3, OracleTypes.CURSOR);// 注册输出参数的类型 游标</div><div class="line">                    cs.registerOutParameter(4, OracleTypes.CURSOR);// 注册输出参数的类型 游标</div><div class="line">                    return cs;</div><div class="line">                &#125;</div><div class="line">            &#125;, new CallableStatementCallback() &#123;</div><div class="line">                public List doInCallableStatement(CallableStatement cs)</div><div class="line">                        throws SQLException, DataAccessException &#123;</div><div class="line">                    </div><div class="line">                    cs.execute();</div><div class="line">                    List list = new ArrayList(); // 存储所有的查询结果</div><div class="line">                    List&lt;Employee&gt; results1 = new ArrayList&lt;Employee&gt;(); // 存放部门1的结果</div><div class="line">                    ResultSet rs = (ResultSet) cs.getObject(3); // 获取存储过程第一个sql的值</div><div class="line">                    // 接收部门1所有雇员对象</div><div class="line">                    while (rs.next()) &#123;</div><div class="line">                        Employee e = new Employee();</div><div class="line">                        e.setDeptNo(rs.getString(&quot;deptNo&quot;));</div><div class="line">                        e.setEmpName(rs.getString(&quot;empName&quot;));</div><div class="line">                        results1.add(e);</div><div class="line">                    &#125;</div><div class="line">                    List&lt;Employee&gt; results2 = new ArrayList&lt;Employee&gt;(); // 存放部门2的结果</div><div class="line">                    rs = (ResultSet) cs.getObject(4); // 获取存储过程第二个sql的值</div><div class="line">                    // 接收部门2所有雇员对象</div><div class="line">                    while (rs.next()) &#123;</div><div class="line">                        Employee e = new Employee();</div><div class="line">                        e.setDeptNo(String.valueOf(rs.getObject(1)));</div><div class="line">                        e.setEmpName(String.valueOf(rs.getObject(2)));</div><div class="line">                        results2.add(e);</div><div class="line">                    &#125;</div><div class="line">                    rs.close(); // 关闭结果集</div><div class="line">                    list.add(results1);</div><div class="line">                    list.add(results2);</div><div class="line">                    </div><div class="line">                    return list;</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">    return resultList;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>找个入口执行下(因为是借以前demo的空,所以随便加了个方法)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Controller</div><div class="line">@RequestMapping(&quot;/dept&quot;)</div><div class="line">public class DeptBean &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>方法:接收连个参数作为不同的部门编号 然后调用刚才写的逻辑</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 分组查询</div><div class="line"> */</div><div class="line">@RequestMapping(&quot;/liste&quot;)</div><div class="line">public String liste(</div><div class="line">        @RequestParam(value=&quot;deptno&quot;, required=true) String deptno,</div><div class="line">        @RequestParam(value=&quot;deptno2&quot;, required=true) String deptno2,</div><div class="line">        Map&lt;String, List&lt;Dept&gt;&gt; model) &#123;</div><div class="line">    </div><div class="line">    System.out.println(deptno);</div><div class="line">    System.out.println(deptno2);</div><div class="line">    </div><div class="line">    List&lt;List&lt;Employee&gt;&gt; list = deptService.listEmployee(new String[]&#123;deptno, deptno2&#125;);</div><div class="line">    </div><div class="line">    return list.size() &gt; 0 ? &quot;/success&quot; : &quot;/error&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>调用地址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://localhost:8080/mvc1/dept/liste?deptno=1&amp;deptno2=2</div></pre></td></tr></table></figure>
-<p>附 控制台结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">1</div><div class="line">2</div><div class="line">1</div><div class="line">小明</div><div class="line">1</div><div class="line">小红</div><div class="line">1</div><div class="line">小白</div><div class="line">0---------------------</div><div class="line">2</div><div class="line">小绿</div><div class="line">2</div><div class="line">小黑</div></pre></td></tr></table></figure>
+<h3 id="3-2-JSON-Web-Token-应用场景"><a href="#3-2-JSON-Web-Token-应用场景" class="headerlink" title="3.2 JSON Web Token 应用场景"></a>3.2 JSON Web Token 应用场景</h3><blockquote>
+<p><code>认证</code>（<code>Authentication</code>）：<code>JWT</code>最常见的场景就是用户认证，一旦用户成功登录以后，每一个后来的请求都需要包含服务端反馈的<code>JWT</code>信息，通过该<code>token</code>允许用户访问路由、服务以及资源。现在，<code>JWT</code>也被广泛的应用于单点登录（<code>Single Sign On</code>）,其主要优势在于使用更小的开销并能够轻松的适用于跨域场景。</p>
+<p><code>信息交流</code>（<code>Information Exchange</code>）: <code>JWT</code>在各方之间安全传输信息是一个非常好的选择。基于<code>JWT</code>可被签名的特性，可以通过公/私钥的方式确定你要发送的目标方。此外，每个<code>JWT</code>的签名是通过其头部和载荷部分计算得出的，你可以确认传送的内容信息有没有被篡改。</p>
+</blockquote>
+<h3 id="3-3-JSON-Web-Token-构成"><a href="#3-3-JSON-Web-Token-构成" class="headerlink" title="3.3 JSON Web Token 构成"></a>3.3 JSON Web Token 构成</h3><p><code>JSON Web Tokens</code>包含三部分并用<code>.</code>分隔, 分别是：</p>
+<pre><code>* `Header` 头信息
+* `Payload` 载荷
+* `Signature` 签名
+</code></pre><p>因此，一个<code>jwt</code>信息通常是这个样子滴：<br><code>xxxxxx.yyyyyyy.zzzzzzz</code></p>
+<p>下面详细了解这三个部分</p>
+<p><strong><code>Header</code> 头信息</strong></p>
+<p><code>JWT</code>的头部通常包含两部分内容：<code>token</code>的类型以及用到的加密算法。例如HMAC SHA256或RSA</p>
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;alg&quot;: &quot;HS256&quot;,</div><div class="line">  &quot;typ&quot;: &quot;JWT&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后将这部分通过<code>Base64</code>加密并作为<code>JWT</code>的第一部分。</p>
+<p><strong><code>Payload</code> 载荷</strong></p>
+<p><code>Token</code>的第二部分就是载荷，这部分包含一些声明。这些声明主要包括一些实体（通常是用户）信息和一些额外的元数据信息。这些声明分为三种类型：保留(<code>reserved</code>)声明、公共(<code>public</code>)声明以及私有(<code>private</code>)声明</p>
+<ul>
+<li><p><strong>保留(<code>reserved</code>)声明</strong>: 这是一个预定义的声明集合，不强制使用，推荐使用。提供了一些有用的，互操作性的声明。（较短的声明名称是为了jwt更紧凑，更利于传输）</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">iss: JWT签发者</div><div class="line">sub: JWT所面向的用户</div><div class="line">aud: JWT接收方</div><div class="line">exp(expires): 过期时间，这里是一个Unix时间戳</div><div class="line">iat(issued at): 签发时间，这里是一个Unix时间戳</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>公共(<code>public</code>)声明</strong>: 这些是由使用<code>JWT</code>的人们定义的，为了防止冲突可以在<code>IANA JSON Web Token Registry</code>中注册。</p>
+</li>
+<li><p><strong>私有(<code>private</code>)声明</strong>: 这些是使用<code>JWT</code>的各方之间共享信息的自定义声明。</p>
+</li>
+</ul>
+<p>实例</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</div><div class="line">  &quot;name&quot;: &quot;John Doe&quot;,</div><div class="line">  &quot;admin&quot;: true</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><p>然后将payload进行<code>Base64</code>加密组成<code>JWT</code>的第二部分。</p>
+<p><strong><code>Signature</code> 签名</strong></p>
+<p>创建签名时需要你准备好加密后的头、载荷信息，一个密钥和指定的算法类型。最后进行签名。</p>
+<p>例如你使用<code>HMAC SHA256</code>算法进行签名的话需要采用下面的方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">HMACSHA256(</div><div class="line">  base64UrlEncode(header) + &quot;.&quot; +</div><div class="line">  base64UrlEncode(payload),</div><div class="line">  secret)</div></pre></td></tr></table></figure>
+<p>这个签名用于确认发送方的数据有没有在信息传输过程中被篡改。</p>
+<p><strong>合体</strong></p>
+<p>将处理后的三部分信息通过<code>.</code>连接成一个字符串，可以轻松的在<code>HTTP</code>环境中进行传递。并且与基于XML的规范(例如<code>SAML</code>)相比，其结构更紧凑更利于传输。</p>
+<p>下面就是一个<code>JWT</code>实例，包含加密后的头和载荷，并通过一个密钥进行签名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</div></pre></td></tr></table></figure>
+<p>可以去生成并校验<code>JWT</code>。<br>如果要使用JWT并将这些概念付诸实践，可以使用<a href="http://jwt.io" target="_blank" rel="external">jwt.io.Debugger</a>对JWT进行解码，验证和生成。</p>
+<h2 id="4-JWT实例"><a href="#4-JWT实例" class="headerlink" title="4. JWT实例"></a>4. <code>JWT</code>实例</h2><h3 id="4-1-流程设计"><a href="#4-1-流程设计" class="headerlink" title="4.1 流程设计"></a>4.1 流程设计</h3><p><img src="https://cdn.auth0.com/content/jwt/jwt-diagram.png" alt="认证流程"></p>
+<h3 id="4-2-贴代码"><a href="#4-2-贴代码" class="headerlink" title="4.2 贴代码"></a>4.2 贴代码</h3><blockquote>
+<p>客户端：Vue.js<br>应用模块：<br>  axios.js 请求发起<br>  qs.js 字符串JSON对象转换<br>  js-base64 前端Base64解密<br>服务端：Spring Boot<br>应用类库：<br>  MyBatis3 数据库操作<br>  fastjson 字符串JSON对象转换<br>  commons-codec 加密解密库</p>
+</blockquote>
+<ol>
+<li>客户端提交登录请求</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">export const login = (&#123; commit &#125;, form) =&gt; &#123;</div><div class="line">  </div><div class="line">  return Vue.http.post(API.USER_LOGIN, qs.stringify(form)).then(data =&gt; &#123;</div><div class="line">    return data</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>服务端认证并生成Token</li>
+</ol>
+<p>// Controller 请求接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">@CrossOrigin // 跨域</div><div class="line">@RestController // Rest请求</div><div class="line">@RequestMapping(&quot;/login&quot;) // 作用域</div><div class="line">public class LoginController &#123;</div><div class="line"></div><div class="line">    @ApiOperation(value=&quot;用户认证接口&quot;, notes=&quot;&quot;)</div><div class="line">    @ApiImplicitParams(&#123;</div><div class="line">            @ApiImplicitParam(name = &quot;username&quot;, value = &quot;用户名&quot;, required = true, dataType = &quot;String&quot;),</div><div class="line">            @ApiImplicitParam(name = &quot;password&quot;, value = &quot;密码&quot;, required = true, dataType = &quot;String&quot;)</div><div class="line">    &#125;)</div><div class="line">    @RequestMapping(path=&quot;/checkUser&quot;, method = RequestMethod.POST) // </div><div class="line">    public ResponseEntity&lt;R&gt; login(@RequestParam String username, @RequestParam String password) &#123;</div><div class="line">        </div><div class="line">        R r = null;</div><div class="line">        try &#123;</div><div class="line">            r = loginServiceImpl.login(username, password);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            r = R.fail(&quot;系统内部异常,请稍后再试&quot;);</div><div class="line">        &#125;</div><div class="line">        return new ResponseEntity&lt;&gt;(r, HttpStatus.OK);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>// 认证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">@Service</div><div class="line">public class LoginServiceImpl implements LoginService &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * &lt;b&gt;功能：登录验证&lt;/b&gt;&lt;br&gt;</div><div class="line">     * &lt;br&gt;</div><div class="line">     * @Author:pfyangf , 2017年9月18日</div><div class="line">     * @param cUsrNme 用户名</div><div class="line">     * @param cPasswd 密码</div><div class="line">     * @return SysToken</div><div class="line">     **/</div><div class="line">    public R login(String cUsrNme, String cPasswd)&#123;</div><div class="line">        R r = R.ok();</div><div class="line">        if(StringUtils.isEmpty(cUsrNme) || StringUtils.isEmpty(cPasswd))&#123;</div><div class="line">            r.change(500, &quot;用户名及密码不能为空&quot;);</div><div class="line">        &#125;</div><div class="line">        SysUser user = sysUserMapper.findByUsername(cUsrNme);</div><div class="line">        if(null == user || !cPasswd.equals(user.getCPasswd()))&#123;</div><div class="line">            r.change(500, &quot;用户名密码不匹配&quot;);</div><div class="line">        &#125;else &#123;</div><div class="line">            r.put(&quot;data&quot;, jwtTokenServiceImpl.createToken(user)); // 创建Token</div><div class="line">            sysUserMapper.changeLastLoginDate(user.getCPkId()); // 修改用户最后登录时间</div><div class="line">        &#125;</div><div class="line">        return r;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>// 生成Token<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">@Service(&quot;jwtTokenServiceImpl&quot;)</div><div class="line">public class JwtTokenServiceImpl implements TokenService &#123;</div><div class="line">    </div><div class="line">    @Value(&quot;$&#123;auth.tokens.expires&#125;&quot;)</div><div class="line">    private Integer authTokensExpires; // token超时时间</div><div class="line">    @Value(&quot;$&#123;auth.tokens.secret&#125;&quot;)</div><div class="line">    private String authTokensSecret; // token盐</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public SysToken createToken(SysUser user) &#123;</div><div class="line">        // 1. header</div><div class="line">        SysJWTHeader jwtHeader = new SysJWTHeader();</div><div class="line">        String headerBase = Base64Util.encode(JSON.toJSONString(jwtHeader));</div><div class="line">        // 2. payload</div><div class="line">        SysJWTPayload jwtPayload = new SysJWTPayload();</div><div class="line">        String jti = CommonUtil.getUuid();</div><div class="line">        jwtPayload.setJti(jti); // jwt 唯一标识</div><div class="line">        Calendar cal = Calendar.getInstance(); // 当前时间</div><div class="line">        jwtPayload.setIat(cal.getTime().getTime()); // 签发时间</div><div class="line">        cal.add(Calendar.MINUTE, authTokensExpires);</div><div class="line">        jwtPayload.setExp(cal.getTime().getTime()); // 设置超时时间</div><div class="line">        jwtPayload.setSub(user.getCPkId()); // 用户主键</div><div class="line">        jwtPayload.setUser(user); // 用户信息</div><div class="line">        String payloadBase = Base64Util.encode(JSON.toJSONString(jwtPayload));</div><div class="line">        // 3. sign</div><div class="line">        String encodedString = headerBase.concat(&quot;.&quot;).concat(payloadBase);</div><div class="line">        String signature = HMACSHA256Util.getSHA256Secure(encodedString, authTokensSecret); </div><div class="line">        // 4. 服务端暂存</div><div class="line">        String userId = user.getCPkId();</div><div class="line">        TokenStorageManager.getTokenStorage().put(userId, jti);</div><div class="line">        return new SysToken(userId, encodedString.concat(&quot;.&quot;).concat(signature));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>// 服务端存储token主键<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class TokenStorageManager &#123;</div><div class="line"></div><div class="line">    private static ConcurrentHashMap&lt;String, String&gt; tokenStorage = null; // token仓库</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * &lt;b&gt;功能：获取暂存map&lt;/b&gt;&lt;br&gt;</div><div class="line">     * &lt;br&gt;</div><div class="line">     * @Author:pfyangf , 2017年9月22日</div><div class="line">     * @return ConcurrentHashMap&lt;String,String&gt;</div><div class="line">     **/</div><div class="line">    public static ConcurrentHashMap&lt;String, String&gt; getTokenStorage()&#123;</div><div class="line">        if(null == tokenStorage)&#123;</div><div class="line">            synchronized (TokenStorageManager.class) &#123;</div><div class="line">                if(null == tokenStorage)&#123;</div><div class="line">                    tokenStorage = new ConcurrentHashMap&lt;&gt;();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return tokenStorage;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>客户端解析token并保存</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">let token = data.data.token;</div><div class="line">if(null != token &amp;&amp; token.length &gt; 0)&#123;</div><div class="line">  let tokenArr = token.split(&apos;.&apos;);</div><div class="line">  let tokenObjArr = tokenArr.map((item, index) =&gt; &#123;</div><div class="line">    return index != 2 ? qs.parse(Base64.decode(item)) : item;</div><div class="line">    // return index != 2 ? JSON2.parse(Base64.decode(item)) : item;</div><div class="line">  &#125;);</div><div class="line">  commit(SET_EXP, tokenObjArr[1]) // 暂存payload</div><div class="line">  commit(SET_USERINFO, tokenObjArr[1].user) // 暂存用户信息</div><div class="line">  commit(SET_TOKEN, token) // 暂存token</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>客户端发出业务请求要求携带token</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">http.interceptors.request.use(function(config) &#123;</div><div class="line">  if (config.appendToken === false) &#123; // 无需 TOKEN 注入</div><div class="line">    NProgress.start()</div><div class="line">    return config</div><div class="line">  &#125;</div><div class="line">  const token = store.state.user.token</div><div class="line"></div><div class="line">  /**</div><div class="line">   * TOKEN 注入</div><div class="line">   * </div><div class="line">   * 此处直接在 query (GET方法) 或者 form-data (POST PUT DELETE 等方法) 注入session 参数</div><div class="line">   * ！实际情况请根据前后端的API规范进行定义</div><div class="line">   */</div><div class="line">  // 自定义token过长 索性直接放header中</div><div class="line">  if(token)&#123;</div><div class="line">    config.headers.authToken = token;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  NProgress.start()</div><div class="line">  return config</div><div class="line">&#125;, function(error) &#123;</div><div class="line">  return Promise.reject(error)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>// 包含jwt请求内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">GET /qz/user/getRecords?page=1 HTTP/1.1</div><div class="line">Host: localhost:8088</div><div class="line">Connection: keep-alive</div><div class="line">Pragma: no-cache</div><div class="line">Cache-Control: no-cache</div><div class="line">Accept: application/json, text/plain, */*</div><div class="line">Origin: http://localhost:9999</div><div class="line">User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36</div><div class="line">authToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDY0MDgzODQyMzMsImlhdCI6MTUwNjQwNjU4NDIzMywianRpIjoiY2YzNzYyNzExNjQyNDg0MzhhYmNhNGRhNzIzN2I1M2IiLCJzdWIiOiIxIiwidXNlciI6eyJjQWRtaW4iOiIxIiwiY0VtYWlsIjoiYWRtaW5Ac3NzLnRvcCIsImNNb2JpbGVQaG9uZSI6IjEzMDAxNzEyMDk5IiwiY05tZSI6IuWNleeLrCIsImNQYXNzd2QiOiIxMjMiLCJjUGtJZCI6IjEiLCJjU2FsdCI6ImFkbWluIiwiY1N0YXR1cyI6IjEiLCJjVXNyTm1lIjoiYWRtaW4iLCJuQWdlIjoxMSwidENydERhdGUiOjE1MDA0MjkwOTYwMDAsInRMYXN0TG9naW5EYXRlIjoxNTA2NDA2MDcwMDAwLCJ0VXBkRGF0ZSI6MTUwNjQwNjA3MDAwMH19.PKO7NEf0lfStaZ/Nu61RjxGlWTEF5QS7vPjK7VvmTCo=</div><div class="line">Referer: http://localhost:9999/users/</div><div class="line">Accept-Encoding: gzip, deflate, br</div><div class="line">Accept-Language: zh-CN,zh;q=0.8,en;q=0.6</div></pre></td></tr></table></figure></p>
+<ol>
+<li>服务端验证token合法性并响应业务请求</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">@CrossOrigin // 跨域</div><div class="line">@RestController // Rest请求</div><div class="line">@RequestMapping(&quot;/user&quot;) // 作用域</div><div class="line">public class SysUserController &#123;</div><div class="line">    </div><div class="line">    @Autowired</div><div class="line">    private SysUserService sysUserServiceImpl; // 登录业务</div><div class="line"></div><div class="line">    /**</div><div class="line">     * &lt;b&gt;功能：退出&lt;/b&gt;&lt;br&gt;</div><div class="line">     * &lt;br&gt;</div><div class="line">     * @Author:pfyangf , 2017年9月18日</div><div class="line">     * @param user</div><div class="line">     * @return ResponseEntity&lt;ResultModel&gt;</div><div class="line">     **/</div><div class="line">    @RequestMapping(path=&quot;/getRecords&quot;, method = RequestMethod.GET) // </div><div class="line">    @Authorization</div><div class="line">    public ResponseEntity&lt;R&gt; getRecords(UserVO user) &#123;</div><div class="line">        R r = null;</div><div class="line">        try &#123;</div><div class="line">            r = sysUserServiceImpl.findByPage(user);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            r = R.fail(&quot;系统内部异常,请稍后再试&quot;);</div><div class="line">        &#125;</div><div class="line">        return new ResponseEntity&lt;&gt;(r, HttpStatus.OK);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>客户端退出</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Vue.http.post(API.USER_LOGOUT).then(data =&gt; &#123;</div><div class="line">    commit(SET_TOKEN, &apos;&apos;);</div><div class="line">&#125;).catch(error =&gt; &#123;</div><div class="line">    commit(SET_TOKEN, &apos;&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ol>
+<li>服务端退出</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@ApiOperation(value=&quot;退出登录&quot;, notes=&quot;&quot;)</div><div class="line">@RequestMapping(path=&quot;/logout&quot;, method = RequestMethod.POST)</div><div class="line">@Authorization</div><div class="line">public ResponseEntity&lt;R&gt; logout(@CurrentUser SysUser user) &#123;</div><div class="line">    </div><div class="line">    R r = null;</div><div class="line">    try &#123;</div><div class="line">        r = loginServiceImpl.logout(user.getCPkId());</div><div class="line">    &#125; catch (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        r = R.fail(&quot;系统内部异常,请稍后再试&quot;);</div><div class="line">    &#125;</div><div class="line">    return new ResponseEntity&lt;&gt;(r, HttpStatus.OK);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public R logout(String userId) &#123;</div><div class="line">    R r = R.ok(&quot;退出成功&quot;);</div><div class="line">    if(StringUtils.isEmpty(userId))&#123;</div><div class="line">        r.change(500, &quot;用户编号不存在&quot;);</div><div class="line">    &#125; else &#123;</div><div class="line">    //  guavaTokenServiceImpl.deleteToken(userId);</div><div class="line">        jwtTokenServiceImpl.deleteToken(userId);</div><div class="line">    &#125;</div><div class="line">    return r;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void deleteToken(String userId) &#123;</div><div class="line">    TokenStorageManager.getTokenStorage().remove(userId);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://jwt.io/" target="_blank" rel="external">jwt官网</a></p>
+</blockquote>
 
     
 
@@ -559,7 +627,7 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/08/25/Install-Docker-Toolbox-on-Windows/" id="post_nav-newer" class="prev-content">
+        <a href="/2017/08/28/DockerInDevApply/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -572,6 +640,14 @@
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
+    
+        <a href="/2017/08/25/Install-Docker-Toolbox-on-Windows/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
     
 </nav>
 
